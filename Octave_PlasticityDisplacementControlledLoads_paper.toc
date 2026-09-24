@@ -1,0 +1,32 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Historical background}{3}{section.2}%
+\contentsline {section}{\numberline {3}Beam theory and flexibility of curved pipes}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Euler--Bernoulli and Timoshenko beam models}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Elbow ovalisation and flexibility factors}{5}{subsection.3.2}%
+\contentsline {paragraph}{Link with Stress Intensification Factors (SIFs).}{5}{section*.8}%
+\contentsline {section}{\numberline {4}Stress Intensification Factors and the Markl fatigue design curve}{5}{section.4}%
+\contentsline {section}{\numberline {5}Elastic follow-up: from local (Neuber) to global (Roche) redistribution}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}The Ramberg--Osgood constitutive law}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Roche's spring-bar analogy}{7}{subsection.5.2}%
+\contentsline {section}{\numberline {6}The RCC-MRx elastic follow-up factor and abatement coefficient}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Energy balance and definition of $r_M$}{8}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Abatement coefficient $g$}{11}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Benchmark description}{12}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Geometry, material and boundary conditions}{12}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Numerical models}{13}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Elastic analysis and model calibration}{15}{section.8}%
+\contentsline {section}{\numberline {9}Elasto-plastic analysis}{16}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Constitutive model}{16}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Stress distribution and identification of the critical section}{16}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Comparing the FE elasto-plastic and NS elastic-plus-code-rule approaches}{17}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Discussion: why is the RCC-MRx route less conservative?}{17}{section.10}%
+\contentsline {subsection}{\numberline {10.1}First explanation: primary-equivalent stress conversion}{17}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Second explanation: mesh sensitivity of the reference solution}{19}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Additional validation: comparison across wall-thickness variants}{19}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Analytical validation on a cantilever with imposed end displacement}{20}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Conclusions and perspectives}{20}{section.11}%
+\contentsline {section}{\numberline {A}Sensitivity of the RCC-MRx abatement coefficient $g$ to mesh density}{22}{section.A}%
+\contentsline {section}{\numberline {B}Roland Roche's demonstration}{22}{section.B}%
+\contentsline {subsection}{\numberline {B.1}Standard variational development in a FE analysis}{22}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}Radially proportional elasto-plastic stress field}{24}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}Energy balance}{25}{subsection.B.3}%
