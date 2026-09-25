@@ -1,0 +1,172 @@
+56: \section{Introduction}
+70: \section{Historical background}
+75: \begin{table}[htbp]
+78: \label{tab:history}
+93: \begin{figure}[htbp]
+97: \label{fig:history-timeline}
+100: \begin{figure}[htbp]
+104: \label{fig:markl-photo}
+107: \begin{figure}[htbp]
+111: \label{fig:historical-lecture}
+117: \section{Beam theory and flexibility of curved pipes}
+120: \subsection{Euler--Bernoulli and Timoshenko beam models}
+125: \label{eq:timoshenko}
+130: \label{eq:eulerbernoulli}
+133: \subsection{Elbow ovalisation and flexibility factors}
+137: \begin{figure}[htbp]
+141: \label{fig:kfactor-definition}
+151: \label{eq:flexfactor}
+155: \begin{figure}[htbp]
+159: \label{fig:ovalisation}
+167: \section{Stress Intensification Factors and the Markl fatigue design curve}
+168: \label{sec:sif}
+176: \label{eq:markl}
+180: \begin{figure}[htbp]
+184: \label{fig:markl-equation-frame}
+197: \section{Elastic follow-up: from local (Neuber) to global (Roche) redistribution}
+202: \begin{table}[htbp]
+205: \label{tab:neuber-followup}
+220: \begin{figure}[htbp]
+224: \label{fig:primary-secondary-paths}
+229: \begin{figure}[htbp]
+233: \label{fig:bar12-elasticity}
+238: \begin{figure}[htbp]
+242: \label{fig:bar12-ro-curve}
+245: \begin{table}[htbp]
+248: \label{tab:dn200-toy-example}
+267: \begin{figure}[htbp]
+271: \label{fig:bar12-contours}
+274: \subsection{The Ramberg--Osgood constitutive law}
+279: \label{eq:RO-generic}
+284: \label{eq:KofT}
+289: \label{eq:RO}
+295: \begin{figure}[htbp]
+301: \label{fig:ro-curves}
+304: \subsection{Roche's spring-bar analogy}
+315: \begin{figure}[htbp]
+319: \label{fig:roche-spring-diagram}
+324: \begin{figure}[htbp]
+328: \label{fig:bar3-ro-curve}
+331: \begin{figure}[htbp]
+335: \label{fig:bar3-contour}
+340: \begin{figure}[htbp]
+344: \label{fig:bar3-contour-pair}
+347: \begin{figure}[htbp]
+351: \label{fig:roche-spring-sweep}
+354: \begin{figure}[htbp]
+358: \label{fig:roche-example}
+361: \begin{figure}[htbp]
+365: \label{fig:roche-example-geometry}
+369: \section{The RCC-MRx elastic follow-up factor and abatement coefficient}
+370: \label{sec:rccmrx}
+373: \subsection{Energy balance and definition of the elastic follow-up factor}
+378: \label{eq:kachanov-ro}
+383: \label{eq:kachanov-stress}
+389: \label{eq:kachanov-vw}
+394: \label{eq:kachanov-elastic-vw}
+402: \label{eq:kachanov-T}
+407: \label{eq:kachanov-final}
+414: \label{eq:rM}
+421: \label{eq:Tglobal}
+438: \begin{figure}[htbp]
+442: \label{fig:rm-graphical-overview}
+445: \begin{figure}[htbp]
+449: \label{fig:energy-balance-scheme}
+452: \subsection{Definition of the abatement coefficient}
+456: \begin{figure}[htbp]
+460: \label{fig:rccmrx-official}
+464: \label{eq:gsimple}
+469: \label{eq:gfull}
+474: \label{eq:CMS1}
+484: \begin{table}[htbp]
+487: \label{tab:key-formulas}
+506: \section{Benchmark description}
+507: \label{sec:benchmark}
+510: \subsection{Geometry, material and boundary conditions}
+523: \begin{figure}[htbp]
+527: \label{fig:benchmark-geometry}
+530: \subsection{Numerical models}
+540: \begin{figure}[htbp]
+544: \label{fig:shell-element}
+547: \begin{figure}[htbp]
+551: \label{fig:marc-manual}
+556: \begin{figure}[htbp]
+560: \label{fig:rbe2-detail}
+564: \section{Elastic analysis and model calibration}
+571: \begin{table}[htbp]
+574: \label{tab:elastic-calib}
+589: \begin{figure}[htbp]
+595: \label{fig:elastic-model}
+600: \begin{figure}[htbp]
+604: \label{fig:elastic-model-final}
+611: \begin{figure}[htbp]
+615: \label{fig:ns-deformed}
+618: \begin{figure}[htbp]
+622: \label{fig:shell-mesh-views}
+626: \section{Elasto-plastic analysis}
+629: \subsection{Constitutive model}
+638: \label{eq:eps-p-eq}
+642: \begin{figure}[htbp]
+646: \label{fig:hardening-plas-new}
+651: \begin{figure}[htbp]
+655: \label{fig:work-hardening-zoom}
+658: \subsection{Stress distribution and identification of the critical section}
+662: \begin{figure}[htbp]
+666: \label{fig:vonmises}
+669: \begin{figure}[htbp]
+673: \label{fig:critical-vonmises-detail}
+676: \subsection{Comparing the FE elasto-plastic and NS elastic-plus-code-rule approaches}
+682: \begin{table}[htbp]
+685: \label{tab:g-comparison}
+696: \begin{figure}[htbp]
+700: \label{fig:hexagon-benchmark-table}
+703: \begin{figure}[htbp]
+707: \label{fig:ns-table}
+712: \begin{figure}[htbp]
+716: \label{fig:fe-g-reconstruction}
+727: \section{Discussion: why is the RCC-MRx route less conservative?}
+728: \label{sec:discussion}
+731: \subsection{First explanation: primary-equivalent stress conversion}
+742: \label{eq:pmpb}
+762: \subsection{Second explanation: mesh sensitivity of the reference solution}
+766: \begin{figure}[htbp]
+770: \label{fig:g-mesh-convergence}
+775: \subsection{Additional validation: comparison across wall-thickness variants}
+779: \begin{figure}[htbp]
+783: \label{fig:g-barchart}
+786: \subsection{Analytical validation on a cantilever with imposed end displacement}
+790: \begin{figure}[htbp]
+794: \label{fig:cantilever-sketch}
+800: \label{eq:cantilever-rx}
+805: \label{eq:cantilever-rmax}
+809: \begin{figure}[htbp]
+813: \label{fig:cantilever-3d}
+816: \begin{figure}[htbp]
+820: \label{fig:cantilever-vm}
+823: \begin{figure}[htbp]
+827: \label{fig:hexagon-cantilever-table}
+833: \section{Conclusions}
+857: \appendix
+858: \section{Sensitivity of the RCC-MRx abatement coefficient to mesh density}
+859: \label{app:mesh-sensitivity}
+864: \begin{table}[htbp]
+867: \label{tab:mesh-vm-data}
+880: \section{Roland Roche's demonstration}
+881: \label{app:roche}
+885: \begin{figure}[htbp]
+889: \label{fig:roche-graphical}
+892: \begin{figure}[htbp]
+896: \label{fig:roche-calculation-sheet}
+899: \subsection{Standard variational development in a FE analysis}
+918: \label{eq:roche2}
+936: \label{eq:roche3}
+941: \label{eq:roche4}
+946: \label{eq:roche6}
+950: \subsection{Radially proportional elasto-plastic stress field}
+955: \label{eq:roche7}
+961: \label{eq:roche89}
+967: \label{eq:roche11}
+971: \subsection{Energy balance}
+986: \label{eq:roche21}
+992: \label{eq:roche2223}
+999: \label{eq:roche1314}
