@@ -1,0 +1,26 @@
+name: Notify on push
+
+on:
+  push:
+    branches: ['**']
+
+jobs:
+  mail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send e-mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: 587
+          secure: false
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          to: ${{ secrets.MAIL_TO }}
+          from: GitHub notifications <${{ secrets.SMTP_USER }}>
+          subject: "Push on ${{ github.repository }} (${{ github.ref_name }})"
+          body: |
+            ${{ github.actor }} pushed to ${{ github.ref_name }}:
+            ${{ github.event.head_commit.message }}
+
+            ${{ github.event.compare }}
