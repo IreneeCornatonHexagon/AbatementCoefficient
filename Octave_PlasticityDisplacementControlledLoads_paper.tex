@@ -75,6 +75,7 @@ Don't forget to mention the nuclear context, which is the central topic around w
 
 % =============================================================================
 \section{Introduction}
+\label{sec:Intro}
 % =============================================================================
 
 Steel pipings are metallic structures (usually pressurized) consisting of straight tubes with hollow cicular cross-sections, assembled by means of welds, fittings (elbows, reducers, tees, etc.) or flanged connections. Due to functional and safety requirements, components such as valves, flow meters, expansion joints and other in-line components might be assembled on piping tubes. The entire structure can be connected to pressurized equipments by means of nozzles and supported by dedicated support structures. Together, these elements constitute a large and complex structure that must be addressed through rigorous engineering analysis.\\
@@ -285,50 +286,14 @@ The presentation also compares the global deformed shapes produced by the two mo
 
 
 % =============================================================================
-\section{Elastic follow-up - Deviation of primary and secondary stress concepts}
+\section{Elastic follow-up}
+\label{sec:EFF}
 % =============================================================================
+Section \ref{sec:Intro} briefly summarized the approach adopted by most standard piping codes for the assessment of piping stresses. For piping systems used in nuclear power plants, more stringent requirements apply, requiring more sophisticated calculation methodologies, particularly for high-temperature applications.  One of the main differences is the need to consider the so-called \textbf{elastic follow-up}. 
 
-\textcolor{red}{Introduction on RCC-MRx here, without forgetting to mention the nuclear context (which is the focus of this journal publication)} \\
-\textcolor{red}{Talk about high temperature pipings and the need to properly consider plasticity} \\
-\textcolor{red}{Limit the scope to negligible creep} \\
+In piping systems, geometric discontinuities or load-induced deformations (e.g., elbow ovalization) can lead to stress concentrations at specific locations, such as elbows, tees, reducers, or thickness transitions. Under sufficiently high loading, most of the structure may remain in the elastic regime and behave as linear springs, thereby elastically following up and constraining these highly stressed regions where local plastic deformation develops. This phenomenon is referred to as elastic follow-up \cite{RCCMRx} \cite{ASMEIII5} . 
 
-
-
-The RCC-MRx code for high-temperature nuclear components formalises this distinction through the concept of the \emph{abatement coefficient} $g$ (RB~3651) \cite{RCCMRx}, which reduces the displacement-dependent moment used in the primary-type damage assessment. The coefficient $g$ is itself derived from the \emph{elastic follow-up factor} $r_M$ (RB~3643), a structural indicator of how much a locally yielding cross-section is elastically restrained (``followed up'') by the surrounding, comparatively stiffer, structure.
-
-This work has two objectives:
-\begin{enumerate}
-    \item to present, in a self-contained manner, the historical and theoretical background that leads from classical beam theory to the modern treatment of elastic follow-up and the abatement coefficient in RCC-MRx;
-    \item to benchmark the RCC-MRx analytical procedure against a reference elasto-plastic finite-element (FE) shell analysis on a simple, well-defined elbow test case, in order to quantify how conservative (or non-conservative) the code procedure is with respect to a full non-linear reference solution.
-\end{enumerate}
-
-
-
-
-
-
-Two conceptually different but often-confused corrections are used to relate an elastically computed stress or strain field to the actual elasto-plastic response of a structure: \emph{Neuber's rule} and the \emph{elastic follow-up effect}. Their essential differences are summarised in Table~\ref{tab:neuber-followup}. The source presentation briefly mentions both $r_M$ and $r_C$ as follow-up-related indicators; only the RCC-MRx factor $r_M$ is developed here because it is the quantity actually used in clauses RB~3643 and RB~3651 and in the benchmark calculations.
-
-\begin{table}[htbp]
-\centering
-\caption{Neuber local correction versus global elastic follow-up.}
-\label{tab:neuber-followup}
-\begin{tabular}{@{}lll@{}}
-\toprule
- & \textbf{Neuber} & \textbf{Elastic follow-up} \\
-\midrule
-Nature & Local & Global \\
-Affected zone & Notch / point & Whole structure \\
-Type of phenomenon & Stress concentration & Strain redistribution \\
-Role & Corrects a local stress peak & Corrects the overall structural response \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Elastic follow-up describes how a locally yielding (softening) section of a structure is ``followed up'' by the surrounding, stiffer parts, which continue to impose additional deformation on the yielded section because the imposed \emph{overall} displacement must still be accommodated. Depending on how stiff the surrounding structure is relative to the yielding section, the behaviour of that section under a nominally secondary (displacement-controlled) load can range from purely secondary (self-limiting, if the surrounding structure is very flexible and simply relaxes) to effectively primary (if the surrounding structure is very stiff and keeps imposing the full displacement onto the yielded, and therefore weaker, section). Figure~\ref{fig:primary-secondary-paths} gives the mechanical analogy illustrating these two limiting behaviours.
-
-\textcolor{red}{Note: Talking about elastic follow-up in a local aspect here, it's a bit out scope, since g coeff is used in to address a global dommage. We might talk about the local aspect of EFF, but maybe push this part to the end of §3.3 (after the moment that sm+sb, g, rM are all introduced)}
-
+In this section, the elastic follow-up concept will be presented based on the work of Roland L. Roche \cite{Roche1987}, without considering the impacts of creep and stress relaxation.
 
 \subsection{The Ramberg--Osgood constitutive law}
 
@@ -481,10 +446,50 @@ The presentation also documents Bar~3's FE contours at another point of the spri
 \section{Elastic follow-up factor and abatement coefficient in RCC-MRx}
 \label{sec:rccmrx}
 % =============================================================================
+\textcolor{red}{Introduction on RCC-MRx here, without forgetting to mention the nuclear context (which is the focus of this journal publication)} \\
 
+\textcolor{red}{Talk about high temperature pipings and the need to properly consider plasticity} \\
 
 \textcolor{red}{This paragraph  a bridge between rM + g of RCC-MRx and the original works from Roland Roche.}
 
+
+RCC-MRx is a French nuclear design code entitled \emph{Design and Construction Rules for Mechanical Components of Nuclear Installations: High-Temperature, Research and Fusion Reactors}.
+
+
+The RCC-MRx code for high-temperature nuclear components formalises this distinction through the concept of the \emph{abatement coefficient} $g$ (RB~3651) \cite{RCCMRx}, which reduces the displacement-dependent moment used in the primary-type damage assessment. The coefficient $g$ is itself derived from the \emph{elastic follow-up factor} $r_M$ (RB~3643), a structural indicator of how much a locally yielding cross-section is elastically restrained (``followed up'') by the surrounding, comparatively stiffer, structure.
+
+This work has two objectives:
+\begin{enumerate}
+    \item to present, in a self-contained manner, the historical and theoretical background that leads from classical beam theory to the modern treatment of elastic follow-up and the abatement coefficient in RCC-MRx;
+    \item to benchmark the RCC-MRx analytical procedure against a reference elasto-plastic finite-element (FE) shell analysis on a simple, well-defined elbow test case, in order to quantify how conservative (or non-conservative) the code procedure is with respect to a full non-linear reference solution.
+\end{enumerate}
+
+
+
+
+
+
+Two conceptually different but often-confused corrections are used to relate an elastically computed stress or strain field to the actual elasto-plastic response of a structure: \emph{Neuber's rule} and the \emph{elastic follow-up effect}. Their essential differences are summarised in Table~\ref{tab:neuber-followup}. The source presentation briefly mentions both $r_M$ and $r_C$ as follow-up-related indicators; only the RCC-MRx factor $r_M$ is developed here because it is the quantity actually used in clauses RB~3643 and RB~3651 and in the benchmark calculations.
+
+\begin{table}[htbp]
+\centering
+\caption{Neuber local correction versus global elastic follow-up.}
+\label{tab:neuber-followup}
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & \textbf{Neuber} & \textbf{Elastic follow-up} \\
+\midrule
+Nature & Local & Global \\
+Affected zone & Notch / point & Whole structure \\
+Type of phenomenon & Stress concentration & Strain redistribution \\
+Role & Corrects a local stress peak & Corrects the overall structural response \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Elastic follow-up describes how a locally yielding (softening) section of a structure is ``followed up'' by the surrounding, stiffer parts, which continue to impose additional deformation on the yielded section because the imposed \emph{overall} displacement must still be accommodated. Depending on how stiff the surrounding structure is relative to the yielding section, the behaviour of that section under a nominally secondary (displacement-controlled) load can range from purely secondary (self-limiting, if the surrounding structure is very flexible and simply relaxes) to effectively primary (if the surrounding structure is very stiff and keeps imposing the full displacement onto the yielded, and therefore weaker, section). Figure~\ref{fig:primary-secondary-paths} gives the mechanical analogy illustrating these two limiting behaviours.
+
+\textcolor{red}{Note: Talking about elastic follow-up in a local aspect here, it's a bit out scope, since g coeff is used in to address a global dommage. We might talk about the local aspect of EFF, but maybe push this part to the end of §3.3 (after the moment that sm+sb, g, rM are all introduced)}
 
 
 
@@ -1155,7 +1160,7 @@ International Conference on Structural Mechanics in Reactor Technology (SMiRT), 
 
 \bibitem{Roche1987}
 R.L.~Roche,
-\emph{Determination of the actual strain variation from an elastic calculation (factor $K_e$)},
+\emph{Analyse à la fatigue – Détermination de la variation réelle de deformation à partir d’un calcul élastique (facteur Ke))},
 1987.
 
 \bibitem{RochePipeStressNote}
@@ -1176,8 +1181,10 @@ AFCEN, \emph{RCC-MRx: Design and Construction Rules for Mechanical Components of
 Sections RB~3643, RB~3651 and RB~A3.3S.451.
 
 
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
+
+\bibitem{ASMEIII5} American Society of Mechanical Engineers (ASME), \textit{ASME Boiler and Pressure Vessel Code, Section III, Division 5: High Temperature Reactors}, 2021 Edition, ASME, New York, NY, USA, 2021.
+
+
 
 \bibitem{...}
 ... \emph{\textcolor{red}{more references expected here}},
