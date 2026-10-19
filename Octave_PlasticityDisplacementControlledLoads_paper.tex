@@ -22,6 +22,7 @@
 \usepackage{tikz}
 \usepackage{parskip}  %no ident
 \usepackage{subcaption}
+\usepackage[normalem]{ulem}
 
 
 \geometry{margin=2cm}
@@ -83,8 +84,8 @@ Steel pipings are metallic structures (usually pressurized) consisting of straig
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/Modele-visuel-bis_01.jpeg}
-\caption{A typical piping structure modelled under PEPS 8.0 (\textcolor{red}{to modify this model -- it's from client})}
+\includegraphics[width=0.8\textwidth]{figures/Modele-visuel-bis_01.png}
+\caption{A typical piping structure modelled under PEPS 8.0 (\textcolor{red}{modified based on client model})}
 \label{fig:ovalisation}
 \end{figure}
 
@@ -102,7 +103,6 @@ Based on the nature of the loading, piping stress analysis distinguishes between
 Figure~\ref{fig:P_S} shows an example of the two stresses.  \textbf{E} presents the stress state of a material point predicted by an elastic approach.  \textbf{P} and \textbf{S} are stress states responding respectively to primary and secondary loads, considering the elastoplastic law.\\
 Primary loads are force-imposed in nature and are balanced by a stress field $\sigma_P=\sigma_E$, regardless of whether the material behavior is described by an elastic or an elastoplastic constitutive law. However, the corresponding elastoplastic strain $\varepsilon_P$ might be significantly larger than the elastically predicted strain  $\varepsilon_E$, under high primary loading conditions, due to plastic flow. As a result, \textbf{excessive deformation} may develop at the structural scale when local plastified zones expand. If the load continues to increase, the stable execessive deformation regime might be lost as structural softenings progressively dominate the global response, eventually lead the structure into the \textbf{plasticity instability} damage mode. Moreover, primary stresses are also responsible for \textbf{buckling} (also known as elastic or elastoplastic instability), due to the presence of unrexable stresses with geometry instabilities.
 
-%\begin{figure}[htbp]
 \begin{figure}[htbp]
 \centering
 		\begin{tikzpicture}
@@ -110,8 +110,8 @@ Primary loads are force-imposed in nature and are balanced by a stress field $\s
 				axis lines=middle,
 				xlabel={$\varepsilon (strain)$},
 				ylabel={$\sigma (stress)$},
-				xmin=0, xmax=7,
-				ymin=0, ymax=6,
+				xmin=0, xmax=1.09,
+				ymin=0, ymax=170,
 				xtick={ 0.01},
 				xticklabels={ $$},         
 				xtick align=outside,
@@ -119,43 +119,46 @@ Primary loads are force-imposed in nature and are balanced by a stress field $\s
 				yticklabels={ $$},
 				legend style={
 					at={(0.98,0.98)},
-					anchor=north east 
+					anchor=north east,
+					font=\scriptsize,
 						   },
 			         width=10cm, height=8cm
 				]
 				
-				% Elastic Line (slope = 2 for simplicity, representing E)
-				\addplot[thick, blue, domain=0:2.6] {2*x};
+				% Elastic Line 
+				\addplot[thick, blue, domain=0:0.1] {1550*x};
 				\addlegendentry{Elastic (code approach)}
 				
-				% Elastoplastic Curve (nonlinear, increasing)
-				\addplot[thick, black, smooth] coordinates {(0,0) (1.8,2.8) (2.68,3.44)  (5,4) (6,4.2) };
+%				% Elastoplastic Curve (nonlinear, increasing)
+				\addplot[thick, black, smooth] coordinates {(0,0) (0.013,20) (0.026,40)(0.04,60) (0.068,80)(0.105,90) (0.184,100)(0.35,110)(0.682,120)(1,126)(1.083,127) };
 				\addlegendentry{Elastoplastic ($\sim$reality)}
-				
+%				
 				% Primary
-				\draw[dashed] (axis cs:2,4) -- (axis cs:5,4)  ;
-
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:1,126)  ;
+%
 				% Secondary
-				\draw[dashed] (axis cs:2,4) -- (axis cs:2,3.05)  ;
-				
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:0.0813,84.5)  ;
+%				
 				% Points
-				\addplot[only marks, mark=*, mark size=2pt] coordinates {(0,0) (2,3.05) (2,4)  (5,4) }; 
-								
+				\addplot[only marks, mark=*, mark size=2pt] coordinates {((0.0813,126)(1,126)(0.0813,84.5)}; 
+%								
 				% Annotations
-				\node at (axis cs:1.9,4.2) {$\textbf{E}$};
-				\node at (axis cs:2.6,4.2) {$ ( \varepsilon_E,\sigma_E)$};
+				\node at (axis cs:0.11,130) {$\textbf{E}$};
+				\node at (axis cs:0.21,130) {$ ( \varepsilon_E,\sigma_E)$};
 
-				\node at (axis cs:2.2,3) {$\textbf{S}$};
-				\node at (axis cs:2.8,3) {$ ( \varepsilon_S,\sigma_S)$};
-				\node at (axis cs:2.7,2.6) {$ Secondary:$};
-				\node at (axis cs:2.6,2.3) {$\varepsilon_S= \varepsilon_E$};
-				\node at (axis cs:2.6,2) {$\sigma_S \leq \sigma_E$};
+				\node at (axis cs:0.11,84.5) {$\textbf{S}$};
+				\node at (axis cs:0.21,84.5) {$ ( \varepsilon_S,\sigma_S)$};
+				\node at (axis cs:0.195,74) {$ Secondary:$};
+				\node at (axis cs:0.190,64) {$\varepsilon_S= \varepsilon_E$};
+				\node at (axis cs:0.190,54) {$\sigma_S \leq \sigma_E$};
 
-				\node at (axis cs:5,3.7) {$\textbf{P}$};
-				\node at (axis cs:5.7,3.7) {$ ( \varepsilon_P,\sigma_P)$};
-				\node at (axis cs:5.6,3.3) {$ Primary: $};
-				\node at (axis cs:5.6,3) {$\sigma_P= \sigma_E$};
-				\node at (axis cs:5.6,2.7) {$\varepsilon_P \geq  \varepsilon_E$};
+
+				\node at (axis cs:0.9,118) {$\textbf{P}$};
+				\node at (axis cs:1,118) {$ ( \varepsilon_P,\sigma_P)$};
+				\node at (axis cs:0.98,107.5) {$ Primary: $};
+				\node at (axis cs:0.975,97.5) {$\sigma_P= \sigma_E$};
+				\node at (axis cs:0.975,87.5) {$\varepsilon_P \geq  \varepsilon_E$};
+
 			\end{axis}
 		\end{tikzpicture}
 \caption{Schematic representation of primary and secondary stresses}
@@ -291,11 +294,13 @@ The presentation also compares the global deformed shapes produced by the two mo
 % =============================================================================
 Section \ref{sec:Intro} briefly summarized the approach adopted by most standard piping codes for the assessment of piping stresses. For piping systems used in nuclear power plants, more stringent requirements apply, requiring more sophisticated calculation methodologies, particularly for high-temperature applications.  One of the main differences is the need to consider the so-called \textbf{elastic follow-up}. 
 
-In piping systems, geometric discontinuities or load-induced deformations (e.g., elbow ovalization) can lead to stress concentrations at specific locations, such as elbows, tees, reducers, or thickness transitions. Under sufficiently high loading, most of the structure may remain in the elastic regime and behave as linear springs, thereby elastically following up and constraining these highly stressed regions where local plastic deformation develops. This phenomenon is referred to as elastic follow-up \cite{RCCMRx} \cite{ASMEIII5} . 
+In piping systems, geometrical discontinuities or load-induced deformations (e.g., elbow ovalization) can lead to stress concentrations at specific locations, such as elbows, tees, reducers, or thickness transitions. Under sufficiently high loading, most of the structure may remain in the elastic regime and behave as linear springs, thereby elastically following up and constraining these highly stressed regions where local plastic deformation develops. This phenomenon is referred to as elastic follow-up \cite{RCCMRx} \cite{ASMEIII5} . 
 
 In this section, the elastic follow-up concept will be presented based on the work of Roland L. Roche \cite{Roche1987}, without considering the impacts of creep and stress relaxation.
 
 \subsection{The Ramberg--Osgood constitutive law}
+
+\textcolor{red}{to redo this paragraph on Ramberg-Osgood}
 
 To model the elasto-plastic material response, the Ramberg--Osgood law is used in its general textbook form, decomposing the total strain into an elastic and a power-law plastic part,
 \begin{equation}
@@ -316,132 +321,151 @@ with, for 316L(N) stainless steel, $n_0 = 0.1125$ ($1/n_0 = 8.89$) and $C_0 = 1.
 \textcolor{red}{--> to use less number/data to talk about Ramberg Osgood}
 
 
-\subsection{Elastic-follow-up -- deviation of primary and secondary concepts}
+\newpage
 
-\textcolor{red}{Show the example from Roland Roche document --- 3beams} \\
-\textcolor{red}{Show how positions between points E, S, P and the real points are (see Figure 2), in context of elastic-follow-up } \\
-\textcolor{red}{--> the necessity to update the current standard piping analysis methodology } \\
-\textcolor{red}{--> At the end of this chapter: show the need to quantify elastic-follow up --> go to the next section } \\
+\subsection{Elastic-follow-up -- deviation of the secondary load concept}
 
+In order to illustrate elastic follow-up, Roland L. Roche \cite{Roche1987} proposed a test involving three bars of identical geometry. Bar 1 is subjected to a primary load, while Bar 2 is subjected to a secondary load. Bar 3 is identical to the other two bars but is connected to an additional spring and is also subjected to a secondary load. In his conclusions, Roland L. Roche showed that Bar 3, although subjected only to a secondary load, exhibits an intermediate behavior between those associated with purely primary and purely secondary loading. With our own selected beam geometry and material, the test is reproduced and shown in figure \ref{fig:3beams}.
 
+ \begin{figure}[htbp] 
+\centering 
+	\begin{subfigure}{1\textwidth} 
+	\centering 
+\includegraphics[width=0.4\textwidth]{figures/beam1ok.png}
+	\caption{Beam 1 under primary load (force imposed F=320 kN) - purely primary stress response} 
+	\label{fig:beam1} 
+	\end{subfigure} 
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.52\textwidth]{figures/primary_secondary_loading_paths.png}
-\caption{Source-presentation mechanical analogy contrasting a purely primary load (left: a weight hanging freely, force-controlled) with a purely secondary load (right: a bolt rigidly fixed against a support, displacement-controlled); the intermediate spring-mounted bolt illustrates the elastic-follow-up case discussed next. -->  \textcolor{red}{we might redo completely this image, or use a figure from a referenced document}}
-\label{fig:primary-secondary-paths}
+\vfill
+	 \begin{subfigure}{1\textwidth} 
+	\centering 
+\includegraphics[width=0.4\textwidth]{figures/beam2ok.png}
+	\caption{Beam2 under secondary load (displacement imposed u=1.623mm) - purely secondary stress response}
+	\label{fig:beam2}
+	\end{subfigure}
+
+\vfill
+	 \begin{subfigure}{1\textwidth} 
+	\hspace*{4.5cm}
+\includegraphics[width=0.6\textwidth]{figures/beam3ok.png}
+	\caption{Beam3 under secondary load (displacement imposed u=8.115mm) - intermediate primary-secondary stress response}
+	\label{fig:beam3}
+	\end{subfigure}
+
+\caption{The three beams share a common geometry: tubes of 2\,m length, 219.07\,mm outside diameter, and 3.76\,mm wall thickness. The material is A3.3S (RCC-MRx Edition 2022). Beam~3 includes an additional tubular section representing the spring, with a length of 1\,m and an outside diameter of 434.38\,mm; the wall thickness and material are identical to those of the other beams. The spring section remains purel elastic, whereas plasticity may develop in the common section. All beams are fixed at one end and loaded at the other.}
+\label{fig:3beams} 
 \end{figure}
 
 
+The applied forces and imposed displacements for the three beams were selected such that, under a purely elastic analysis, all three beams exhibit the same stress and strain state \textbf{E}: $ \varepsilon_E=0.081\%$ and $\sigma_E = 126\,\mathrm{MPa}$. \\
 
-
-
-
-
-
-Slides~16--17 of the source presentation illustrate this contrast quantitatively on a small didactic DN200 bar example, explicitly built so that a force-controlled case (Bar~1) and a displacement-controlled case (Bar~2) share the same elastic starting point. The common geometry is a DN200 tube of length \SI{2}{m} and thickness \SI{3.76}{mm}, with $E=\SI{155}{GPa}$ and $\nu=0.3$. Bar~1 is loaded by $F_1=\SI{320}{kN}$, giving $\sigma_{\mathrm{el}} = F_1/S = \SI{126}{MPa}$ and $\varepsilon_{\mathrm{el}}=\sigma_{\mathrm{el}}/E=\SI{0.081}{\percent}$. Bar~2 is then assigned an imposed displacement $u_2=\SI{1.623}{mm}$ so that the same elastic stress is recovered independently through $\sigma_{\mathrm{el}}=(u_2/L)E=\SI{126}{MPa}$; Figure~\ref{fig:bar12-elasticity} reproduces the slide's graphical construction (slide~16) of this common elastic point $(\sigma_{\mathrm{el}},\varepsilon_{\mathrm{el}})$ on the Hookean line $E=\sigma/\varepsilon$, shared by both bars before plasticity is introduced.
+When the Ramberg--Osgood plasticity law is introduced into the common section, beam 1 (point \textbf{P}) exhibits a purely primary stress response, as expected: $ \varepsilon_P=1\% >  \varepsilon_E $ and $\sigma_P = 126\,\mathrm{MPa}=\sigma_E$. Similarly, beam 2 (pont \textbf{S}) exhibits a purely secondary stress response: $ \varepsilon_S=0.081\% =  \varepsilon_E $ and $\sigma_S = 82.3\,\mathrm{MPa} < \sigma_E$. This distinction between primary and secondary load responses was previously illustrated in figure \ref{fig:P_S} and is reproduced here in figure \ref{fig:deviation}. However, beam 3 (point \textbf{SP}), \emph{although subjected to a secondary load}, exhibits an intermediate stress state between the purely secondary and purely primary configurations. Point SP lies between points S and P on the elastoplastic stress-strain curve: $ \varepsilon_S<  \left( \varepsilon_{PS}=0.16\% \right) < \varepsilon_P $ and  $\sigma_S < \left( \sigma_{SP}= 95.85\,\mathrm{MPa} \right) < \sigma_P $. \\
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.42\textwidth]{figures/bar12_elasticity_construction.png}
-\caption{Slide-level graphical construction (slide~16) of the common elastic reference point $(\sigma_{\mathrm{el}},\varepsilon_{\mathrm{el}})=(\SI{126}{MPa},\SI{0.081}{\percent})$ shared by Bars~1 and~2, obtained independently from $F_1/S$ (Bar~1) and $(u_2/L)E$ (Bar~2) before the elasto-plastic calculations of Figure~\ref{fig:bar12-contours} are run. -->  \textcolor{red}{to remove}}
-\label{fig:bar12-elasticity}
+		\begin{tikzpicture}
+			\begin{axis}[
+				axis lines=middle,
+				xlabel={$\varepsilon (\%)$},
+				ylabel={$\sigma (MPa)$},
+				xmin=0, xmax=1.09,
+				ymin=0, ymax=170,
+				%xtick={ 0.01},
+				%xticklabels={ $$},         
+				xtick align=outside,
+				%ytick={0.01},
+				%yticklabels={ $$},
+				legend style={
+					at={(0.98,0.98)},
+					anchor=north east,
+					font=\scriptsize,
+						   },
+			         width=10cm, height=8cm
+				]
+				
+				% Elastic Line (slope = 2 for simplicity, representing E)
+				\addplot[thick, blue, domain=0:0.1] {1550*x};
+				\addlegendentry{Elastic (code approach)}
+				
+				% Elastoplastic Curve (nonlinear, increasing)
+				\addplot[thick, black, smooth] coordinates {(0,0) (0.013,20) (0.026,40)(0.04,60) (0.068,80)(0.105,90) (0.184,100)(0.35,110)(0.682,120)(1,126)(1.083,127) };
+				\addlegendentry{Elastoplastic ($\sim$reality)}
+
+				%EFF curve : y=-447.761x + 162.269, with x in % and y in MPa
+				\addplot[thick, red, domain=0.081:0.5] {-447.761*x+162.269};
+				\addlegendentry{Elastic follow-up (spring effect)}
+				
+				% Primary
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:1,126)  ;
+
+				% Secondary
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:0.0813,84.5)  ;
+				
+				% Points
+				\addplot[only marks, mark=*, mark size=2pt] coordinates {((0.0813,126)(1,126)(0.0813,84.5)(0.148,96)}; 
+								
+				% Annotations
+				\node at (axis cs:0.11,130) {$\textbf{E}$};
+				\node at (axis cs:0.21,130) {$ ( \varepsilon_E,\sigma_E)$};
+
+				\node at (axis cs:0.11,84.5) {$\textbf{S}$};
+				\node at (axis cs:0.14,74) {$ ( \varepsilon_S,\sigma_S)$};
+				\node at (axis cs:0.14,64) {$ Secondary$};
+
+				\node at (axis cs:0.9,118) {$\textbf{P}$};
+				\node at (axis cs:1,118) {$ ( \varepsilon_P,\sigma_P)$};
+				\node at (axis cs:0.98,107.5) {$ Primary$};
+
+				\node at (axis cs:0.22,96) {$\textbf{SP}$};
+				\node at (axis cs:0.36,96) {$ ( \varepsilon_{SP},\sigma_{SP})$};
+
+			\end{axis}
+		\end{tikzpicture}
+\caption{Elastic follow-up -- deviation of secondary stress observed in beam 3}
+\label{fig:deviation}
 \end{figure}
 
-Once plasticity is admitted (slide~17), the primary path reaches $\sigma_1=\SI{126}{MPa}$ and $\varepsilon_1=\SI{1}{\percent}$, whereas the purely secondary path relaxes to $\sigma_2=\SI{82.3}{MPa}$ and $\varepsilon_2=\SI{0.081}{\percent}$ -- the exact pedagogical contrast used on the slides. Figure~\ref{fig:bar12-ro-curve} plots Bars~1 and~2's elastic and elasto-plastic points $(\sigma_{\mathrm{el}},\varepsilon_{\mathrm{el}})$, $(\sigma_1,\varepsilon_1)$ and $(\sigma_2,\varepsilon_2)$ directly on the same Ramberg--Osgood curve used for the DN200 example, before Bar~3 (the spring case discussed in Section~\ref{sec:roche-spring-bar} below) is introduced.
+
+Beam 3 in the above example should be understood as a symbolic representation of a piping structure. The common section acts as the source of plasticity due to stress concentrations occurring at specific weak points within the structure. In reality, these vulnerable locations are not only subjected to direct local loading, but are also influenced by loads transfer through the surrounding parts of the piping system. These less vulnerable regions experience lower stress levels and therefore remain entirely within the elastic regime. In this context, the behavior of the weak links responding to the imposed-secondary loads might be deviated compared to the case when no intermediate structure is present, based on how the intermediate structure (spring) elastically responds to the secondary loads. \\
+
+In the example shown in figure \ref{fig:deviation}, the spring section has a relatively small stiffness compared with the one of the common section, i.e., $k_{spring}=\frac{1}{4}k_{section}$. This stiffness $k_{spring}$ might be viewed as representing a long adjacent piping segment containing several loops, which significantly reduces its overall stiffness. It is also worth noting that the spring section imposes a boundary condition for the common section. Thanks to the surrounding pipings' flexibility, plastic deformation is more likely to develop in the weak zone (the common section). As a result, the position of point \textbf{SP} deviates from its initially predicted location (point \textbf{S}) under the applied secondary load. In other words, in the presence of spring effect and plasticity, the secondary load is no longer strictly displacement-controlled, as assumed in the methodologies adopted by many conventional piping design codes. \\
+Moreover, if the spring stiffness is almost zero, plastic deformation can develop almost freely in the weak zone. As a result, point \textbf{SP} converges toward the position of point \textbf{P} (the purely primary-load case), and Beam~3 exhibits essentially the same response as Beam~1. Conversely, if the surrounding structure is very stiff (with an almost infinite stiffness), the weak zone is strongly constrained and plasticity develops in a more controlled manner. In this case, point \textbf{SP} approaches the position of point \textbf{S} (the purely secondary-load case) on the elastoplastic curve, and Beam~3 exhibits essentially the same response as Beam~2. These discussions are verified in the parametrical anlaysis below.
+
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.45\textwidth]{figures/bar12_ramberg_osgood_curve.png}
-\caption{Ramberg--Osgood curve (RCC-MRx Figure A3.3S.451) with Bar~1's purely primary point $(\sigma_1,\varepsilon_1)$ and Bar~2's purely secondary point $(\sigma_2,\varepsilon_2)$ located relative to the common elastic point $(\sigma_{\mathrm{el}},\varepsilon_{\mathrm{el}})$, reproduced from the presentation. -->  \textcolor{red}{to remove}}
-\label{fig:bar12-ro-curve}
-\end{figure}
-
-\begin{table}[htbp]
-\centering
-\caption{Worked DN200 example reproduced from the presentation to contrast primary and secondary loading paths.}
-\label{tab:dn200-toy-example}
-\begin{tabularx}{\textwidth}{@{}llX@{}}
-\toprule
-\textbf{Quantity} & \textbf{Value} & \textbf{Role in the example} \\
-\midrule
-Nominal size / geometry & DN200, $L=\SI{2}{m}$, $t=\SI{3.76}{mm}$ & common bar geometry \\
-Elastic constants & $E=\SI{155}{GPa}$, $\nu=0.3$ & RCC-MRx A3.3S.451 data used on the slide \\
-Primary input & $F_1=\SI{320}{kN}$ & force applied to Bar~1 \\
-Secondary input & $u_2=\SI{1.623}{mm}$ & imposed end displacement applied to Bar~2 \\
-Common elastic stress & $\sigma_{\mathrm{el}}=\SI{126}{MPa}$ & obtained both from $F_1/S$ and from $(u_2/L)E$ \\
-Common elastic strain & $\varepsilon_{\mathrm{el}}=\SI{0.081}{\percent}$ & elastic starting point of both paths \\
-Primary elasto-plastic point & $(\sigma_1,\varepsilon_1)=(\SI{126}{MPa},\SI{1}{\percent})$ & force-controlled response \\
-Secondary elasto-plastic point & $(\sigma_2,\varepsilon_2)=(\SI{82.3}{MPa},\SI{0.081}{\percent})$ & self-limiting displacement-controlled response \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-The corresponding FE stress--strain calculations (linear-elastic and elasto-plastic MSC~Marc runs on the two bars) are reproduced in Figure~\ref{fig:bar12-contours}: because Bars~1 and~2 are calibrated to the same elastic stress, their elastic contour is identical, while the elasto-plastic contours diverge exactly as summarised in Table~\ref{tab:dn200-toy-example} -- Bar~1 remains at the primary stress level (\SI{126.34}{MPa}), whereas Bar~2 relaxes to the secondary level (\SI{82.3}{MPa}).
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.55\textwidth]{figures/bar12_fe_contours.png}
-\caption{MSC~Marc equivalent von~Mises stress contours for the DN200 toy example. Top: common elastic state shared by Bars~1 and~2 (\SI{126}{MPa}). Middle: Bar~1's elasto-plastic, purely primary response (\emph{linearJOB-primary}), remaining close to the elastic stress level. Bottom: Bar~2's elasto-plastic, purely secondary response (\emph{nonlinear-secondary-beam2-JOB}), relaxing to a markedly lower stress -- the self-limiting behaviour characteristic of displacement-controlled loading. -->  \textcolor{red}{higher quality}}
-\label{fig:bar12-contours}
-\end{figure}
-
-
-\vspace{30mm}
-
-
-
-
-R.~Roche's original demonstration of elastic follow-up \cite{Roche1987} uses a simple three-bar analogy:
-\begin{itemize}
-    \item \textbf{Bar 1} is subjected to a purely primary load: the elastically computed stress--strain state $(\sigma_{\mathrm{el}},\varepsilon_{\mathrm{el}})$ moves, once plasticity is included, to $(\sigma_1,\varepsilon_1)$ on the Ramberg--Osgood curve, following the classical and potentially dangerous behaviour under primary loading (unbounded deformation for stresses above yield).
-    \item \textbf{Bar 2} is subjected to a purely secondary (displacement-controlled) load: with plasticity, the elastic state $(\sigma_{\mathrm{el}},\varepsilon_{\mathrm{el}})$ moves to $(\sigma_2,\varepsilon_2)$, exhibiting the self-limiting character typical of secondary stresses.
-    \item \textbf{Bar 3} reproduces Bar 2's geometry and loading but adds a \emph{spring} in series, with an imposed end displacement calibrated so that the resulting \emph{elastic} stress equals that of Bars 1 and 2. Despite representing a nominally purely secondary load case, Bar 3 exhibits behaviour intermediate between that of Bar 1 (primary) and that of Bar 2 (secondary): $(\sigma_3,\varepsilon_3)$ lies between $(\sigma_1,\varepsilon_1)$ and $(\sigma_2,\varepsilon_2)$.
-\end{itemize}
-
-This example shows that a nominally secondary stress can, in the presence of elastic follow-up (represented here by the series spring), acquire a partly primary character. A parametric study of the spring stiffness $k_2$ confirms this trend continuously: as $k_2 \to \infty$, Bar~3 tends towards Bar~2's purely secondary behaviour; as $k_2 \to 0$, Bar~3 tends towards Bar~1's primary-like behaviour. Figure~\ref{fig:roche-spring-diagram} shows the conceptual three-bar construction, Figure~\ref{fig:bar3-contour} its FE counterpart, Figure~\ref{fig:roche-spring-sweep} the spring-stiffness sweep extracted from the presentation, and Figure~\ref{fig:roche-example} an original numerical example from Roche. RCC-MRx later formalised this behaviour through the elastic follow-up factor $r_M$ and the abatement coefficient $g$ (Section~\ref{sec:rccmrx}).
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.45\textwidth]{figures/roche_spring_diagram_english.png}
-\caption{Roche's original spring-bar analogy: Bar~1 (left) carries a pure primary stress (dead-weight-like load); Bar~2 (right) carries a pure secondary stress through a rigid bolted connection; Bar~3 (centre), connected through a soft spring, reproduces an intermediate ``spring effect'' behaviour between Bars~1 and~2. -->  \textcolor{red}{doubly occured figure --> to remove}}
-\label{fig:roche-spring-diagram}
-\end{figure}
-
-A three-bar FE validation of this analogy, carried out with MSC~Marc on bars of unit cross-section, gives an elastic reference stress $\sigma_{\mathrm{el}}=\SI{126}{MPa}$; the elasto-plastic calculations give $\sigma_1=\SI{126.34}{MPa}$ for the purely primary Bar~1 (\emph{linear-primary} job) and $\sigma_2=\SI{82.3}{MPa}$ for the purely secondary Bar~2 (\emph{nonlinear-secondary-beam2} job). Figure~\ref{fig:bar3-ro-curve} first places Bar~3's single representative point $(\sigma_3,\varepsilon_3)$ on the same curve, visibly intermediate between Bar~1 and Bar~2, before the full parametric sweep is examined. For Bar~3, a parametric study on the series-spring stiffness $k_2$ confirms the continuous transition announced above: the extracted points A--D of Figure~\ref{fig:roche-spring-sweep} correspond to $k_2=2k$, $k/2$, $k/4$ and $k/16$, for which $r_M$ rises from 0.996 to 3.989, 7.981 and 31.931, while the estimated stress increases from $\sigma_{3,\mathrm{est}}=\SIlist{89.912;97.183;101.8;111.4}{MPa}$ and the associated strain from $\varepsilon_{3,\mathrm{est}}=\SIlist{0.104;0.155;0.206;0.383}{\percent}$. The same sweep shows the end displacement increasing from \SI{2.435}{mm} to \SI{4.869}{mm}, \SI{8.115}{mm} and \SI{27.591}{mm}, i.e.\ Bar~3 moves away from the purely secondary limit toward the primary-like response as the spring restraint is relaxed.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.45\textwidth]{figures/bar3_ramberg_osgood_curve.png}
-\caption{Ramberg--Osgood curve with Bar~3's point $(\sigma_3,\varepsilon_3)$ (``spring effect'') added to Bars~1 and~2, showing at a glance the intermediate character of the spring-effect response, before the parametric sweep of Figure~\ref{fig:roche-spring-sweep} is introduced. -->  \textcolor{red}{important: redo the figure. Maybe reuse figure 2 and modify it --> lecturers will not be disturbed by too many similar figures}}
-\label{fig:bar3-ro-curve}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.7\textwidth]{figures/bar3_spring_vonmises.png}
-\caption{MSC~Marc equivalent von~Mises stress contour for Bar~3 (\emph{nonlinear-secondary-beam3} job): the stress in the flexible segment reaches \SI{90.342}{MPa}, an intermediate value between Bar~1's primary stress ($\sigma_1=\SI{126.34}{MPa}$) and Bar~2's secondary stress ($\sigma_2=\SI{82.3}{MPa}$), illustrating the ``spring effect'' for a representative spring stiffness $k_2$.}
-\label{fig:bar3-contour}
-\end{figure}
-
-The presentation also documents Bar~3's FE contours at another point of the spring-stiffness sweep, reproduced in Figure~\ref{fig:bar3-contour-pair}: the elastic reference state (\SI{126.056}{MPa}, essentially identical to Bars~1 and~2 since the spring is calibrated to preserve the elastic stress) and a further elasto-plastic run at \SI{95.852}{MPa}, again located between Bar~1's and Bar~2's limiting responses -- consistent with, though not numerically identical to, the closest tabulated estimate ($\sigma_{3,\mathrm{est}}=\SI{101.8}{MPa}$ at $u_3=\SI{8.115}{mm}$ in Figure~\ref{fig:roche-spring-sweep}), the two figures reflect slightly different runs of the same parametric family.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.6\textwidth]{figures/bar3_spring_contours_pair.png}
-\caption{MSC~Marc equivalent von~Mises stress contours for a second, independent spring-stiffness run on Bar~3: elastic reference state (top, \SI{126.056}{MPa}) and elasto-plastic response (bottom, \SI{95.852}{MPa}), both showing the flexible bar segment together with the stiffer series-spring segment.-->  \textcolor{red}{higher quality}}
-\label{fig:bar3-contour-pair}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.6\textwidth]{figures/parametrics.png}
-\caption{Parametric three-bar sweep extracted from the presentation: reducing the added spring stiffness from $k_2=2k$ to $k_2=k/16$ drives Bar~3 continuously away from the purely secondary limit (Bar~2) and towards the primary-like limit (Bar~1). The slide reports the corresponding sequence of follow-up factors ($r_M=0.996$, 3.989, 7.981, 31.931), stress estimates ($\sigma_{3,\mathrm{est}}=\SIlist{89.912;97.183;101.8;111.4}{MPa}$) and end displacements ($u_3=\SIlist{2.435;4.869;8.115;27.591}{mm}$).  -->  \textcolor{red}{higher quality + Maybe reuse figure 2 and modify it --> lecturers will not be disturbed by too many similar figures}}
+\includegraphics[width=0.4\textwidth]{figures/parametrics.png}
+\caption{Parametric analysis on the spring stiffness' effect  -->  \textcolor{red}{higher quality + Maybe reuse figure 2 and modify it --> lecturers will not be disturbed by too many similar figures}}
 \label{fig:roche-spring-sweep}
 \end{figure}
 
 
 
+
+
+\newpage
+
+
+
+\vspace{3cm}
+----------------------------------------------------------\textcolor{red}{the following contents are not OK}------------------------------------\\
+This example shows that a nominally secondary stress can, in the presence of elastic follow-up (represented here by the series spring), acquire a partly primary character. A parametric study of the spring stiffness $k_2$ confirms this trend continuously: as $k_2 \to \infty$, Bar~3 tends towards Bar~2's purely secondary behaviour; as $k_2 \to 0$, Bar~3 tends towards Bar~1's primary-like behaviour. Figure~\ref{fig:roche-spring-diagram} shows the conceptual three-bar construction, Figure~\ref{fig:bar3-contour} its FE counterpart, Figure~\ref{fig:roche-spring-sweep} the spring-stiffness sweep extracted from the presentation, and Figure~\ref{fig:roche-example} an original numerical example from Roche. RCC-MRx later formalised this behaviour through the elastic follow-up factor $r_M$ and the abatement coefficient $g$ (Section~\ref{sec:rccmrx}).
+
+
+A three-bar FE validation of this analogy, carried out with MSC~Marc on bars of unit cross-section, gives an elastic reference stress $\sigma_{\mathrm{el}}=\SI{126}{MPa}$; the elasto-plastic calculations give $\sigma_1=\SI{126.34}{MPa}$ for the purely primary Bar~1 (\emph{linear-primary} job) and $\sigma_2=\SI{82.3}{MPa}$ for the purely secondary Bar~2 (\emph{nonlinear-secondary-beam2} job). Figure~\ref{fig:bar3-ro-curve} first places Bar~3's single representative point $(\sigma_3,\varepsilon_3)$ on the same curve, visibly intermediate between Bar~1 and Bar~2, before the full parametric sweep is examined. For Bar~3, a parametric study on the series-spring stiffness $k_2$ confirms the continuous transition announced above: the extracted points A--D of Figure~\ref{fig:roche-spring-sweep} correspond to $k_2=2k$, $k/2$, $k/4$ and $k/16$, for which $r_M$ rises from 0.996 to 3.989, 7.981 and 31.931, while the estimated stress increases from $\sigma_{3,\mathrm{est}}=\SIlist{89.912;97.183;101.8;111.4}{MPa}$ and the associated strain from $\varepsilon_{3,\mathrm{est}}=\SIlist{0.104;0.155;0.206;0.383}{\percent}$. The same sweep shows the end displacement increasing from \SI{2.435}{mm} to \SI{4.869}{mm}, \SI{8.115}{mm} and \SI{27.591}{mm}, i.e.\ Bar~3 moves away from the purely secondary limit toward the primary-like response as the spring restraint is relaxed.
+
+
+
+
+
+
+
+
+\textcolor{red}{Show how positions between points E, S, P and the real points are (see Figure 2), in context of elastic-follow-up } \\
+\textcolor{red}{--> the necessity to update the current standard piping analysis methodology } \\
+\textcolor{red}{--> At the end of this chapter: show the need to quantify elastic-follow up --> go to the next section } \\
+
+\newpage
 % =============================================================================
 \section{Elastic follow-up factor and abatement coefficient in RCC-MRx}
 \label{sec:rccmrx}
