@@ -23,6 +23,9 @@
 \usepackage{parskip}  %no ident
 \usepackage{subcaption}
 \usepackage[normalem]{ulem}
+\usepackage[dvipsnames]{xcolor}
+
+\definecolor{myGreen}{rgb}{0.13, 0.55, 0.13}
 
 
 \geometry{margin=2cm}
@@ -86,7 +89,7 @@ Steel pipings are metallic structures (usually pressurized) consisting of straig
 \centering
 \includegraphics[width=0.8\textwidth]{figures/Modele-visuel-bis_01.png}
 \caption{A typical piping structure modelled under PEPS 8.0 (\textcolor{red}{modified based on client model})}
-\label{fig:ovalisation}
+\label{fig:typical_piping_system}
 \end{figure}
 
 \textcolor{red}{For the above figure: add some equipments, remove all small piping portions ; add all components mentionned in the first paragraph in this structure }
@@ -161,14 +164,14 @@ Primary loads are force-imposed in nature and are balanced by a stress field $\s
 
 			\end{axis}
 		\end{tikzpicture}
-\caption{Schematic representation of primary and secondary stresses}
+\caption{Stress categorization: primary and secondary stresses}
 \label{fig:P_S}
 \end{figure}
 
 Secondary loads are displacement-controlled by nature, meaning that the structure is subjected to strain-imposed boundary conditions. As a result, the structure deformation is prescribed and $\varepsilon_S = \varepsilon_E$ regardless of the type of analysis employed. Under sufficiently high secondary loads, localized yielding may occur and plastic flow can develop, leading to elastoplastic stress levels lower than those predicted by a purely elastic analysis: {$\sigma_S \leq \sigma_E$}.  The remainder of the structure, constrained by the imposed-strain boundary conditions, accommodates the local plastic deformation and limits the extent of the plastified region. Secondary stresses are threfore \textbf{self-limiting}. \\Secondary stresses are usually induced by (cyclic) thermal expansion, seismic anchor movements, or differential settlement. The two most significant damage modes are \textbf{fatigue} under cyclic loading and \textbf{progressive deformation}. \\
 Piping design codes classify loads according to these two categories and specify allowable stress limits based on the associated failure modes, drawing on both experimental evidence and theoretical considerations. In practice, a linear elastic analysis is used to determine the stress state at each point of the structure (\textbf{E}). The nature of the loading can then be identified, allowing the actual response to be interpreted according to the characteristics of primary (\textbf{P}) or secondary stresses (\textbf{S}) and assessed against the corresponding code compliance criteria. This methodology helps avoid the need for complex nonlinear elastoplastic analyses. \\
 
-The previous paragraphs briefly outlined the main ideas behind piping design codes for addressing the complex structural problems encountered in piping analysis. A further challenge arises in numerical simulation: even linear 3D finite element analyses (FEA) remain computationally expensive, in terms of model preparation, solution time, and result post-processing. In this context, beam theory plays a key role, providing an efficient means of representing long pipe runs and their associated components while significantly reducing the computational effort required. The classical Euler--Bernoulli hypothesis neglects transverse shear deformation and is only valid for slender members. The Timoshenko beam theory retains transverse shear and remains valid for stockier members as well. Standard nuclear piping codes rely on Timoshenko-type beam elements for the straight and curved segments of the model.  \\
+The previous paragraphs briefly outlined the main ideas behind piping design codes for addressing the complex structural problems encountered in piping analysis, in particular the stress categorization within a linear approach. A further challenge arises in numerical simulation: even linear 3D finite element analyses (FEA) remain computationally expensive, in terms of model preparation, solution time, and result post-processing. In this context, beam theory plays a key role, providing an efficient means of representing long pipe runs and their associated components while significantly reducing the computational effort required. The classical Euler--Bernoulli hypothesis neglects transverse shear deformation and is only valid for slender members. The Timoshenko beam theory retains transverse shear and remains valid for stockier members as well. Standard nuclear piping codes rely on Timoshenko-type beam elements for the straight and curved segments of the model.  \\
 Beam theory was originally developed for straight pipes and must be adapted for curved pipes (bend or elbows). Under bendings, elbows undergoes cross-sectional \textbf{\emph{ovalisation}}: the initial circular cross-section distorts into an oval shape. This ovalisation is a geometrical non-linearity, illustrated by the shell FEA analysis shown in Figure~\ref{fig:ovalisation}, increases the flexibility of the elbow well beyond the prediction of classical (straight) beam theory. The \textbf{\emph{flexibility factor} $k$} is defined as the ratio between the rotation per unit length of the curved component and the rotation per unit length of an equivalent straight pipe under the same bending moment. Von~K\'arm\'an/Hovgaard suggested first approximations to estimate the flexibility factor of elbows, and latter on Beskin introduced simpler reference approximation. In the slide sequence, the latter is presented as the practical formula retained for piping calculations, without an explicit intermediate derivation from the former. The flexibility factor of a smooth, unpressurised elbow is therefore written in the benchmark, in terms of the non-dimensional flexibility characteristic $h$, as
 \begin{equation}
 h = \frac{t\,R}{r^{2}}, \qquad k = \frac{1.65}{h},
@@ -323,7 +326,7 @@ with, for 316L(N) stainless steel, $n_0 = 0.1125$ ($1/n_0 = 8.89$) and $C_0 = 1.
 
 \newpage
 
-\subsection{Elastic-follow-up -- deviation of the secondary load concept}
+\subsection{Elastic-follow-up -- deviation of the secondary stress category}
 
 In order to illustrate elastic follow-up, Roland L. Roche \cite{Roche1987} proposed a test involving three bars of identical geometry. Bar 1 is subjected to a primary load, while Bar 2 is subjected to a secondary load. Bar 3 is identical to the other two bars but is connected to an additional spring and is also subjected to a secondary load. In his conclusions, Roland L. Roche showed that Bar 3, although subjected only to a secondary load, exhibits an intermediate behavior between those associated with purely primary and purely secondary loading. With our own selected beam geometry and material, the test is reproduced and shown in figure \ref{fig:3beams}.
 
@@ -429,43 +432,91 @@ When the Ramberg--Osgood plasticity law is introduced into the common section, b
 Beam 3 in the above example might be understood as a symbolic representation of a piping structure. The common section acts as the source of plasticity due to stress concentrations occurring at specific weak points within the structure. In reality, these vulnerable locations are not only subjected to direct local loading, but are also influenced by loads transfer through the surrounding parts of the piping system. These less vulnerable regions experience lower stress levels and therefore remain entirely within the elastic regime. In this context, the behavior of the weak links responding to the imposed-secondary loads might be deviated compared to the case when no intermediate structure is present, based on how the intermediate structure (spring) elastically responds to the secondary loads. \\
 
 In the example shown in figure \ref{fig:deviation}, the spring section has a relatively small stiffness compared with the one of the common section, i.e., $k_{spring}=\frac{1}{4}k_{section}$. This stiffness $k_{spring}$ might be viewed as representing a long adjacent piping segment containing several loops, which significantly reduces its overall stiffness. It is also worth noting that the spring section imposes a boundary condition for the common section. Thanks to the surrounding pipings' flexibility, plastic deformation is more likely to develop in the weak zone (the common section). As a result, the position of point \textbf{SP} deviates from its initially predicted location (point \textbf{S}) under the applied secondary load. In other words, in the presence of spring effect and plasticity, the secondary load is no longer strictly displacement-controlled, as assumed in the methodologies adopted by many conventional piping design codes. \\
-Moreover, if the spring stiffness is almost zero, plastic deformation can develop almost freely in the weak zone. As a result, point \textbf{SP} converges toward the position of point \textbf{P} (the purely primary-load case), and Beam~3 exhibits essentially the same response as Beam~1. Conversely, if the surrounding structure is very stiff (with an almost infinite stiffness), the weak zone is strongly constrained and plasticity develops in a more controlled manner. In this case, point \textbf{SP} approaches the position of point \textbf{S} (the purely secondary-load case) on the elastoplastic curve, and Beam~3 exhibits essentially the same response as Beam~2. These discussions are verified in the parametrical anlaysis below.
+Moreover, if the spring stiffness is almost zero, plastic deformation can develop almost freely in the weak zone. As a result, point \textbf{SP} converges toward the position of point \textbf{P} (the purely primary-load case), and Beam~3 exhibits essentially the same response as Beam~1. Conversely, if the surrounding structure is very stiff (with an almost infinite stiffness), the weak zone is strongly constrained and plasticity develops in a more controlled manner. In this case, point \textbf{SP} approaches the position of point \textbf{S} (the purely secondary-load case) on the elastoplastic curve, and Beam~3 exhibits essentially the same response as Beam~2. \\
+
+The above remarks are illustrated by points B and D in Figure~\ref{fig:parametric-EFU}. For point B, the spring stiffness is increased to \(k/2\), where \(k\) is the stiffness of the common section. The imposed displacement is increased to 2.435\,mm to achieve the same elastic solution as that predicted for point E. As expected, compared with point SP, the higher spring stiffness causes point B to move closer to the secondary-behavior limit (point S), yielding \(\sigma_B = 90.3\,\text{MPa}\) and \(\varepsilon_B = 0.13\%\). Similarly, for point D, the initial spring stiffness is reduced to \(k/16\), and the imposed displacement is adjusted to 27.591\,mm. As expected, point D moves closer to the primary-behavior limit (point P), yielding \(\sigma_D = 106.7\,\text{MPa}\) and \(\varepsilon_D = 0.283\%\). This parametric study also shows that purely primary behavior is approached as the spring stiffness tends to zero, whereas purely secondary behavior is approached in the limit of infinitely stiff springs.
+
+
+
+
 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.4\textwidth]{figures/parametrics.png}
-\caption{Parametric analysis on the spring stiffness' effect  -->  \textcolor{red}{higher quality + Maybe reuse figure 2 and modify it --> lecturers will not be disturbed by too many similar figures}}
-\label{fig:roche-spring-sweep}
+		\begin{tikzpicture}
+			\begin{axis}[
+				axis lines=middle,
+				xlabel={$\varepsilon (\%)$},
+				ylabel={$\sigma (MPa)$},
+				xmin=0, xmax=1.09,
+				ymin=0, ymax=170,
+				%xtick={ 0.01},
+				%xticklabels={ $$},         
+				xtick align=outside,
+				%ytick={0.01},
+				%yticklabels={ $$},
+				legend style={
+					at={(0.98,0.98)},
+					anchor=north east,
+					font=\scriptsize,
+						   },
+			         width=10cm, height=8cm
+				]
+				
+				% Elastic Line (slope = 2 for simplicity, representing E)
+				\addplot[thick, blue, domain=0:0.1] {1550*x};
+				\addlegendentry{Elastic (code approach)}
+				
+				% Elastoplastic Curve (nonlinear, increasing)
+				\addplot[thick, black, smooth] coordinates {(0,0) (0.013,20) (0.026,40)(0.04,60) (0.068,80)(0.105,90) (0.184,100)(0.35,110)(0.682,120)(1,126)(1.083,127) };
+				\addlegendentry{Elastoplastic ($\sim$reality)}
+
+				%EFF curves
+				\addplot[thick, red, domain=0.081:0.5] {-447.761*x+162.269};
+				\addplot[thick, red, domain=0.081:1] {-95.545*x+133.739};
+				\addplot[thick, red, domain=0.081:1] {-1231.034*x+225.714};
+
+				\addlegendentry{Elastic follow-up (spring effect)}
+
+				% Primary
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:1,126)  ;
+
+				% Secondary
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:0.0813,0)  ;
+				
+				% Points
+				\addplot[only marks, mark=*, mark size=2pt] coordinates {((0.0813,126)(1,126)(0.0813,84.5)(0.148,96)(0.11,90.3)(0.283,106.7)}; 
+								
+				% Annotations
+				\node at (axis cs:0.11,130) {\textbf{E}};
+				\node at (axis cs:0.21,130) {$ ( \varepsilon_E,\sigma_E)$};
+
+				\node at (axis cs:0.083,77) {\textbf{S}};
+				\node at (axis cs:0.083,35) {\textcolor{myGreen}{0}};
+
+				\node at (axis cs:1,118) {\textbf{P}};
+				\node at (axis cs:0.7,126){$\mathcolor{myGreen}{\mathbf{\infty}}$};
+
+				\node at (axis cs:0.12,83) {\textbf{B}};
+				\node at (axis cs:0.16,40) {\textcolor{myGreen}{k/2}};
+
+				\node at (axis cs:0.165,90) {\textbf{SP}};
+				\node at (axis cs:0.26,47) {\textcolor{myGreen}{k/4}};
+
+				\node at (axis cs:0.283,100) {\textbf{D}};
+				\node at (axis cs:0.55,80) {\textcolor{myGreen}{k/16}};
+
+			\end{axis}
+		\end{tikzpicture}
+\caption{Parametric analysis on the spring stiffness' effect}
+\label{fig:parametric-EFU}
 \end{figure}
 
 
 
+The three-beam example (Figures~\ref{fig:deviation} and \ref{fig:parametric-EFU}) illustrates the limitations of the conventional secondary-stress concept in the presence of elastic follow-up effects. The spring stiffness, represented in Figure~\ref{fig:parametric-EFU}, significantly influences the elastoplastic response of the weak links. However, spring stiffness itself is not a general parameter for quantifying elastic follow-up in complex piping systems. A more fundamental measure is required to characterize the phenomenon independently of a particular mechanical idealization. In the next section, the concept of elastic follow-up is revisited from a more general perspective, and a suitable quantification method is introduced.
 
 
-\newpage
-
-
-
-\vspace{3cm}
-----------------------------------------------------------\textcolor{red}{the following contents are not OK}------------------------------------\\
-This example shows that a nominally secondary stress can, in the presence of elastic follow-up (represented here by the series spring), acquire a partly primary character. A parametric study of the spring stiffness $k_2$ confirms this trend continuously: as $k_2 \to \infty$, Bar~3 tends towards Bar~2's purely secondary behaviour; as $k_2 \to 0$, Bar~3 tends towards Bar~1's primary-like behaviour. Figure~\ref{fig:roche-spring-diagram} shows the conceptual three-bar construction, Figure~\ref{fig:bar3-contour} its FE counterpart, Figure~\ref{fig:roche-spring-sweep} the spring-stiffness sweep extracted from the presentation, and Figure~\ref{fig:roche-example} an original numerical example from Roche. RCC-MRx later formalised this behaviour through the elastic follow-up factor $r_M$ and the abatement coefficient $g$ (Section~\ref{sec:rccmrx}).
-
-
-A three-bar FE validation of this analogy, carried out with MSC~Marc on bars of unit cross-section, gives an elastic reference stress $\sigma_{\mathrm{el}}=\SI{126}{MPa}$; the elasto-plastic calculations give $\sigma_1=\SI{126.34}{MPa}$ for the purely primary Bar~1 (\emph{linear-primary} job) and $\sigma_2=\SI{82.3}{MPa}$ for the purely secondary Bar~2 (\emph{nonlinear-secondary-beam2} job). Figure~\ref{fig:bar3-ro-curve} first places Bar~3's single representative point $(\sigma_3,\varepsilon_3)$ on the same curve, visibly intermediate between Bar~1 and Bar~2, before the full parametric sweep is examined. For Bar~3, a parametric study on the series-spring stiffness $k_2$ confirms the continuous transition announced above: the extracted points A--D of Figure~\ref{fig:roche-spring-sweep} correspond to $k_2=2k$, $k/2$, $k/4$ and $k/16$, for which $r_M$ rises from 0.996 to 3.989, 7.981 and 31.931, while the estimated stress increases from $\sigma_{3,\mathrm{est}}=\SIlist{89.912;97.183;101.8;111.4}{MPa}$ and the associated strain from $\varepsilon_{3,\mathrm{est}}=\SIlist{0.104;0.155;0.206;0.383}{\percent}$. The same sweep shows the end displacement increasing from \SI{2.435}{mm} to \SI{4.869}{mm}, \SI{8.115}{mm} and \SI{27.591}{mm}, i.e.\ Bar~3 moves away from the purely secondary limit toward the primary-like response as the spring restraint is relaxed.
-
-
-
-
-
-
-
-
-\textcolor{red}{Show how positions between points E, S, P and the real points are (see Figure 2), in context of elastic-follow-up } \\
-\textcolor{red}{--> the necessity to update the current standard piping analysis methodology } \\
-\textcolor{red}{--> At the end of this chapter: show the need to quantify elastic-follow up --> go to the next section } \\
-
-\newpage
 % =============================================================================
 \section{Elastic follow-up factor and abatement coefficient in RCC-MRx}
 \label{sec:rccmrx}
