@@ -43,10 +43,9 @@
 % ---------------------------------------------------------------------------
 % Title / authors
 % ---------------------------------------------------------------------------
-\title{\textbf{Abatement coefficient g in RCC-MRx RB3650  \\ 
-(for high-temperature type-P nuclear piping analysis)}}
+\title{\textbf{Abatement coefficient g in RCC-MRx \\ }}
 
-
+%(for high-temperature type-P nuclear piping analysis)
 
 
 \author[1]{Ir\'en\'ee Cornaton}
@@ -88,15 +87,13 @@ Steel pipings are metallic structures (usually pressurized) consisting of straig
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/Modele-visuel-bis_01.png}
-\caption{A typical piping structure modelled under PEPS 8.0 (\textcolor{red}{modified based on client model})}
+\caption{A typical piping structure modelled under PEPS 8.0}
 \label{fig:typical_piping_system}
 \end{figure}
 
-\textcolor{red}{For the above figure: add some equipments, remove all small piping portions ; add all components mentionned in the first paragraph in this structure }
 
 
-
-\subsection{Standard calculation methodology for piping analysis}
+\subsection{Calculation methodology in standard piping analysis}
 
 
 Piping stress engineers are interested in the stress state at every material point within pipings that might extend over kilometers. Performing a detailed 3D finite element analysis (FEA) of such structures would be excessively time-consuming and is generally incompatible with the industrial projects' needs. In this context, piping design codes provide rules for the analysis of piping systems, generally based on the assumption of \textbf{linear elastic material behavior} (Hooke's law), with allowable stress limits established to prevent the various failure modes and to ensure an adequate level of safety. \\
@@ -198,9 +195,9 @@ Finally, because of the geometric and material discontinuities near fittings, we
 
 \newpage
 
-\subsection{Elastic benchmark of the standard piping code approach using shell and beam finite element models}
+\subsection{Elastic benchmark}
 
-\textcolor{red}{Maybe say that we are referring to the anlaysis of point E in Figure 2}
+\textcolor{red}{Maybe say that we are referring to the anlaysis of point E in Figure 2} \\
 
 The objective of the benchmark presented below is is to demonstrate the consistency between a Timoshenko beam model (Figure \ref{fig:PEPS})  and a 3D shell FEA model (Figure \ref{fig:Marc}), for the analysis of a simple stainless-steel piping structure. 
 
@@ -301,7 +298,11 @@ In piping systems, geometrical discontinuities or load-induced deformations (e.g
 
 In this section, the elastic follow-up concept will be presented based on the work of Roland L. Roche \cite{Roche1987}, without considering the impacts of creep and stress relaxation.
 
-\subsection{The Ramberg--Osgood constitutive law}
+
+
+\vspace{3cm}
+
+\textbf{The Ramberg--Osgood constitutive law:}
 
 \textcolor{red}{to redo this paragraph on Ramberg-Osgood}
 
@@ -327,6 +328,7 @@ with, for 316L(N) stainless steel, $n_0 = 0.1125$ ($1/n_0 = 8.89$) and $C_0 = 1.
 \newpage
 
 \subsection{Elastic-follow-up -- deviation of the secondary stress category}
+
 
 In order to illustrate elastic follow-up, Roland L. Roche \cite{Roche1987} proposed a test involving three bars of identical geometry. Bar 1 is subjected to a primary load, while Bar 2 is subjected to a secondary load. Bar 3 is identical to the other two bars but is connected to an additional spring and is also subjected to a secondary load. In his conclusions, Roland L. Roche showed that Bar 3, although subjected only to a secondary load, exhibits an intermediate behavior between those associated with purely primary and purely secondary loading. With our own selected beam geometry and material, the test is reproduced and shown in figure \ref{fig:3beams}.
 
@@ -518,89 +520,64 @@ The three-beam example (Figures~\ref{fig:deviation} and \ref{fig:parametric-EFU}
 
 
 % =============================================================================
-\section{Elastic follow-up factor and abatement coefficient in RCC-MRx}
+\subsection{Elastic follow-up factor in RCC-MRx}
 \label{sec:rccmrx}
 % =============================================================================
 \textcolor{red}{Introduction on RCC-MRx here, without forgetting to mention the nuclear context (which is the focus of this journal publication)} \\
-
 \textcolor{red}{Talk about high temperature pipings and the need to properly consider plasticity} \\
 
-\textcolor{red}{This paragraph  a bridge between rM + g of RCC-MRx and the original works from Roland Roche.}
+
+RCC-MRx is a French nuclear design code entitled \emph{Design and Construction Rules for Mechanical Components of Nuclear Installations: High-Temperature, Research and Fusion Reactors}. In the negligible-creep regime, RCC-MRx RB 3650 considers the interaction between elasticity and plasticity under spring effects and quantifies elastic follow-up using the rules provided in RB 3643.3. Displacement-controlled moments are included in the validation of primary stresses in accordance with the requirements of RB 3651 through an abatement coefficient, $g$, which accounts for the elastic follow-up behavior of the entire structure.
 
 
-RCC-MRx is a French nuclear design code entitled \emph{Design and Construction Rules for Mechanical Components of Nuclear Installations: High-Temperature, Research and Fusion Reactors}.
-
-
-The RCC-MRx code for high-temperature nuclear components formalises this distinction through the concept of the \emph{abatement coefficient} $g$ (RB~3651) \cite{RCCMRx}, which reduces the displacement-dependent moment used in the primary-type damage assessment. The coefficient $g$ is itself derived from the \emph{elastic follow-up factor} $r_M$ (RB~3643), a structural indicator of how much a locally yielding cross-section is elastically restrained (``followed up'') by the surrounding, comparatively stiffer, structure.
-
-This work has two objectives:
-\begin{enumerate}
-    \item to present, in a self-contained manner, the historical and theoretical background that leads from classical beam theory to the modern treatment of elastic follow-up and the abatement coefficient in RCC-MRx;
-    \item to benchmark the RCC-MRx analytical procedure against a reference elasto-plastic finite-element (FE) shell analysis on a simple, well-defined elbow test case, in order to quantify how conservative (or non-conservative) the code procedure is with respect to a full non-linear reference solution.
-\end{enumerate}
+This section continues the discussion presented in §\ref{sec:EFF}. With the objective of generalizing the elastic follow-up concept and quantifying the degree of elastic follow-up in a piping system subjected to loading, Roland L. Roche introduced two fundamental assumptions. \\
 
 
 
 
 
 
-Two conceptually different but often-confused corrections are used to relate an elastically computed stress or strain field to the actual elasto-plastic response of a structure: \emph{Neuber's rule} and the \emph{elastic follow-up effect}. Their essential differences are summarised in Table~\ref{tab:neuber-followup}. The source presentation briefly mentions both $r_M$ and $r_C$ as follow-up-related indicators; only the RCC-MRx factor $r_M$ is developed here because it is the quantity actually used in clauses RB~3643 and RB~3651 and in the benchmark calculations.
+The above equation of rM is valid for isotropic materials. Considering $\nu=0.3$ for steels, we have:
+	\begin{equation}
+		rM    =0.867\left ( \frac{T}{t}-1 \right )
+		\label{def:EFU2}
+	\end{equation}
+In a conservative manner, the code RCC-MRx considers $\frac{2(1+\nu)}{3} \approx 1 $, and forces an additional stress indice of 0.87 for pressure and torsional moments, in order to consider the isotropic 3D character of the material. So finally we have the following formula used in RCC-MRx:
+	\begin{equation}
+		\mathbf{rM    =\frac{T}{t}-1}
+		\label{def:EFU_final}
+	\end{equation}
+Note that the higher rM, more the load is considered as having more primary characters. It means that rM(coeff=1) > rM(coeff=0.867) is a conservative approach. 
 
-\begin{table}[htbp]
-\centering
-\caption{Neuber local correction versus global elastic follow-up.}
-\label{tab:neuber-followup}
-\begin{tabular}{@{}lll@{}}
-\toprule
- & \textbf{Neuber} & \textbf{Elastic follow-up} \\
-\midrule
-Nature & Local & Global \\
-Affected zone & Notch / point & Whole structure \\
-Type of phenomenon & Stress concentration & Strain redistribution \\
-Role & Corrects a local stress peak & Corrects the overall structural response \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Elastic follow-up describes how a locally yielding (softening) section of a structure is ``followed up'' by the surrounding, stiffer parts, which continue to impose additional deformation on the yielded section because the imposed \emph{overall} displacement must still be accommodated. Depending on how stiff the surrounding structure is relative to the yielding section, the behaviour of that section under a nominally secondary (displacement-controlled) load can range from purely secondary (self-limiting, if the surrounding structure is very flexible and simply relaxes) to effectively primary (if the surrounding structure is very stiff and keeps imposing the full displacement onto the yielded, and therefore weaker, section). Figure~\ref{fig:primary-secondary-paths} gives the mechanical analogy illustrating these two limiting behaviours.
-
-\textcolor{red}{Note: Talking about elastic follow-up in a local aspect here, it's a bit out scope, since g coeff is used in to address a global dommage. We might talk about the local aspect of EFF, but maybe push this part to the end of §3.3 (after the moment that sm+sb, g, rM are all introduced)}
+Additionally, based on the definition of local resilience t, we have:
+	\begin{flalign*}
+		  T=\frac{  \iiint\sigma_0^*     \varepsilon_0^* dV}{  \iiint \sigma_0^*   \varepsilon_0^{p*}   dV}=\frac{  \iiint\sigma_0^{*2}dV}{  \iiint \frac{\sigma_0^{*2}}{t}    dV}
+	\end{flalign*}
+(assuming that the young modulus is homogeously constant). Finally, if the equivalent stresses are constant in each piping section, we can find the formula of T suggested by the code RCC-MRx: 
+	\begin{flalign*}
+		  T=\frac{  \iiint\sigma_0^{*2}dV}{  \iiint \frac{\sigma_0^{*2}}{t}    dV}=\frac{  \int\sigma_0^{*2}Ads}{  \int \frac{\sigma_0^{*2}}{t}   A ds}
+	\end{flalign*}
+\newline
 
 
 
-\subsection{Energy balance and definition of the elastic follow-up factor}
-
-\textcolor{red}{Must show the two essential assumptions of Roland Roche here : Katchanov + Ramberg Osgood} \\
-
-Before stating the RCC-MRx result, it is useful to make explicit the two independent hypotheses combined in the presentation to obtain it, since they are attributed to two different authors and are easily conflated. The material non-linearity is represented by the Ramberg--Osgood strain decomposition, written here in incremental form relative to a reference elastic state (subscript $0$),
+Now, define the elastic follow-up factor as below:
 \begin{equation}
-\Delta\bar{\bar\varepsilon} = \varphi\,\Delta\bar{\bar\varepsilon}_0 + \Phi(\varphi)\,\Delta\bar{\bar\varepsilon}_0^{P},
-\label{eq:kachanov-ro}
+rM=\frac{E(\varepsilon^* - \varepsilon_0^*)}{ \sigma_0^*-\sigma^* } 
 \end{equation}
-while the loading-path non-linearity is represented by Kachanov's hypothesis of a radially proportional (self-similar) stress redistribution,
-\begin{equation}
-\Delta\bar{\bar\sigma} = \varphi\,\Delta\bar{\bar\sigma}_0 ,
-\label{eq:kachanov-stress}
-\end{equation}
-with the same scalar multiplier $\varphi$ in both relations, and $\Phi(\varphi)=\varphi^{1/n_0}$ the Ramberg--Osgood exponent function of Eq.~\eqref{eq:RO}. Equation~\eqref{eq:kachanov-stress} -- i.e., that the elasto-plastic stress field remains everywhere collinear with the purely elastic one, only rescaled by $\varphi$ -- is Kachanov's contribution and is the key simplifying assumption that turns a genuinely non-linear redistribution problem into a scalar one; Eq.~\eqref{eq:kachanov-ro} is the Ramberg--Osgood material response evaluated along that self-similar path. Writing the virtual-work statement of the elasto-plastic increment against the elastic reference field, and separating an imposed-displacement contribution $\Delta u$ (secondary) from a thermal/imposed-strain contribution $\Delta\bar{\bar e}$,
-\begin{equation}
-\varphi\!\int \Delta\bar{\bar\varepsilon}_0{:}\Delta\bar{\bar\sigma}_0\,dv + \Phi(\varphi)\!\int \Delta\bar{\bar\varepsilon}_0^{P}{:}\Delta\bar{\bar\sigma}_0\,dv
-= \int \Delta u\,\Delta F_0\,ds + \int \Delta\bar{\bar e}{:}\Delta\bar{\bar\sigma}_0\,dv ,
-\label{eq:kachanov-vw}
-\end{equation}
-and comparing with the energy balance of the purely elastic calculation (same loading, $\varphi=\Phi=1$),
-\begin{equation}
-\tfrac12\!\int \Delta\bar{\bar\varepsilon}_0{:}\Delta\bar{\bar\sigma}_0\,dv = \tfrac12\!\int \Delta u\,\Delta F_0\,ds + \tfrac12\!\int \Delta\bar{\bar e}{:}\Delta\bar{\bar\sigma}_0\,dv ,
-\label{eq:kachanov-elastic-vw}
-\end{equation}
-subtracting \emph{twice} Eq.~\eqref{eq:kachanov-elastic-vw} (which clears its $\tfrac12$ prefactor) from Eq.~\eqref{eq:kachanov-vw} eliminates the (generally unknown) right-hand-side loading terms and leaves a purely field-integral relation,
-\begin{gather}
-(\varphi-1)\int \Delta\bar{\bar\varepsilon}_0{:}\Delta\bar{\bar\sigma}_0\,dv + \Phi(\varphi)\int \Delta\bar{\bar\varepsilon}_0^{P}{:}\Delta\bar{\bar\sigma}_0\,dv = 0
-\;\Longrightarrow\;
-(\varphi-1)\,T + \Phi(\varphi) = 0, \\
-\frac1T = \frac{\displaystyle\int \Delta\bar{\bar\varepsilon}_0^{P}{:}\Delta\bar{\bar\sigma}_0\,dv}{\displaystyle\int \Delta\bar{\bar\varepsilon}_0{:}\Delta\bar{\bar\sigma}_0\,dv} ,
-\label{eq:kachanov-T}
-\end{gather}
+
+
+Up to now, we can find essential formulas used in calculations of rM, from Roland Roche's article, and RCC-MRx.
+
+
+
+
+
+
+
+\vspace{3cm}
+
+
 which defines the global resilience $T$ purely from the elastic solution, without solving the non-linear problem. Passing to equivalent (von~Mises) stress and strain increments $\Delta\varepsilon^{*}$, $\Delta\sigma^{*}$ as in Eq.~\eqref{eq:roche89}, and using the elastic relation $\Delta\varepsilon_0^{*}=2(1+\nu)\,\Delta\sigma_0^{*}/3E$, Eq.~\eqref{eq:kachanov-T} reduces to the compact result derived in full in Eq.~\eqref{eq:roche2223} of Appendix~\ref{app:roche},
 \begin{equation}
 \frac{3}{2(1+\nu)}\cdot\frac{E\left(\Delta\varepsilon^{*}-\Delta\varepsilon_0^{*}\right)}{\Delta\sigma_0^{*}-\Delta\sigma^{*}} = \frac{T}{t}-1 ,
@@ -626,63 +603,12 @@ For isotropic materials, the rigorous derivation of Appendix~\ref{app:roche} giv
 
 
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{figures/energy_balance_equivalent_stress_scheme.png}
-\caption{Energy-balance scheme extracted from the presentation, summarising Roche's route from the virtual-work statement of the elastic calculation to the equivalent stress/strain formulation used to define $T$, $t$ and ultimately $r_M$.}
-\label{fig:energy-balance-scheme}
-\end{figure}
-
-
-
-
-
-
-
-\newpage
-
-\subsection{Applications of Roche's method}
-
-The factor $r_M$ has the following limiting behaviour:
-\begin{itemize}
-    \item $r_M = 0$ ($T=t$): no elastic follow-up; the stress is purely secondary (fully self-limiting).
-    \item $r_M \to \infty$ ($T \gg t$): very significant elastic follow-up; the stress behaves as purely primary.
-\end{itemize}
-Note that a \emph{higher} $r_M$ is treated by the code as a \emph{more conservative}, more primary-like, assumption; taking $r_M(\mathrm{coeff}=1) > r_M(\mathrm{coeff}=0.867)$ is therefore itself a conservative simplification.
-
-In the Roche three-bar analogy, Bar 2 (no spring) corresponds to $r_M=0$, Bar 1 (rigid connection) corresponds to $r_M\to\infty$, and Bar 3 (elastic spring) lies at an intermediate, finite value of $r_M$ that depends on the spring stiffness $k_2$.
-
-Operationally, the presentation summarises the RCC-MRx workflow in four steps: (i) perform a purely elastic piping calculation; (ii) deduce the local plastic strain function $\varepsilon_{M,p}(\sigma_{\mathrm{ref}})$ from the adopted Ramberg--Osgood law; (iii) compute the global resilience $T$ by stress-squared weighting of the elastic reference field over the whole structure; and (iv) retain the governing local value of $r_M$ (and therefore of $g$) at the critical section. Figures~\ref{fig:rm-graphical-overview} and \ref{fig:energy-balance-scheme} summarise these complementary viewpoints: a graphical construction on the constitutive curve and an energy-balance route derived from the elastic FE solution. In other words, the code is intended to recover an elasto-plastic \emph{estimate} from an elastic base calculation rather than to replace full non-linear analysis in all circumstances.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.55\textwidth]{figures/rm_graphical_definition_slide.png}
-\caption{Graphical construction of $r_M$, reproduced directly from the presentation: $\sigma_0=\sigma_{\mathrm{el}}$ is the elastic reference stress at point $M$, $\sigma$ the actual elasto-plastic stress reached at the same strain $\varepsilon$; the local resilience is $t=OM/MN$, the global resilience $T$ is such that $OQ=(T/t)\,OM$, and the spring-effect line of slope $-1/r_M=\tan\theta$ passes through $M$ and $Q$.-->  \textcolor{red}{to be replaced by a latex code + make it similar to Figure 2}}
-\label{fig:rm-graphical-overview}
-\end{figure}
-
-
-
-
-
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.92\textwidth]{figures/roche_spring_stiffness_parametric_sweep.png}
-\caption{Parametric three-bar sweep extracted from the presentation: reducing the added spring stiffness from $k_2=2k$ to $k_2=k/16$ drives Bar~3 continuously away from the purely secondary limit (Bar~2) and towards the primary-like limit (Bar~1). The slide reports the corresponding sequence of follow-up factors ($r_M=0.996$, 3.989, 7.981, 31.931), stress estimates ($\sigma_{3,\mathrm{est}}=\SIlist{89.912;97.183;101.8;111.4}{MPa}$) and end displacements ($u_3=\SIlist{2.435;4.869;8.115;27.591}{mm}$).-->  \textcolor{red}{to redesign. Don't let the rM curve occur too many times}}
-\label{fig:roche-spring-sweep}
-\end{figure}
-
-\vspace{30mm}
-
-\textcolor{red}{Maybe put Appendix D directly here} \\
-
 
 
 \newpage
 
 
-\subsection{Definition of the abatement coefficient - sm+sb stresses}
+\subsection{Abatement coefficient g in RCC-MRx}
 
 For a section without internal pressure, RCC-MRx clause RB~3651.1131 defines the abatement coefficient as the ratio $g=\sigma/\sigma_{\mathrm{el}}$ of the true elasto-plastic stress to the elastically computed stress at the same imposed strain. The same result can be written directly from $r_M$ and the Ramberg--Osgood law as
 \begin{equation}
@@ -763,7 +689,7 @@ This raises a natural verification question, addressed by the benchmark of this 
 
 \newpage
 % =============================================================================
-\section{Elasto-plastic benchmark of the RCC-MRx abattement coefficient g}
+\section{Elasto-plastic benchmark on the abattement coefficient g}
 % =============================================================================
 \textcolor{red}{Some introduction here} \\
 \textcolor{red}{says we review the Roland Roche approach by a FEA elastoplastic large strain model} \\
@@ -958,8 +884,7 @@ Both explanations are consistent with one another and are not mutually exclusive
 \section*{Acknowledgements}
 % =============================================================================
 The authors thank the organisers of Pipe Stress Day 2026 (Lyon, France) for the opportunity to present the initial version of this work. \\
-\textcolor{red}{Octave teams} \\
-\textcolor{red}{Cadence}
+\textcolor{red}{Octave teams} + \textcolor{red}{Cadence}
 
 
 
@@ -971,10 +896,407 @@ The authors thank the organisers of Pipe Stress Day 2026 (Lyon, France) for the 
 \appendix
 
 
-\section{Roland Roche's demonstration}
-\label{app:roche}
+\section{Definition of elastic follow-up factor}
 
-\textcolor{red}{All formulations of this appendix will be reviewed again} \\
+
+
+
+The first assumption pertains to loading-path nonlinearity and is based on Kachanov's hypothesis of a radially proportional (self-similar) stress redistribution:
+\begin{equation}
+\bar{\bar\sigma} = \varphi\,\bar{\bar\sigma}_0 
+\label{eq:kachanov-stress}
+\end{equation}
+
+
+Equation ~\eqref{eq:kachanov-stress} might also be expressed for the equivalent stresses:
+\begin{align} 
+\sigma^* =\varphi \sigma_0^* 
+\label{eq:kachanov-stress-equivalent}
+\end{align}
+
+
+
+
+
+$(\Delta\bar{\bar{\varepsilon}}_0, \Delta\bar{\bar{\sigma}}_0)$ denotes the strain--stress tensor state of the material point obtained from a purely elastic analysis. $\varepsilon_0^*$ and $\sigma_0^*$ are the corresponding equivalent elastic strain and stress, respectively (schematically represented by point \textbf{E} in Figure~\ref{fig:deviation}). See appendix \ref{sec:equivalent_sigma_epsilon_eq} for further details.
+
+$(\Delta\bar{\bar{\varepsilon}}, \Delta\bar{\bar{\sigma}})$ denotes the strain--stress tensor state of the material point obtained from an elastoplastic analysis. $\varepsilon^*$ and $\sigma^*$ are the corresponding equivalent elastoplastic strain and stress, respectively (schematically represented by point \textbf{SP} in Figure~\ref{fig:deviation}).
+
+
+
+
+
+
+The second assumption concerns material nonlinearity, represented by the Ramberg--Osgood law. RCC-MRx provides the corresponding uniaxial stress--strain relation as follows:
+\begin{equation}
+\varepsilon_{axial} = \frac{\sigma_{axial}}{E} + \left(\frac{\sigma_{axial}}{K}\right)^{1/n}
+\label{eq:Osgood_code}
+\end{equation}
+
+
+
+
+
+
+\subsection{First approach: Ramberg-Osgood relation under uniaxial configurations}
+\label{sec:firstApproach}
+
+In this first approach, we consider only the axial deformation of the beam under an imposed displacement \textbf{u}. All stress and strain tensors are represented by their corresponding axial scalar quantities: \textbf{SP}($\varepsilon$, $\sigma$) and \textbf{E}($\varepsilon_0$, $\sigma_0$).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/FirstApproach.png}
+\caption{A beam is axially loaded by a secodary load-\textcolor{red}{to adap the figure: cycle displacement deltaU is out scope}}
+\label{fig:firstApproach}
+\end{figure}
+
+For uniaxial loads, the RCC-MRx Ramberg-Osgood formula can be directly applied:
+\begin{equation}
+\varepsilon(x) = \frac{\sigma(x)}{E}   + \left(\frac{\sigma(x)}{K}\right)^{1/n}
+\label{eq:Osgood-first-approach}
+\end{equation}
+
+The Khachanov assumption is simply $\sigma(x)=\varphi \sigma_0(x)$. The Ramberg--Osgood relation is rewritten as follows:
+\begin{align} 
+\varepsilon(x) = \frac{\varphi \sigma_0(x)}{E} + \left(\frac{\varphi \sigma_0(x)}{K}\right)^{1/n}  = \varphi \varepsilon_0(x)  + \phi \varepsilon_0^{p}(x)
+\label{eq:Osgood_modified-C}
+\end{align}
+
+where $\varepsilon_0^{p}$ is the equivalent plastic strain obtained from the Ramberg--Osgood law using the elastic stress $\sigma_0$, and $\phi=\varphi^{n}$. \\
+
+
+Now, let's analyze the structure using an elastoplastic approach (point \textbf{SP}):
+\begin{equation*}
+\int_{x=0}^{x=L} \delta\sigma(x) \varepsilon(x) A(x) \,dx = \delta\sigma(L)A(L)u 
+\end{equation*}
+
+Using relation~\eqref{eq:kachanov-stress-equivalent} and introducing the variation of the unknown field, $\delta\varphi$, yields 
+\begin{equation*} 
+\int_{x=0}^{x=L} (\delta \varphi) \sigma_0(x) \varepsilon(x) A(x) \,dx =(\delta \varphi)\sigma_0(L) A(L) u 
+\end{equation*}
+
+\begin{equation} 
+\int_{x=0}^{x=L} \sigma_0(x) \varepsilon(x) A(x) \,dx =\sigma_0(L) A(L) u 
+\label{eq:EnergyBalance-elastoplastic-A}
+\end{equation}
+
+
+For the elastic solution (point \textbf{E}), consider the same secondary loads \textbf{u}. The principle of virtual work gives 
+\begin{equation} 
+\frac{1}{2}\int_{x=0}^{x=L} \sigma_0(x)  \varepsilon_0(x) A(x) \, dx = \frac{1}{2}\sigma_0(L) A(L) u 
+\label{eq:EnergyBalance-elastic-B}
+\end{equation} 
+
+The energy balances for the elastic solution (Equation~\eqref{eq:EnergyBalance-elastic-B}) and the elastoplastic solution (Equation~\eqref{eq:EnergyBalance-elastoplastic-A}) yield \begin{flalign*} 
+\int_{x=0}^{x=L} \sigma_0(x) \varepsilon(x) A(x) \,dx &=\int_{x=0}^{x=L} \sigma_0(x)  \varepsilon_0(x) A(x) \, dx
+\end{flalign*} 
+
+Substituting Equations~\eqref{eq:kachanov-stress} and ~\eqref{eq:Osgood_modified-C} into the above expression yields 
+\begin{flalign*} 
+\int_{x=0}^{x=L} \sigma_0(x) \left( \varphi(x) \varepsilon_0(x)  + \phi \varepsilon_0^{p}(x) \right) A(x) \,dx &=\int_{x=0}^{x=L} \sigma_0(x)  \varepsilon_0(x) A(x) \, dx
+\end{flalign*} 
+\begin{flalign} 
+(\varphi-1) \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0(x) A(x) \, dx + \phi \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0^p(x) A(x)\, dx &=0
+\label{eq:phiiT}
+\end{flalign} 
+
+
+Defining the local resilience t and global resilience T as below:
+\begin{equation*} 
+\frac{1}{t}= \frac{ \varepsilon_0^p(x)}{ \varepsilon_0(x)}
+\end{equation*} 
+\begin{equation*} 
+\frac{1}{T}= \frac{ \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0^p(x) A(x) \, dx }{  \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0(x) A(x) \, dx }=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}
+\end{equation*} 
+
+
+The above equation ~\eqref{eq:phiiT} can be rewritten as 
+\begin{equation}
+\left( \varphi-1 \right)T+\phi=0
+\label{eq:LaRoche4A} 
+\end{equation}
+
+Now, starting from equation ~\eqref{eq:Osgood_modified-C}, we have:
+\begin{align} 
+\varepsilon(x)  &= \varphi \varepsilon_0(x)  + \phi \varepsilon_0^{p}(x)  \notag \\[3mm]
+\varepsilon(x) - \varepsilon_0(x) &=\varepsilon_0(x)  (\varphi-1) \left(1+\frac{\phi}{\varphi-1}\frac{\varepsilon_0^p(x)}{\varepsilon_0(x)}\right) \notag \\[3mm]
+\frac{\varepsilon(x)-\varepsilon_0(x)}{ \left(\varphi-1 \right)\varepsilon_0(x)} &= 1+\frac{\phi}{\varphi-1}\frac{\varepsilon_0^p(x)}{\varepsilon_0(x)} \notag \\[3mm]
+\frac{E(\varepsilon(x)-\varepsilon_0(x))}{ \left(\varphi-1 \right)\sigma_0(x)} &= 1+\frac{\phi}{\varphi-1}\frac{\varepsilon_0^p(x)}{\varepsilon_0(x)} \notag \\[3mm]
+\frac{E(\varepsilon(x)-\varepsilon_0(x))}{ \sigma(x)-\sigma_0(x)} &= 1+\frac{\phi}{\varphi-1}\frac{\varepsilon_0^p(x)}{\varepsilon_0(x)} \notag \\[3mm]
+\frac{E(\varepsilon(x)-\varepsilon_0(x))}{ \sigma_0(x)-\sigma(x)} &= -1+\frac{T}{t} \text{             \ \ \ \ \ \ \ \    (from equation ~\eqref{eq:LaRoche4A})  }
+\end{align}
+
+
+
+
+Now we define the elastic-follow-up factor $rM=\frac{E(\varepsilon(x) - \varepsilon_0(x)}{ \sigma_0(x)-\sigma(x) }  $, then:
+	\begin{equation}
+		rM    =\frac{T}{t} -1
+		\label{def:EFU}
+	\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Second approach: Generalized stress-strain tensors Ramberg-Osgood under multiaxial configurations}
+\label{sec:secondApproach}
+
+In context of a multiaxial configuration, the Ramberg Osgood law is generalized for the plastic deformation tensor:
+\begin{align} 
+\bar{\bar\varepsilon}^p(\bar{\bar\sigma}) &= \phi(\varphi)  \bar{\bar\varepsilon}^p(\bar{\bar\sigma}_0)  \notag \\[3mm]
+\bar{\bar\varepsilon}^p &= \phi(\varphi)  \bar{\bar\varepsilon}_0^p
+\label{eq:plastic_tensor}
+\end{align}
+
+The total elastoplastic strain tensor is expressed as below:
+\begin{equation*} 
+\bar{\bar\varepsilon} = \bar{\bar\varepsilon}^{el} +\bar{\bar\varepsilon}^p
+\end{equation*}
+Following Hooke' law $\bar{\bar\sigma}=\bar{\bar C} \bar{\bar\varepsilon}^{el}$ and equation ~\eqref{eq:plastic_tensor}, we have:
+\begin{equation} 
+\bar{\bar\varepsilon} =\bar{\bar C}^{-1} \bar{\bar\sigma} +\phi  \bar{\bar\varepsilon}_0^p=\varphi \bar{\bar C}^{-1} \bar{\bar\sigma}_0 +\phi  \bar{\bar\varepsilon}_0^p =\varphi  \bar{\bar\varepsilon}_0 +\phi  \bar{\bar\varepsilon}_0^p
+\label{eq:Ramberg-Osgood-modif-2nd}
+\end{equation}
+
+Equation ~\eqref{eq:Ramberg-Osgood-modif-2nd} might also be expressed for the equivalent strains:
+\begin{align} 
+\varepsilon^* =\varphi \varepsilon_0^* + \phi \varepsilon_0^{p*} 
+\label{eq:Ramberg-Osgood-modif-2nd-equivalent}
+\end{align}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/energy_balance_equivalent_stress_scheme.png}
+\caption{Energy-balance scheme extracted from the presentation, summarising Roche's route from the virtual-work statement of the elastic calculation to the equivalent stress/strain formulation used to define $T$, $t$ and ultimately $r_M$.}
+\label{fig:energy-balance-scheme}
+\end{figure}
+
+
+
+
+For the elastoplastic analysis (point \textbf{SP}), the local equilibrium equation is given by $\sigma_{ij,j}+f_i=0$ (with $i,j=\overline{1,3}$). \\
+Considering an imposed displacement field $\vec u$ prescribed on the boundary of the domain, together with a thermal expansion load $\bar{\bar\epsilon}$ acting on all material points (see Figure \ref{fig:energy-balance-scheme}), application of the divergence theorem and the principle of virtual work leads to the following relation involving an infinitesimal variation of the stress field, $\delta\sigma$:
+\begin{equation}
+\iiint \delta\bar{\bar\sigma}:\bar{\bar\varepsilon}\,dV = \iint \delta\bar{\bar\sigma}\,\vec n\,\vec u\,dS - \iiint \delta\bar{\bar\sigma}:\bar{\bar\epsilon}\,dV
+\label{eq:roche6}
+\end{equation}
+Using relation~\eqref{eq:kachanov-stress-equivalent} and introducing the variation of the unknown field, $\delta\varphi$, yields 
+\begin{equation*} \iiint_V (\delta\varphi)\,\bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}\,dV = \iint_S (\delta\varphi)\,\bar{\bar{\sigma}}_0 \cdot \vec{n} \cdot \vec{u}\,dS - \iiint_V (\delta\varphi)\,\bar{\bar{\sigma}}_0 : \bar{\bar{\epsilon}}\,dV
+\end{equation*}
+
+
+\begin{equation} \iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}\,dV = \iint_S \bar{\bar{\sigma}}_0 \cdot \vec{n} \cdot \vec{u}\,dS - \iiint_V\bar{\bar{\sigma}}_0 : \bar{\bar{\epsilon}}\,dV
+\label{eq:EnergyBalance-elastoplastic-2nd}
+\end{equation}
+
+
+For the elastic solution (point \textbf{E}), consider the same secondary loads ($\vec{u}$ and $\bar{\bar{\epsilon}}$). The principle of virtual work gives 
+\begin{equation} 
+\frac{1}{2}\iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}_0 \, dV = \frac{1}{2}\iint_S \bar{\bar{\sigma}}_0 \cdot \vec{n} \cdot \vec{u} \, dS - \frac{1}{2}\iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\epsilon}} \, dV \label{eq:EnergyBalance-elastic-2nd}
+\end{equation} 
+
+The energy balances for the elastic solution (Equation~\eqref{eq:EnergyBalance-elastic-2nd}) and the elastoplastic solution (Equation~\eqref{eq:EnergyBalance-elastoplastic-2nd}) yield \begin{flalign*} 
+\iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}} \, dV &= \iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}_0 \, dV, \\ \iiint_V \frac{1}{\varphi}\, \bar{\bar{\sigma}} : \bar{\bar{\varepsilon}} \, dV &= \iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}_0 \, dV
+\end{flalign*} 
+
+Neglecting the contribution of volumetric strains to the strain energy, the above tensorial relation can be expressed in terms of the equivalent stress and equivalent strain as
+\begin{flalign*}
+\iiint_V \frac{1}{\varphi}\, \sigma^* \varepsilon^* \, dV = \iiint_V \sigma_0^* \varepsilon_0^* \, dV
+\end{flalign*} 
+
+Substituting Equations~\eqref{eq:Ramberg-Osgood-modif-2nd-equivalent} and ~\eqref{eq:kachanov-stress-equivalent} into the above expression yields 
+\begin{flalign*} 
+\iiint_V \sigma_0^* \left(  \varphi \varepsilon_0^* + \phi \varepsilon_0^{p*}  \right) \, dV &= \iiint_V \sigma_0^* \varepsilon_0^* \, dV
+\end{flalign*} 
+\begin{flalign} 
+\left( \varphi-1 \right) \iiint_V \sigma_0^* \varepsilon_0^* \, dV + \phi \iiint_V \sigma_0^* \varepsilon_0^{p*} \, dV &=0
+\label{eq:phiiT-2nd}
+\end{flalign} 
+
+
+
+Defining the local resilience t and global resilience T as below:
+\begin{equation*} 
+\frac{1}{t}= \frac{ \varepsilon_0^{p*}}{ \varepsilon_0^*}
+\end{equation*} 
+\begin{equation*} 
+\frac{1}{T}= \frac{ \iiint_V \sigma_0^* \varepsilon_0^{p*} \, dV }{ \iiint_V \sigma_0^* \varepsilon_0^* \, dV }=\frac{ \iiint_V \frac{1}{t} \sigma_0^{*2} \, dV }{ \iiint_V \sigma_0^{*2}  \, dV }
+\end{equation*} 
+
+
+The above equation \eqref{eq:phiiT-2nd} can be rewritten as 
+\begin{equation}\left( \varphi-1 \right)T+\phi=0
+\label{eq:LaRoche4} 
+\end{equation}
+
+
+Now, starting from equation ~\eqref{eq:Ramberg-Osgood-modif-2nd-equivalent}, we have:
+\begin{align} 
+\varepsilon^* &= \varphi \varepsilon_0^* + \phi \varepsilon_0^{p*}  \notag \\[3mm]
+\varepsilon^* - \varepsilon_0^* &=\varepsilon_0^*  \left(\varphi-1 \right) \left(1+\frac{\phi}{\varphi-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*}\right) \notag \\[3mm]
+\frac{\varepsilon^*-\varepsilon_0^*}{ \left(\varphi-1 \right)\varepsilon_0^*} &= 1+\frac{\phi}{\varphi-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*} \notag \\[3mm]
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \frac{\varepsilon^*-\varepsilon_0^*} { (\varphi-1) \left( \frac{2}{3}\frac{1+\nu}{E}  \sigma_0^* \right) }  &= 1+\frac{\phi}{\varphi-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*} \notag  \qquad \text{(from equation \eqref{e_final}, see Appendix \ref{sec:equivalent_sigma_epsilon_eq})} \notag \\[3mm]
+\frac{E(\varepsilon^*-\varepsilon_0^*)} { (\varphi-1) \sigma_0^*} \frac{3}{2(1+\nu)} &= 1 +\frac{\phi}{\varphi-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*}  \notag  \\[3mm]
+\frac{E(\varepsilon^*-\varepsilon_0^*)} {\sigma_0^*-\sigma^*} &=0.867 \left( -1-\frac{\phi}{\varphi-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*} \right) \notag \\[3mm]
+\frac{E(\varepsilon^*-\varepsilon_0^*)} {\sigma_0^*-\sigma^*} &=  0.867 \left( \frac{T}{t} -1      \right)
+\end{align}
+
+Now we define the elastic-follow-up factor $rM=\frac{E(\varepsilon^* - \varepsilon_0^*)}{ \sigma_0^*-\sigma^* }  $, then:
+	\begin{equation}
+		rM    =0.867\left( \frac{T}{t} -1      \right) < \frac{T}{t} -1
+		\label{def:EFU-2nd}
+	\end{equation}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\subsection{Third approach: Equivalent stress--strain relation Ramberg-Osgood relation under multiaxial configurations}
+\label{sec:thirdApproach}
+
+
+
+
+
+For multidirection loads, the Ramberg-Osgood relation is generalized as below:
+\begin{equation}
+\varepsilon^* = \frac{\sigma^*}{E}   + \left(\frac{\sigma^*}{K}\right)^{1/n}
+\label{eq:Osgood}
+\end{equation}
+
+
+
+By converting the tensorial relation of Equation~\ref{eq:kachanov-stress} into its equivalent stress--strain form, the Ramberg--Osgood relation can be rewritten as follows:
+\begin{align} 
+\varepsilon^* &= \frac{\varphi \sigma_0^*}{E} + \left(\frac{\varphi \sigma_0^*}{K}\right)^{1/n} \notag \\
+&= \varphi \frac{3\varepsilon_0^*}{2(1+\nu)} + \varphi^{1/n} \left(\frac{\sigma_0^*}{K}\right)^{1/n} \notag \\
+&= \varphi \frac{3\varepsilon_0^*}{2(1+\nu)}  + \phi \varepsilon_0^{p*} 
+\label{eq:Osgood_modified}
+\end{align}
+
+With $\varepsilon_0^{p*} $ is the equivalent plastic deformation obtained by Ramberg-Osgood law using the elastic stress $\sigma_0^*$. \\
+
+
+
+
+
+
+
+
+For the elastoplastic analysis (point \textbf{SP}), the local equilibrium equation is given by $\sigma_{ij,j}+f_i=0$ (with $i,j=\overline{1,3}$). \\
+Considering an imposed displacement field $\vec u$ prescribed on the boundary of the domain, together with a thermal expansion load $\bar{\bar\epsilon}$ acting on all material points (see Figure \ref{fig:energy-balance-scheme}), application of the divergence theorem and the principle of virtual work leads to the following relation involving an infinitesimal variation of the stress field, $\delta\sigma$:
+\begin{equation}
+\iiint \delta\bar{\bar\sigma}:\bar{\bar\varepsilon}\,dV = \iint \delta\bar{\bar\sigma}\,\vec n\,\vec u\,dS - \iiint \delta\bar{\bar\sigma}:\bar{\bar\epsilon}\,dV
+\label{eq:roche6}
+\end{equation}
+Using relation~\eqref{eq:kachanov-stress} and introducing the variation of the unknown field, $\delta\varphi$, yields 
+\begin{equation*} \iiint_V (\delta\varphi)\,\bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}\,dV = \iint_S (\delta\varphi)\,\bar{\bar{\sigma}}_0 \cdot \vec{n} \cdot \vec{u}\,dS - \iiint_V (\delta\varphi)\,\bar{\bar{\sigma}}_0 : \bar{\bar{\epsilon}}\,dV
+\end{equation*}
+
+
+\begin{equation} \iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}\,dV = \iint_S \bar{\bar{\sigma}}_0 \cdot \vec{n} \cdot \vec{u}\,dS - \iiint_V\bar{\bar{\sigma}}_0 : \bar{\bar{\epsilon}}\,dV
+\label{eq:EnergyBalance-elastoplastic}
+\end{equation}
+
+
+For the elastic solution (point \textbf{E}), consider the same secondary loads ($\vec{u}$ and $\bar{\bar{\epsilon}}$). The principle of virtual work gives 
+\begin{equation} 
+\frac{1}{2}\iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}_0 \, dV = \frac{1}{2}\iint_S \bar{\bar{\sigma}}_0 \cdot \vec{n} \cdot \vec{u} \, dS - \frac{1}{2}\iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\epsilon}} \, dV \label{eq:EnergyBalance-elastic}
+\end{equation} 
+
+The energy balances for the elastic solution (Equation~\eqref{eq:EnergyBalance-elastic}) and the elastoplastic solution (Equation~\eqref{eq:EnergyBalance-elastoplastic}) yield \begin{flalign*} 
+\iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}} \, dV &= \iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}_0 \, dV, \\ \iiint_V \frac{1}{\varphi}\, \bar{\bar{\sigma}} : \bar{\bar{\varepsilon}} \, dV &= \iiint_V \bar{\bar{\sigma}}_0 : \bar{\bar{\varepsilon}}_0 \, dV
+\end{flalign*} 
+
+Neglecting the contribution of volumetric strains to the strain energy, the above tensorial relation can be expressed in terms of the equivalent stress and equivalent strain as
+\begin{flalign*}
+\iiint_V \frac{1}{\varphi}\, \sigma^* \varepsilon^* \, dV = \iiint_V \sigma_0^* \varepsilon_0^* \, dV
+\end{flalign*} 
+
+Substituting Equations~\eqref{eq:kachanov-stress} and ~\eqref{eq:Osgood_modified} into the above expression yields 
+\begin{flalign*} 
+\iiint_V \sigma_0^* \left(  \varphi \frac{3\varepsilon_0^*}{2(1+\nu)}  + \phi \varepsilon_0^{p*}  \right) \, dV &= \iiint_V \sigma_0^* \varepsilon_0^* \, dV
+\end{flalign*} 
+\begin{flalign*} 
+\left( \varphi\frac{3}{2(1+\nu)}-1 \right) \iiint_V \sigma_0^* \varepsilon_0^* \, dV + \phi \iiint_V \sigma_0^* \varepsilon_0^{p*} \, dV &=0
+\end{flalign*} 
+
+
+
+
+Defining the global resilience T as below:
+\begin{equation*} 
+\frac{1}{T}= \frac{ \iiint_V \sigma_0^* \varepsilon_0^{p*} \, dV }{ \iiint_V \sigma_0^* \varepsilon_0^* \, dV }
+\end{equation*} 
+The above equation can be rewritten as 
+\begin{equation}\left( \varphi\frac{3}{2(1+\nu)}-1 \right)T+\phi=0
+\label{eq:LaRoche4} 
+\end{equation}
+
+
+Now, starting from equation ~\eqref{eq:Osgood_modified}, we have:
+\begin{align} 
+\varepsilon^* &= \varphi \frac{3\varepsilon_0^*}{2(1+\nu)}  + \phi \varepsilon_0^{p*}  \notag \\[3mm]
+\varepsilon^* - \varepsilon_0^* &=\varepsilon_0^*  \left(\varphi\frac{3}{2(1+\nu)}-1 \right) \left(1+\frac{\phi}{\varphi\frac{3}{2(1+\nu)}-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*}\right) \notag \\[3mm]
+\frac{\varepsilon^*-\varepsilon_0^*}{ \left(\varphi\frac{3}{2(1+\nu)}-1 \right)\varepsilon_0^*} &= 1+\frac{\phi}{\varphi\frac{3}{2(1+\nu)}-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*} \notag \\[3mm]
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \frac{\varepsilon^*-\varepsilon_0^*} { \left(\varphi\frac{3}{2(1+\nu)}-1 \right) \left( \frac{2}{3}\frac{1+\nu}{E}  \sigma_0^* \right) }  &= 1+\frac{\phi}{\varphi\frac{3}{2(1+\nu)}-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*} \qquad \text{(from equation \eqref{e_final}, see Appendix \ref{sec:equivalent_sigma_epsilon_eq})} \notag \\[3mm]
+\frac{E(\varepsilon^*-\varepsilon_0^*)} {\varphi \sigma_0^*- \frac{2(1+\nu)}{3}\sigma_0^*} &= 1+\frac{\phi}{\varphi\frac{3}{2(1+\nu)}-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*} \notag  \\[3mm]
+\frac{E(\varepsilon^*-\varepsilon_0^*)} {0.867\sigma_0^*-\sigma^*} &= -1-\frac{\phi}{\varphi\frac{3}{2(1+\nu)}-1}\frac{\varepsilon_0^{p*}}{\varepsilon_0^*} \notag
+\end{align}
+
+
+
+With the local resilience defined as $t=\frac{\varepsilon_0^*}{\varepsilon_0^{p*}}$ and using equation ~\eqref{eq:LaRoche4}, the above formula becomes:
+	\begin{equation*}
+		\frac{E(\varepsilon^*-\varepsilon_0^*)} {0.867\sigma_0^*-\sigma^*} =    \frac{T}{t} -1      
+	\end{equation*}
+Now we define the elastic-follow-up factor $rM=\frac{E(\varepsilon^* - \varepsilon_0^*)}{ \sigma_0^*-\sigma^* }  $, then:
+\begin{equation*}
+	rM    < \frac{E(\varepsilon^*-\varepsilon_0^*)} {0.867\sigma_0^*-\sigma^*} 
+\end{equation*}
+or 
+\begin{equation}
+	rM    <  \frac{T}{t}-1 
+	\label{def:EFU-3rd}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Schematic interpretation of the elastic follow-up curve }
+\label{app:roche}
 
 
 This appendix reproduces, for completeness, the mathematical derivation of the elastic follow-up factor $r_M$ from the energy balance of a purely elastic finite-element analysis, following R.~Roche's original method \cite{Roche1987} as re-derived, in full native LaTeX (no scanned material), from an internal technical note accompanying the source presentation \cite{RochePipeStressNote}. This is the rigorous justification of Eqs.~\eqref{eq:rM}--\eqref{eq:Tglobal} used in Section~\ref{sec:rccmrx}. Figures~\ref{fig:roche-graphical} and \ref{fig:roche-calculation-sheet} reproduce the graphical and documentary material from which the algebraic steps below were reconstructed.
@@ -988,114 +1310,82 @@ This appendix reproduces, for completeness, the mathematical derivation of the e
 
 
 
-\subsection{Standard variational development in a FE analysis}
 
-The local equilibrium equation is $\sigma_{ij,j}+f_i=0$. Admitting a variational displacement field $\delta u$ applied at every material point, $\sigma_{ij,j}\delta u_i + f_i \delta u_i = 0$, and summing over the whole structure,
-\begin{equation}
-\iiint \sigma_{ij,j}\delta u_i \, dV + \iiint f_i \delta u_i \, dV = 0.
-\end{equation}
-Using
-\[
-\sigma_{ij,j}\delta u_i = (\sigma_{ij}\delta u_i)_{,j} - \sigma_{ij}\delta u_{i,j},
-\qquad
-\iiint(\sigma_{ij}\delta u_i)_{,j}\,dV = \iint \sigma_{ij}n_j\delta u_i\,dS,
-\]
-the divergence theorem gives
-\begin{equation}
-\iint \sigma_{ij}n_j\delta u_i\,dS - \iiint \sigma_{ij}\delta u_{i,j}\,dV + \iiint f_i\delta u_i\,dV = 0.
-\end{equation}
-With $\sigma_{ij}\delta u_{i,j} = \sigma_{ij}\tfrac12(\delta u_{i,j}+\delta u_{j,i}) = \sigma_{ij}\delta\varepsilon_{ij}$,
-\begin{equation}
-\iint \sigma_{ij}n_j\delta u_i\,dS - \iiint \sigma_{ij}\delta\varepsilon_{ij}\,dV + \iiint f_i\delta u_i\,dV = 0.
-\label{eq:roche2}
-\end{equation}
-Assume an external surface load
-\[
-W_{\mathrm{ext}}=\iint \sigma_{ij}n_j u_i\,dS,
-\]
-with variational form
-\[
-\delta W_{\mathrm{ext}} = \iint \delta\sigma_{ij}n_j u_i\,dS + \iint \sigma_{ij}n_j\delta u_i\,dS.
-\]
-Likewise, the internal work is
-\[
-\delta W_{\mathrm{int}} = \delta\iiint \bar{\bar\sigma}:\bar{\bar\varepsilon}\,dV
-= \iiint \bar{\bar\sigma}:\delta\bar{\bar\varepsilon}\,dV + \iiint \delta\bar{\bar\sigma}:\bar{\bar\varepsilon}\,dV.
-\]
-The principle of virtual work, $\delta W_{\mathrm{int}}=\delta W_{\mathrm{ext}}$, then gives
-\begin{equation}
-\iint \delta\sigma_{ij}n_j u_i\,dS + \iint \sigma_{ij}n_j\delta u_i\,dS = \iiint \sigma_{ij}\delta\varepsilon_{ij}\,dV + \iiint \delta\sigma_{ij}\varepsilon_{ij}\,dV.
-\label{eq:roche3}
-\end{equation}
-From \eqref{eq:roche2}--\eqref{eq:roche3}, in the case $f_i=0$, one obtains the compact equality between external complementary work and the internal stress--strain product,
-\begin{equation}
-\iint \delta\sigma_{ij}n_j u_i\,dS = \iiint \delta\sigma_{ij}\varepsilon_{ij}\,dV.
-\label{eq:roche4}
-\end{equation}
-Introducing a thermal (or other imposed-strain) contribution $\bar{\bar\epsilon}$, distinct from the mechanical strain $\bar{\bar\varepsilon}$,
-\begin{equation}
-\iiint \delta\bar{\bar\sigma}:\bar{\bar\varepsilon}\,dV = \iint \delta\bar{\bar\sigma}\,\vec n\,\vec u\,dS - \iiint \delta\bar{\bar\sigma}:\bar{\bar\epsilon}\,dV.
-\label{eq:roche6}
-\end{equation}
-This is the working form used by Roche to derive $r_M$.
 
-\subsection{Radially proportional elasto-plastic stress field}
 
-Roche's method assumes that the elasto-plastic stress distribution remains, at every point, homogeneously proportional to the purely elastic solution, through a single scalar $\varphi$:
-\begin{equation}
-\bar{\bar\sigma} = \varphi\,\bar{\bar\sigma}_0.
-\label{eq:roche7}
-\end{equation}
-Defining the equivalent (von Mises) stress and strain through Eq.~\eqref{eq:roche89},
-\begin{equation}
-\varepsilon^{*} = \sqrt{\tfrac23 e_{ij}e_{ij}},\ e_{ij}=\varepsilon_{ij}-\tfrac13\varepsilon_{kk}\delta_{ij}; \qquad
-\sigma^{*} = \sqrt{\tfrac32 s_{ij}s_{ij}},\ s_{ij}=\sigma_{ij}-\tfrac13\sigma_{kk}\delta_{ij},
-\label{eq:roche89}
-\end{equation}
-Eq.~\eqref{eq:roche7} implies $\sigma^{*}=\varphi\,\sigma_0^{*}$, so that the elastic part of the equivalent strain, evaluated at the actual stress $\sigma^{*}$, is simply $\varphi$ times its elastic-reference value, $\varepsilon^{*}_{\mathrm{el}}(\sigma^{*})=\varphi\,\varepsilon^{*}_{\mathrm{el}}(\sigma_0^{*})=\varphi\,\varepsilon_0^{*}$ (a direct consequence of Hooke's law being linear in stress). The plastic equivalent strain follows the Ramberg--Osgood law, Eq.~\eqref{eq:RO}:
-\begin{equation}
-\varepsilon^{*}(\sigma^{*}) = \varphi\,\varepsilon^{*}_{\mathrm{el}}(\sigma_0^{*}) + 0.01\left(\frac{\varphi\sigma_0^{*}}{C_0 R_{p0.2,\mathrm{mean}}}\right)^{1/n_0}
-= \varphi\varepsilon_0^{*} + \phi\,\varepsilon_0^{p*}, \qquad \phi=\varphi^{1/n_0},
-\label{eq:roche11}
-\end{equation}
-with $\varepsilon_0^{p*} = 0.01\left(\sigma_0^{*}/(C_0 R_{p0.2,\mathrm{mean}})\right)^{1/n_0}$.
 
-\subsection{Energy balance}
+\newpage
 
-Using Hooke's law $\varepsilon_{0ij} = \tfrac{1+\nu}{E}\sigma_{0ij}-\tfrac{\nu}{E}\sigma_{0kk}\delta_{ij}$, its trace gives $\varepsilon_{0kk} = \tfrac{1-2\nu}{E}\sigma_{0kk}$, so that the deviatoric mechanical strain becomes
-\begin{equation}
-e_{0ij} = \varepsilon_{0ij}-\tfrac13\varepsilon_{0kk}\delta_{ij}
-= \frac{1+\nu}{E}\sigma_{0ij}-\frac{\nu}{E}\sigma_{0kk}\delta_{ij}-\frac13\varepsilon_{0kk}\delta_{ij}
-= \frac{1+\nu}{E}\sigma_{0ij}-\frac{\nu}{E}\sigma_{0kk}\delta_{ij}-\frac13\frac{1-2\nu}{E}\sigma_{0kk}\delta_{ij} ,
-\end{equation}
-which simplifies, using $\sigma_{0ij}-\delta_{ij}\sigma_{0kk}/3=s_{0ij}$, to
-\begin{equation}
-e_{0ij} = \frac{1+\nu}{E}\left(\sigma_{0ij}-\tfrac13\delta_{ij}\sigma_{0kk}\right) = \frac{1+\nu}{E}\,s_{0ij},
-\end{equation}
-and hence
-\begin{equation}
-\varepsilon_0^{*} = \frac{2}{3}\frac{1+\nu}{E}\sigma_0^{*}.
-\label{eq:roche21}
-\end{equation}
-Combining Eqs.~\eqref{eq:roche11} and \eqref{eq:roche21} and defining the \emph{local resilience} $t=\varepsilon_0^{*}/\varepsilon_0^{p*}$, algebraic manipulation gives
-\begin{equation}
-\frac{3}{2(1+\nu)}\,\frac{E(\varepsilon^{*}-\varepsilon_0^{*})}{\sigma_0^{*}-\sigma^{*}} = \frac{T}{t}-1, \qquad
-r_M = \frac{E(\varepsilon^{*}-\varepsilon_0^{*})}{\sigma_0^{*}-\sigma^{*}} \; \Rightarrow\; r_M = \frac{2(1+\nu)}{3}\left(\frac{T}{t}-1\right),
-\label{eq:roche2223}
-\end{equation}
-where the \emph{global resilience} $T$ is obtained, by applying the energy balance of Eq.~\eqref{eq:roche6} to the purely elastic reference state and using Eqs.~\eqref{eq:roche4}, \eqref{eq:roche7}--\eqref{eq:roche11},
-\begin{equation}
-(\varphi-1)\iiint \sigma_0^{*}\varepsilon_0^{*}\,dV + \phi\iiint \sigma_0^{*}\varepsilon_0^{p*}\,dV = 0
-\;\Longrightarrow\;
-T \equiv \frac{\iiint \sigma_0^{*}\varepsilon_0^{*}\,dV}{\iiint \sigma_0^{*}\varepsilon_0^{p*}\,dV} = \frac{\iiint {\sigma_0^{*}}^2\,dV}{\displaystyle\iiint \frac{{\sigma_0^{*}}^2}{t}\,dV},
-\label{eq:roche1314}
-\end{equation}
-which, assuming a constant Young's modulus and constant equivalent stress within each piping section, reduces to the practical, section-integrated form used by RCC-MRx, Eq.~\eqref{eq:Tglobal}:
-\begin{equation}
-T = \frac{\int \sigma_0^{*2} A\,ds}{\displaystyle\int \frac{\sigma_0^{*2}A}{t}\,ds}.
-\end{equation}
+\section{Applications of Roche's method}
 
-Equation~\eqref{eq:roche1314} is therefore the continuous-domain counterpart of the piping-code formula of Eq.~\eqref{eq:Tglobal}. For steels ($\nu=0.3$), Eq.~\eqref{eq:roche2223} gives $r_M=0.867(T/t-1)$; the code's simplified, slightly more conservative form $r_M=T/t-1$ (Eq.~\eqref{eq:rM}) is obtained by taking $\tfrac{2(1+\nu)}{3}\approx1$, the associated 3-D correction being reintroduced separately as a 0.87 stress index on pressure and torsional-moment terms (Eq.~\eqref{eq:Tglobal}). This completes, in native equation form, every algebraic step of the internal technical note \cite{RochePipeStressNote} from which this appendix was reconstructed.
+The factor $r_M$ has the following limiting behaviour:
+\begin{itemize}
+    \item $r_M = 0$ ($T=t$): no elastic follow-up; the stress is purely secondary (fully self-limiting).
+    \item $r_M \to \infty$ ($T \gg t$): very significant elastic follow-up; the stress behaves as purely primary.
+\end{itemize}
+Note that a \emph{higher} $r_M$ is treated by the code as a \emph{more conservative}, more primary-like, assumption; taking $r_M(\mathrm{coeff}=1) > r_M(\mathrm{coeff}=0.867)$ is therefore itself a conservative simplification.
+
+In the Roche three-bar analogy, Bar 2 (no spring) corresponds to $r_M=0$, Bar 1 (rigid connection) corresponds to $r_M\to\infty$, and Bar 3 (elastic spring) lies at an intermediate, finite value of $r_M$ that depends on the spring stiffness $k_2$.
+
+Operationally, the presentation summarises the RCC-MRx workflow in four steps: (i) perform a purely elastic piping calculation; (ii) deduce the local plastic strain function $\varepsilon_{M,p}(\sigma_{\mathrm{ref}})$ from the adopted Ramberg--Osgood law; (iii) compute the global resilience $T$ by stress-squared weighting of the elastic reference field over the whole structure; and (iv) retain the governing local value of $r_M$ (and therefore of $g$) at the critical section. Figures~\ref{fig:rm-graphical-overview} and \ref{fig:energy-balance-scheme} summarise these complementary viewpoints: a graphical construction on the constitutive curve and an energy-balance route derived from the elastic FE solution. In other words, the code is intended to recover an elasto-plastic \emph{estimate} from an elastic base calculation rather than to replace full non-linear analysis in all circumstances.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.55\textwidth]{figures/rm_graphical_definition_slide.png}
+\caption{Graphical construction of $r_M$, reproduced directly from the presentation: $\sigma_0=\sigma_{\mathrm{el}}$ is the elastic reference stress at point $M$, $\sigma$ the actual elasto-plastic stress reached at the same strain $\varepsilon$; the local resilience is $t=OM/MN$, the global resilience $T$ is such that $OQ=(T/t)\,OM$, and the spring-effect line of slope $-1/r_M=\tan\theta$ passes through $M$ and $Q$.-->  \textcolor{red}{to be replaced by a latex code + make it similar to Figure 2}}
+\label{fig:rm-graphical-overview}
+\end{figure}
+
+
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/roche_spring_stiffness_parametric_sweep.png}
+\caption{Parametric three-bar sweep extracted from the presentation: reducing the added spring stiffness from $k_2=2k$ to $k_2=k/16$ drives Bar~3 continuously away from the purely secondary limit (Bar~2) and towards the primary-like limit (Bar~1). The slide reports the corresponding sequence of follow-up factors ($r_M=0.996$, 3.989, 7.981, 31.931), stress estimates ($\sigma_{3,\mathrm{est}}=\SIlist{89.912;97.183;101.8;111.4}{MPa}$) and end displacements ($u_3=\SIlist{2.435;4.869;8.115;27.591}{mm}$).-->  \textcolor{red}{to redesign. Don't let the rM curve occur too many times}}
+\label{fig:roche-spring-sweep}
+\end{figure}
+
+\vspace{30mm}
+
+
+
+
+
+
+
+
+\newpage
+\section{Definition of equivalent stress and strain}
+\label{sec:equivalent_sigma_epsilon_eq}
+
+The equivalent stress and equivalent strain for the purely elastic solution are defined as 
+\begin{equation} 
+\varepsilon_0^* = \sqrt{\frac{2}{3}e_{0ij}e_{0ij}}, \qquad e_{0ij} = \varepsilon_{0ij} - \frac{1}{3}\varepsilon_{0kk}\delta_{ij}, \label{eij} 
+\end{equation} 
+and 
+\begin{equation} 
+\sigma_0^* = \sqrt{\frac{3}{2}s_{0ij}s_{0ij}}, \qquad s_{0ij} = \sigma_{0ij} - \frac{1}{3}\sigma_{0kk}\delta_{ij}. \label{sij} 
+\end{equation} 
+Using Hooke's law $\varepsilon_{0ij} = \frac{1+\nu}{E}\sigma_{0ij} - \frac{\nu}{E}\sigma_{0kk}\delta_{ij} $, and consider the trace of Hook's tensorial relation, we have:  
+\begin{equation*} 
+\varepsilon_{0kk} = \frac{1+\nu}{E}\sigma_{0kk} - 3\frac{\nu}{E}\sigma_{0kk} = \frac{1-2\nu}{E}\sigma_{0kk}
+\end{equation*} 
+Substituting the trace and tensorial relation of the Hook law into Equation~\eqref{eij} yields 
+\begin{equation*} 
+e_{0ij} = \frac{1+\nu}{E}\sigma_{0ij} - \frac{\nu}{E}\sigma_{0kk}\delta_{ij} - \frac{1}{3}\frac{1-2\nu}{E}\sigma_{0kk}\delta_{ij}. \label{eij3} 
+\end{equation*} 
+After simplification, 
+\begin{equation*} 
+e_{0ij} = \frac{1+\nu}{E} \left( \sigma_{0ij} - \frac{1}{3}\sigma_{0kk}\delta_{ij} \right) = \frac{1+\nu}{E}s_{0ij}. 
+\end{equation*} 
+Using the above relation, equations~\eqref{eij} and \eqref{sij}, the equivalent strain is related to the equivalent stress by 
+\begin{equation} 
+\varepsilon_0^* = \frac{2}{3}\frac{1+\nu}{E}\sigma_0^*. 
+\label{e_final} 
+\end{equation}
 
 
 
