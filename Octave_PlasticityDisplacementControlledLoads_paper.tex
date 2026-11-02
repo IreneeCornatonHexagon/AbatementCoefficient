@@ -290,13 +290,19 @@ The presentation also compares the global deformed shapes produced by the two mo
 
 % =============================================================================
 \section{Elastic follow-up}
-\label{sec:EFF}
 % =============================================================================
 Section \ref{sec:Intro} briefly summarized the approach adopted by most standard piping codes for the assessment of piping stresses. For piping systems used in nuclear power plants, more stringent requirements apply, requiring more sophisticated calculation methodologies, particularly for high-temperature applications.  One of the main differences is the need to consider the so-called \textbf{elastic follow-up}. 
 
 In piping systems, geometrical discontinuities or load-induced deformations (e.g., elbow ovalization) can lead to stress concentrations at specific locations, such as elbows, tees, reducers, or thickness transitions. Under sufficiently high loading, most of the structure may remain in the elastic regime and behave as linear springs, thereby elastically following up and constraining these highly stressed regions where local plastic deformation develops. This phenomenon is referred to as elastic follow-up \cite{RCCMRx} \cite{ASMEIII5} . 
 
 In this section, the elastic follow-up concept will be presented based on the work of Roland L. Roche \cite{Roche1987}, without considering the impacts of creep and stress relaxation.
+
+
+RCC-MRx is a French nuclear design code entitled \emph{Design and Construction Rules for Mechanical Components of Nuclear Installations: High-Temperature, Research and Fusion Reactors}. In the negligible-creep regime, RCC-MRx RB 3650 considers the interaction between elasticity and plasticity under spring effects and quantifies elastic follow-up using the rules provided in RB 3643.3, following the methodology suggested by Roland L. Roche ( \cite{Roche1987}). Displacement-controlled moments are included in the validation of primary stresses in accordance with the requirements of RB 3651 through an abatement coefficient, $g$, which accounts for the elastic follow-up behavior of the entire structure.
+
+
+\textcolor{red}{Introduction on RCC-MRx here, without forgetting to mention the nuclear context (which is the focus of this journal publication)} \\
+\textcolor{red}{Talk about high temperature pipings and the need to properly consider plasticity} \\
 
 
 
@@ -327,8 +333,8 @@ with, for 316L(N) stainless steel, $n_0 = 0.1125$ ($1/n_0 = 8.89$) and $C_0 = 1.
 
 \newpage
 
-\subsection{Elastic-follow-up -- deviation of the secondary stress category}
-
+\subsection{Spring effects -- deviation of the secondary stress category}
+\label{sec:EFF}
 
 In order to illustrate elastic follow-up, Roland L. Roche \cite{Roche1987} proposed a test involving three bars of identical geometry. Bar 1 is subjected to a primary load, while Bar 2 is subjected to a secondary load. Bar 3 is identical to the other two bars but is connected to an additional spring and is also subjected to a secondary load. In his conclusions, Roland L. Roche showed that Bar 3, although subjected only to a secondary load, exhibits an intermediate behavior between those associated with purely primary and purely secondary loading. With our own selected beam geometry and material, the test is reproduced and shown in figure \ref{fig:3beams}.
 
@@ -523,69 +529,101 @@ The three-beam example (Figures~\ref{fig:deviation} and \ref{fig:parametric-EFU}
 \subsection{Elastic follow-up factor in RCC-MRx}
 \label{sec:rccmrx}
 % =============================================================================
-\textcolor{red}{Introduction on RCC-MRx here, without forgetting to mention the nuclear context (which is the focus of this journal publication)} \\
-\textcolor{red}{Talk about high temperature pipings and the need to properly consider plasticity} \\
 
+This section continues the discussion presented in §\ref{sec:EFF}. With the objective of generalizing the elastic follow-up concept and quantifying the degree of elastic follow-up in a piping system subjected to loading, Roland L. Roche introduced two fundamental assumptions. All details of calculations are provided in Appendix \ref{ApdxA}. \\
+The first assumption is the Kachanov hypothesis, which assumes that the elastoplastic stress field (point \textbf{SP}) is proportional to the elastic stress field (point \textbf{E}) through a scalar  $\varphi$, taken to be uniform throughout the entire structure under consideration. See equations \eqref{eq:kachanov-stress} and \eqref{eq:kachanov-stress-equivalent}.\\
+The second hypothesis concerns the constitutive law and accounts for material plasticity through the Ramberg--Osgood relation through equations \eqref{eq:Osgood-first-approach}, \eqref{eq:plastic_tensor} and \eqref{eq:Osgood}. \\
 
-RCC-MRx is a French nuclear design code entitled \emph{Design and Construction Rules for Mechanical Components of Nuclear Installations: High-Temperature, Research and Fusion Reactors}. In the negligible-creep regime, RCC-MRx RB 3650 considers the interaction between elasticity and plasticity under spring effects and quantifies elastic follow-up using the rules provided in RB 3643.3. Displacement-controlled moments are included in the validation of primary stresses in accordance with the requirements of RB 3651 through an abatement coefficient, $g$, which accounts for the elastic follow-up behavior of the entire structure.
+\vspace{1cm}
+\textbf{First approach:} \\
+As a first step, Roland L. Roche considers the axial behavior of a straight pipe under displacement-imposed load. The detailed derivation is provided in Appendix \ref{sec:firstApproach}. Using the principle of virtual work, a relationship is established between the purely elastic solution and the elastoplastic solution through the elastic follow-up factor $r_M$, defined as
+\[
+r_M=\frac{E\left(\varepsilon(x)-\varepsilon_0(x)\right)}
+{\sigma_0(x)-\sigma(x)}.
+\]
+This definition of $r_M$ corresponds to the inverse of the slope of the segment joining points \textbf{E} and \textbf{SP} in Figure \ref{fig:deviation}.
+The energy balance helps to map between point \textbf{E} and point \textbf{SP} by the following formula of rM:
+\begin{equation*}
+	rM    =\frac{T}{t} -1
+\end{equation*}
+With local resilience (t) and global resilience (T) defined as below:
+\begin{equation*} 
+\frac{1}{t}= \frac{ \varepsilon_0^p(x)}{ \varepsilon_0(x)}
+\end{equation*} 
+\begin{equation*} 
+\frac{1}{T}=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}
+\end{equation*} 
+Local resilience and global resilience are indicators of the inverse degree of plasticity present in a structure, at the local and global scales, respectively. Of particular interest is the fact that both \(t\) and \(T\) are determined solely from the results of a linear elastic analysis (point \textbf{E}). In other words, determining \(r_M\) requires only a linear elastic analysis together with knowledge of the material's plastic constitutive law.
 
+Knowing \(r_M\), which corresponds to the inverse of the slope of the EFU segment (see Figure \ref{fig:deviation}), and using the Ramberg--Osgood relation implicitly defines a system of two equations. Solving this system makes it possible to determine the position of point \textbf{SP} from the elastic solution represented by point \textbf{E}. The detailed derivation is provided in Appendix \ref{application_roche}.
 
-This section continues the discussion presented in §\ref{sec:EFF}. With the objective of generalizing the elastic follow-up concept and quantifying the degree of elastic follow-up in a piping system subjected to loading, Roland L. Roche introduced two fundamental assumptions. \\
+Moreover, the elastic follow-up factor \(r_M\) provides a means of quantifying the degree of elastic follow-up in a generalized piping system without explicitly considering spring stiffness. The higher the value of \(r_M\), the greater the degree of elastic follow-up present in the structure. The parametric study of the spring effect presented in Figure \ref{fig:parametric-EFU} is revisited in Appendix \ref{application_roche}, this time using \(r_M\) as the governing parameter. The results demonstrate that, for the simple case of a straight pipe with a variable cross-section, the objective outlined at the end of §\ref{sec:EFF} is indeed achieved.
 
+\vspace{1cm}
+\textbf{Second approach:} \\
+As a second step, Roland L. Roche extends the derivation to a general piping system. In addition to displacement-controlled loading, thermal expansion effects are also taken into account. The details of the derivation are provided in Appendix \ref{sec:secondApproach}. The uniaxial Ramberg--Osgood law is generalized to the tensorial framework through Equation \eqref{eq:plastic_tensor}:
+\begin{align*}
+\bar{\bar\varepsilon}^p &= \phi(\varphi)\,\bar{\bar\varepsilon}_0^p
+\end{align*}
+To remain consistent with the stress--strain representation of Figure \ref{fig:deviation}, the tensorial formulation must then be recast in terms of equivalent stress and equivalent strain quantities. Following this conversion, the same procedure as in the first approach is applied. The elastic follow-up factor and the associated quantities are obtained as follows:
+\begin{equation*}
+r_M=\frac{E\left(\varepsilon^*-\varepsilon_0^*\right)}
+{\sigma_0^*-\sigma^*}
+\end{equation*}
 
+\begin{equation*}
+r_M = 0.867\left(\frac{T}{t}-1\right)
+< \frac{T}{t}-1
+\end{equation*}
 
+\begin{equation*}
+\frac{1}{t}=
+\frac{\varepsilon_0^{p*}}
+{\varepsilon_0^*}
+\end{equation*}
 
+\begin{equation*}
+\frac{1}{T}
+=
+\frac{\iiint_V \sigma_0^* \varepsilon_0^{p*}\,dV}
+{\iiint_V \sigma_0^* \varepsilon_0^*\,dV}
+=
+\frac{\iiint_V \frac{1}{t}\sigma_0^{*2}\,dV}
+{\iiint_V \sigma_0^{*2}\,dV}
+\end{equation*}
 
+Once again, a relationship very similar to that obtained in the first approach is found for \(r_M\), differing only by the factor 0.867. However, the formulation is now generalized to arbitrary piping systems and accounts for multiaxial stress states, displacement-controlled loading, and thermal expansion effects.
 
-The above equation of rM is valid for isotropic materials. Considering $\nu=0.3$ for steels, we have:
-	\begin{equation}
-		rM    =0.867\left ( \frac{T}{t}-1 \right )
-		\label{def:EFU2}
-	\end{equation}
-In a conservative manner, the code RCC-MRx considers $\frac{2(1+\nu)}{3} \approx 1 $, and forces an additional stress indice of 0.87 for pressure and torsional moments, in order to consider the isotropic 3D character of the material. So finally we have the following formula used in RCC-MRx:
-	\begin{equation}
-		\mathbf{rM    =\frac{T}{t}-1}
-		\label{def:EFU_final}
-	\end{equation}
-Note that the higher rM, more the load is considered as having more primary characters. It means that rM(coeff=1) > rM(coeff=0.867) is a conservative approach. 
-
-Additionally, based on the definition of local resilience t, we have:
-	\begin{flalign*}
-		  T=\frac{  \iiint\sigma_0^*     \varepsilon_0^* dV}{  \iiint \sigma_0^*   \varepsilon_0^{p*}   dV}=\frac{  \iiint\sigma_0^{*2}dV}{  \iiint \frac{\sigma_0^{*2}}{t}    dV}
-	\end{flalign*}
-(assuming that the young modulus is homogeously constant). Finally, if the equivalent stresses are constant in each piping section, we can find the formula of T suggested by the code RCC-MRx: 
-	\begin{flalign*}
-		  T=\frac{  \iiint\sigma_0^{*2}dV}{  \iiint \frac{\sigma_0^{*2}}{t}    dV}=\frac{  \int\sigma_0^{*2}Ads}{  \int \frac{\sigma_0^{*2}}{t}   A ds}
-	\end{flalign*}
-\newline
-
-
-
-Now, define the elastic follow-up factor as below:
+\vspace{1cm}
+\textbf{Third approach:} \\
+Finally, in a third step, the method developed by Roland L. Roche is generalized by removing the need for the tensorial Ramberg--Osgood assumption and relying solely on equivalent stress--strain relations:
+\begin{equation*}
+\varepsilon^* = \frac{\sigma^*}{E} + \left(\frac{\sigma^*}{K}\right)^{1/n}
+\end{equation*}
+Following the same methodology as Roland L. Roche, the following relationships are obtained:
+\begin{equation*}
+r_M=\frac{E\left(\varepsilon^*-\varepsilon_0^*\right)}
+{\sigma_0^*-\sigma^*}
+\end{equation*}
+\begin{equation*}
+r_M <
+\frac{E\left(\varepsilon^*-\varepsilon_0^*\right)}
+{0.867\,\sigma_0^*-\sigma^*}
+\end{equation*}
+or equivalently,
 \begin{equation}
-rM=\frac{E(\varepsilon^* - \varepsilon_0^*)}{ \sigma_0^*-\sigma^* } 
+r_M < \frac{T}{t}-1
+\label{def:EFU-3rd}
 \end{equation}
+where \(T\) and \(t\) are defined exactly as in the second approach.
+
+Compared with the method of Roland L. Roche, the resulting expression is no longer an equality but an upper bound on the elastic follow-up factor. Nevertheless, it retains the same interpretation and relies on the same resilience indicators \(t\) and \(T\).
 
 
-Up to now, we can find essential formulas used in calculations of rM, from Roland Roche's article, and RCC-MRx.
+\vspace{1cm}
 
-
-
-
-
-
-
-\vspace{3cm}
-
-
-which defines the global resilience $T$ purely from the elastic solution, without solving the non-linear problem. Passing to equivalent (von~Mises) stress and strain increments $\Delta\varepsilon^{*}$, $\Delta\sigma^{*}$ as in Eq.~\eqref{eq:roche89}, and using the elastic relation $\Delta\varepsilon_0^{*}=2(1+\nu)\,\Delta\sigma_0^{*}/3E$, Eq.~\eqref{eq:kachanov-T} reduces to the compact result derived in full in Eq.~\eqref{eq:roche2223} of Appendix~\ref{app:roche},
-\begin{equation}
-\frac{3}{2(1+\nu)}\cdot\frac{E\left(\Delta\varepsilon^{*}-\Delta\varepsilon_0^{*}\right)}{\Delta\sigma_0^{*}-\Delta\sigma^{*}} = \frac{T}{t}-1 ,
-\label{eq:kachanov-final}
-\end{equation}
-i.e. the same elastic follow-up factor $r_M$ recovered below from Roche's total-quantity (rather than incremental) notation; the full step-by-step derivation, including the definition of the local resilience $t$, is reproduced in Appendix~\ref{app:roche}.
-
-RCC-MRx clause RB~3643 formalises the elastic follow-up factor $r_M$ from an energy balance of the purely elastic calculation, following R.~Roche's original derivation (reproduced in full in Appendix~\ref{app:roche}). Let $(\sigma_{\mathrm{el}},\varepsilon_{\mathrm{el}})$ be the elastically computed equivalent stress and strain at the section of interest, and $(\sigma,\varepsilon)$ the actual (elasto-plastic) equivalent stress and strain reached at the same section once the true, non-linear material law (here, Ramberg--Osgood, Eq.~\eqref{eq:RO}) is accounted for, with the loading history assumed radially proportional ($\bar{\bar\sigma} = \varphi\,\bar{\bar\sigma}_0$, i.e. the elasto-plastic stress tensor field remains everywhere proportional to the elastic one through a single scalar $\varphi$). RCC-MRx defines the elastic follow-up factor as
+\textbf{Elastic follow-up factor in RCC-MRx RB3650:} \\
+RCC-MRx clause RB~3643 formalises the elastic follow-up factor $r_M$ from an energy balance of the purely elastic calculation, following R.~Roche's original derivation (reproduced in full in Appendix \ref{sec:firstApproach} and Appendix \ref{sec:secondApproach}, extended in Appendix \ref{sec:thirdApproach}). Let $(\sigma_{\mathrm{el}},\varepsilon_{\mathrm{el}})$ be the elastically computed equivalent stress and strain at the section of interest, and $(\sigma,\varepsilon)$ the actual (elasto-plastic) equivalent stress and strain reached at the same section once the true, non-linear material law (here, Ramberg--Osgood, Eq.~\eqref{eq:RO}) is accounted for, with the loading history assumed radially proportional ($\bar{\bar\sigma} = \varphi\,\bar{\bar\sigma}_0$, i.e. the elasto-plastic stress tensor field remains everywhere proportional to the elastic one through a single scalar $\varphi$). RCC-MRx defines the elastic follow-up factor as
 \begin{equation}
 r_M \;=\; -\frac{E(\varepsilon-\varepsilon_{\mathrm{el}})}{\sigma-\sigma_{\mathrm{el}}} \;=\; \frac{T}{t}-1 \;\ge 0,
 \label{eq:rM}
@@ -597,9 +635,9 @@ T = \frac{\int \sigma_{\mathrm{ref}}^2 A\, ds}{\displaystyle\int \frac{\sigma_{\
 \sigma_{\mathrm{ref}}^2 = \left[0.79\,B_2\,\frac{(m)'_R}{Z}\right]^2 + \left[0.87\,\frac{m_1}{Z}\right]^2,
 \label{eq:Tglobal}
 \end{equation}
-with $\varepsilon_{M,p}(\sigma) = 0.01\left[\sigma/\big(C_0\,R_{p0.2,\mathrm{mean}}\big)\right]^{1/n_0}$ the plastic part of the mean Ramberg--Osgood curve (Eq.~\eqref{eq:RO}), and $m_1$, $(m)'_R$ the primary and secondary (resultant) moments at the section, $Z$ its section modulus. Equation~\eqref{eq:Tglobal} is the practical, piping-code form of $T$; its rigorous derivation from the energy balance $\iiint \bar{\bar\sigma}_0:\bar{\bar\varepsilon}\,dV = \iiint \bar{\bar\sigma}_0:\bar{\bar\varepsilon}_0\,dV$ is given in Appendix~\ref{app:roche}, Eqs.~(13)--(14) and (22).
+with $\varepsilon_{M,p}(\sigma) = 0.01\left[\sigma/\big(C_0\,R_{p0.2,\mathrm{mean}}\big)\right]^{1/n_0}$ the plastic part of the mean Ramberg--Osgood curve (Eq.~\eqref{eq:RO}), and $m_1$, $(m)'_R$ the primary and secondary (resultant) moments at the section, $Z$ its section modulus. 
 
-For isotropic materials, the rigorous derivation of Appendix~\ref{app:roche} gives $r_M = \frac{2(1+\nu)}{3}\left(\frac{T}{t}-1\right)$, which for steels ($\nu=0.3$) gives $r_M = 0.867\left(\frac{T}{t}-1\right)$. Conservatively, RCC-MRx takes $\frac{2(1+\nu)}{3}\approx 1$ (absorbing the 3-D correction into a separate stress index of 0.87 applied to pressure and torsional moments), so that the code ultimately uses the simplified form of Eq.~\eqref{eq:rM}, $r_M = T/t - 1$.
+The solution adopted by RCC-MRx encompasses all three approaches presented above.
 
 
 
@@ -897,6 +935,7 @@ The authors thank the organisers of Pipe Stress Day 2026 (Lyon, France) for the 
 
 
 \section{Definition of elastic follow-up factor}
+\label{ApdxA}
 
 
 
@@ -1317,6 +1356,7 @@ This appendix reproduces, for completeness, the mathematical derivation of the e
 \newpage
 
 \section{Applications of Roche's method}
+\label{application_roche}
 
 The factor $r_M$ has the following limiting behaviour:
 \begin{itemize}
