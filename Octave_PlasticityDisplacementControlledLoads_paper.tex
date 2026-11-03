@@ -94,7 +94,7 @@ Steel pipings are metallic structures (usually pressurized) consisting of straig
 
 
 \subsection{Calculation methodology in standard piping analysis}
-
+\label{sec:standardApproach}
 
 Piping stress engineers are interested in the stress state at every material point within pipings that might extend over kilometers. Performing a detailed 3D finite element analysis (FEA) of such structures would be excessively time-consuming and is generally incompatible with the industrial projects' needs. In this context, piping design codes provide rules for the analysis of piping systems, generally based on the assumption of \textbf{linear elastic material behavior} (Hooke's law), with allowable stress limits established to prevent the various failure modes and to ensure an adequate level of safety. \\
 
@@ -186,7 +186,7 @@ Finally, because of the geometric and material discontinuities near fittings, we
 
 \textcolor{red}{Present the impact of pressure on the ovalization here + introduce the pressure ovalization correction}  \\
 
-\textbf{\textcolor{red}{Note:  it might be impossible to consider pressure in this work. Because Marc will have to explicitly consider pressure load, but here we only want the pressure effects on the elbows' flexibility (deformation) and consider only thermal exp --> to discuss more}}
+\textbf{\textcolor{red}{Note:  it might be impossible to consider pressure in this work. Because Marc will have to explicitly consider pressure load, but here we only want the pressure effects on the elbows' flexibility (deformation) and consider only thermal exp --> to discuss more --> note that g coefficient is to be applied only on displacement-controlled loads}}
 
 
 
@@ -640,45 +640,118 @@ with $\varepsilon_{M,p}(\sigma) = 0.01\left[\sigma/\big(C_0\,R_{p0.2,\mathrm{mea
 The solution adopted by RCC-MRx encompasses all three approaches presented above.
 
 
-
+\textcolor{red}{maybe some discussions here --> to think about}
 
 
 \newpage
 
 
 \subsection{Abatement coefficient g in RCC-MRx}
+Up to this point, we have reviewed how standard piping codes address complex structural behavior through linear analysis supplemented by stress categorization (§\ref{sec:standardApproach}), examined the limitations of the secondary stress concept in the presence of elastic follow-up (§\ref{sec:EFF}), and presented the quantification of elastic follow-up through the RCC-MRx methodology (§\ref{sec:rccmrx}).
 
-For a section without internal pressure, RCC-MRx clause RB~3651.1131 defines the abatement coefficient as the ratio $g=\sigma/\sigma_{\mathrm{el}}$ of the true elasto-plastic stress to the elastically computed stress at the same imposed strain. The same result can be written directly from $r_M$ and the Ramberg--Osgood law as
-\begin{equation}
-g \;=\; \frac{\sigma\,(1+r_M)}{E\,\varepsilon_{M,p}(\sigma) + \sigma\,(1+r_M)} .
-\label{eq:gsimple}
-\end{equation}
-When a primary membrane stress from pressure, $\sigma_P = 0.87\,\dfrac{P D_i}{2h_c}$, is also present at the section (with $\sigma_P<\sigma$), the code generalises Eq.~\eqref{eq:gsimple} to
-\begin{equation}
-g \;=\; \frac{(\sigma-\sigma_P)(1+r_M)}{E\left[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)\right] + (\sigma-\sigma_P)(1+r_M)} .
-\label{eq:gfull}
-\end{equation}
-Figure~\ref{fig:rccmrx-official} reproduces the code's own graphical construction of $g$, equivalent to Eqs.~\eqref{eq:gsimple}--\eqref{eq:gfull}.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.8\textwidth]{figures/rccmrx_official_g_figure.png}
-\caption{RCC-MRx Figure RB~3651.1132 (reproduced from the code): graphical definition of the abatement coefficient $g$, showing the average Ramberg--Osgood tensile curve, the elastic (slope $E$) and elastic-follow-up (slope $-E/r_M$) construction lines, the primary membrane stress $\sigma_p$ and allowable stress $S^{*}$.}
-\label{fig:rccmrx-official}
-\end{figure}
+This observation raises an important question, particularly in light of the results presented in Figure \ref{fig:deviation}. Due to the presence of elastic follow-up, loads traditionally classified as secondary exhibit a deviation from the expected secondary-stress behavior and partially resemble the behavior of primary loads. This observation highlights the need to account for the contribution of secondary loads when assessing the acceptability of primary stresses.
 
-The coefficient $g$ is then used to reduce (``abate'') the displacement-dependent moment $m$ (secondary, in the classical sense) into an abated value $g\,m$, which is combined with the primary loads in the assessment of primary-type (P-type) damage through the RCC-MRx CMS1 stress-limitation rule (RB~3651.1131):
+
+\vspace{1cm}
+
+
+\textbf{Type P damages and sm+sb stresses in RCC-MRx piping analysis:} \\
+According to RCC-MRx RB 3600, type-P damage mechanisms include excessive deformation, plastic instability, fracture, and both elastic and elastoplastic instabilities. The design rules intended to prevent these failure modes are provided in RCC-MRx RB 3650. Among the type-P assessments required by the code is the verification of the \(\overline{s_m+s_b}\) stress category:
+
 \begin{equation}
 \overline{s_m+s_b} = \left[\left(D_1\left[\frac{PD_i}{2h_c}\right]\right)^2 + \left\langle D_2/Z,\, M + g\cdot m\right\rangle^2\right]^{0.5} \le S^{*} .
 \label{eq:CMS1}
 \end{equation}
-In this way, the combined effects of elastic follow-up and plasticity are accounted for in the P-type damage check of RCC-MRx, via $\overline{s_m+s_b}$, without requiring the analyst to perform a full elasto-plastic finite-element calculation. The presentation motivates exactly this rule by asking whether secondary loads must be considered when validating primary stresses: the answer is illustrated by re-using the Bar~1/Bar~2/Bar~3 Ramberg--Osgood curve already given in Figure~\ref{fig:roche-spring-sweep} (bottom-right panel) -- since Bar~3's response (points A--D) sits strictly between the purely primary (Bar~1) and purely secondary (Bar~2) limits, a nominally secondary moment can behave partly as a primary one, which is precisely why $g\cdot m$, rather than $m$ alone, is added inside the CMS1 check of Eq.~\eqref{eq:CMS1}.
+%
+%
+%\begin{figure}[htbp]
+%\centering
+%\includegraphics[width=0.4\textwidth]{figures/sm+sb.png}
+%\caption{\(\overline{s_m+s_b}\) stress validation in RCC-MRx RB 3651.1131}
+%\label{fig:sm+sb}
+%\end{figure}
 
-For the benchmark section reported later in Figure~\ref{fig:hexagon-benchmark-table}, the code output gives $\sigma=\SI{119.59}{MPa}$, $\varepsilon_{M,p}(\sigma)=\SI{0.587}{\percent}$ and $r_M=2.638$. Substituting these values into Eq.~\eqref{eq:gsimple} with $E=\SI{155000}{MPa}$ yields
-\[
-g = \frac{119.59(1+2.638)}{155000\times0.00587 + 119.59(1+2.638)} = 0.3235,
-\]
-i.e.\ the reported production-code value $g=0.3237$ to within rounding of the tabulated strain $\varepsilon_{M,p}$. This direct numerical check was used here as an internal verification of the transcribed RCC-MRx formulae.
+As expected, type-P damage mechanisms are primarily associated with primary stresses. Consequently, the verification of \(\overline{s_m+s_b}\) should, in principle, involve only loads exhibiting a primary character.
+
+However, equation \eqref{eq:CMS1} shows that, in addition to pressure \(P\) and displacement-controlled moments \(M\), the stress classification also contains the term \(m\), which represents displacement-controlled moments. The presence of this contribution is noteworthy and directly relates to the question raised earlier in this section. Indeed, RCC-MRx incorporates the effect of displacement-controlled loads in the \(\overline{s_m+s_b}\) assessment, thereby acknowledging that such loads may exhibit a partial primary character when elastic follow-up is present.
+
+This approach is consistent with the observations discussed previously: elastic follow-up causes displacement-controlled loads to deviate from ideal secondary behavior and to contribute, at least partially, to the mechanisms associated with type-P damage.
+
+\vspace{1cm}
+\textbf{Abatement coefficient g} \\
+As shown in equation~\eqref{eq:CMS1}, displacement-controlled moments are accounted for in the type-P \(s_m+s_b\) assessment through the abatement coefficient \(g\), defined as 
+\begin{equation} 
+g \;=\; \frac{(\sigma-\sigma_P)(1+r_M)} {E\left[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)\right] + (\sigma-\sigma_P)(1+r_M)} . 
+\label{eq:gfull}
+\end{equation} 
+Here, \(\varepsilon_{M,p}\) denotes the plastic strain predicted by the Ramberg--Osgood relation. The contribution of the primary pressure stress is removed by introducing \(\sigma_P = 0.87\,\dfrac{P D_i}{2h_c}\), which is subtracted from the total stress in the above expression.
+
+An important remark is that RCC-MRx requires the use of the maximum elastic follow-up factor \(r_M\) within the entire structure. This requirement is consistent with the first assumption of Roland L. Roche's method, which assumes a constant proportionality factor \(\varphi\) between the elastoplastic and elastic stress fields (Equation~\eqref{eq:kachanov-stress}). It is also consistent with the objective of the \(s_m+s_b\) assessment, which is intended to prevent elastic and elastoplastic instabilities, both of which are global failure modes governed by the overall structural response.
+
+
+
+\vspace{1cm}
+\textbf{How to interprete the formula of abatement coefficient g  ?} \\
+In a first step, the right-hand side of Equation~\eqref{eq:gfull} is analyzed without considering the specific procedure given in RCC-MRx RB 3651.1132 (let's say the g coefficient is not yet introduced at this stage). Instead, we simply consider an elastoplastic stress \(\sigma\) and its associated elastic solution \(\sigma_{el}\). The elastic follow-up factor is recalled as \[ r_M = -\frac{E\left(\varepsilon-\varepsilon_{el}\right)} {\sigma-\sigma_{el}}. \]
+The right-hand side of Equation~\eqref{eq:gfull} can then be rewritten as
+\begin{equation*}
+\frac{(\sigma-\sigma_P)(1+r_M)} {E\left[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)\right] +(\sigma-\sigma_P)(1+r_M)} \geq \frac{(\sigma-\sigma_P)(1+r_M)} {E\,\varepsilon_{M,p}(\sigma) +(\sigma-\sigma_P)(1+r_M)} = \frac{\sigma-\sigma_P} {E\,\dfrac{\varepsilon_{M,p}(\sigma)}{1+r_M} +\sigma-\sigma_P} = \frac{\sigma-\sigma_P} {\sigma_{el}-\sigma_P}
+\end{equation*}
+($"="$ is obtained only in condition that $\sigma_P=0$) \\
+So, in essence, the formula in the right-hand-side of equation \eqref{eq:gfull} is used to derive the ratio between the elastoplastic stress and the elastic stress, without considering the primary pressure stress, in a conservative approach.
+
+Now, to satisfy the Kachanov hypothesis, a unique elastic follow-up factor must be considered throughout the structure. To obtain a conservative result, the maximum elastic follow-up factor of the entire structure is used, i.e., \(r_M=r_{M,\max}\). The above inequality can then be developed as follows:
+\begin{equation*}
+\frac{\sigma-\sigma_P} {\sigma_{el}-\sigma_P}  \leq     \frac{(\sigma-\sigma_P)(1+r_{M,max})} {E\left[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)\right] +(\sigma-\sigma_P)(1+r_{M,max})}
+\end{equation*}
+Finally, the displacement-controlled moments \(m\) must be multiplied by the factor $\frac{\sigma-\sigma_P}{\sigma_{el}-\sigma_P}$ in order to obtain the displacement-controlled moment corresponding to the elastoplastic analysis (see the term $g.m$ in equation \eqref{eq:gfull})\\
+
+
+In practice, if an elastoplastic stress \(\sigma\) is used to estimate the upper bound of the ratio \[ \frac{\sigma-\sigma_P}{\sigma_{el}-\sigma_P}, \] a difficulty remains: elastoplastic analyses are generally not intended to be performed in the context of routine piping design. Therefore, an alternative method is required to evaluate this ratio.
+To estimate the abatement coefficient \(g\), RCC-MRx adopts the following expression for \(\sigma\):
+\begin{equation*} 
+\sigma = 2\,S^{*}\,\left[\frac{(R_{p0.2})_{moy}}{(R_{p0.2})_{\min}}\right]
+\end{equation*}
+with
+\begin{equation*} 
+S^{*} = \alpha \left[ 0.426\,(R_{p0.2})_{\min}(\theta_m) + 0.032\,(R_m)_{\min}(\theta_m) \right]
+\end{equation*}
+From a methodological standpoint, the code assumes a material stress state corresponding to a limiting, or target, stress level associated with the onset of elastic or elastoplastic instability.
+
+
+The complete abatement procedure defined in RCC-MRx, for monotonic loads, is summarized in Figure~RB~3651.1132.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/rccmrx_official_g_figure.png}
+\caption{RCC-MRx Figure RB~3651.1132 - the abatement is realized based on a target stress resulting in the elastic/elastoplastic instability limit }
+\label{fig:rccmrx-official}
+\end{figure}
+
+With this calculation procedure, only elastic analyses are required to evaluate both the elastic follow-up factor \(r_M\) and the abatement coefficient \(g\).
+
+
+
+
+\vspace{2cm}
+\textcolor{red}{to redo the following contents}\\
+
+
+
+
+
+When a primary membrane stress from pressure, $\sigma_P = 0.87\,\dfrac{P D_i}{2h_c}$, is also present at the section (with $\sigma_P<\sigma$), the code generalises Eq.~\eqref{eq:gsimple} to
+
+Figure~\ref{fig:rccmrx-official} reproduces the code's own graphical construction of $g$, equivalent to Eqs.~\eqref{eq:gsimple}--\eqref{eq:gfull}.
+
+
+
+The coefficient $g$ is then used to reduce (``abate'') the displacement-dependent moment $m$ (secondary, in the classical sense) into an abated value $g\,m$, which is combined with the primary loads in the assessment of primary-type (P-type) damage through the RCC-MRx CMS1 stress-limitation rule (RB~3651.1131):
+\begin{equation}
+\overline{s_m+s_b} = \left[\left(D_1\left[\frac{PD_i}{2h_c}\right]\right)^2 + \left\langle D_2/Z,\, M + g\cdot m\right\rangle^2\right]^{0.5} \le S^{*} .
+\label{eq:CMS10010000}
+\end{equation}
+
 
 \begin{table}[htbp]
 \centering
@@ -699,28 +772,27 @@ $\sigma_{\mathrm{ref}}$ & Elastic reference equivalent stress used to build $T$ 
 
 Table~\ref{tab:key-formulas} is intended as a quick-reference summary; its notation is used consistently throughout the remainder of the paper and in Appendix~\ref{app:roche}.
 
-This raises a natural verification question, addressed by the benchmark of this paper: \emph{is it necessary to explicitly reconsider secondary loads in the primary-stress validation, and if so, does the RCC-MRx analytical route ($r_M$, $g$) correctly and conservatively capture the elasto-plastic reality?}
 
-\vspace{30mm}
+\vspace{10mm}
 
 
 \textcolor{red}{Talk about sm+sb + type P damages here -- including elastic and elastoplastic instability}
 
-\vspace{30mm}
+\vspace{10mm}
 
 \textcolor{red}{Maybe we can say that the above method uses a global approach for the calculation of rM --> g accounted in sm+sb, to cover a global damage mode which is elastic/elastoplastic instability} \\
 
 
-\vspace{30mm}
+\vspace{10mm}
 
 \textcolor{red}{We'll need the RCC-MRx criteria to understand more on the allowble stresses of sm+sb in the code}
 
-\vspace{30mm}
+\vspace{10mm}
 
 \textcolor{red}{We might talk more about the fact that elastic follow-up might also be used in local analysis -- see ASME III NB for fatigue and progressive deformation - correction factor}
 
 
-\vspace{30mm}
+\vspace{10mm}
 
 \textcolor{red}{Maybe we can discuss on the topic of g unique here, based on Katchanov assumption of Roland Roche} \\
 
