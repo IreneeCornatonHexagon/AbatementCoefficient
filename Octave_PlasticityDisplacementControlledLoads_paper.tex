@@ -76,6 +76,12 @@ Don't forget to mention the nuclear context, which is the central topic around w
 
 \noindent\textbf{Keywords:} high temperature piping analysis ; RCC-MRx; elastic follow-up; abatement coefficient ;  plasticity.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % =============================================================================
 \section{Introduction}
 \label{sec:Intro}
@@ -93,6 +99,12 @@ Steel pipings are metallic structures (usually pressurized) consisting of straig
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Calculation methodology in standard piping analysis}
 \label{sec:standardApproach}
 
@@ -195,6 +207,12 @@ Finally, because of the geometric and material discontinuities near fittings, we
 
 \newpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Elastic benchmark}
 
 \textcolor{red}{Maybe say that we are referring to the anlaysis of point E in Figure 2} \\
@@ -333,6 +351,12 @@ with, for 316L(N) stainless steel, $n_0 = 0.1125$ ($1/n_0 = 8.89$) and $C_0 = 1.
 
 \newpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Spring effects -- deviation of the secondary stress category}
 \label{sec:EFF}
 
@@ -526,6 +550,13 @@ The three-beam example (Figures~\ref{fig:deviation} and \ref{fig:parametric-EFU}
 
 
 % =============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Elastic follow-up factor in RCC-MRx}
 \label{sec:rccmrx}
 % =============================================================================
@@ -551,8 +582,13 @@ With local resilience (t) and global resilience (T) defined as below:
 \frac{1}{t}= \frac{ \varepsilon_0^p(x)}{ \varepsilon_0(x)}
 \end{equation*} 
 \begin{equation*} 
-\frac{1}{T}=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}
+\frac{1}{T}= \frac{ \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0^p(x) A(x) \, dx }{  \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0(x) A(x) \, dx }
 \end{equation*} 
+or 
+\begin{equation*} 
+\frac{1}{T}=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}     \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous in the structure)}
+\end{equation*} 
+
 Local resilience and global resilience are indicators of the inverse degree of plasticity present in a structure, at the local and global scales, respectively. Of particular interest is the fact that both \(t\) and \(T\) are determined solely from the results of a linear elastic analysis (point \textbf{E}). In other words, determining \(r_M\) requires only a linear elastic analysis together with knowledge of the material's plastic constitutive law.
 
 Knowing \(r_M\), which corresponds to the inverse of the slope of the EFU segment (see Figure \ref{fig:deviation}), and using the Ramberg--Osgood relation implicitly defines a system of two equations. Solving this system makes it possible to determine the position of point \textbf{SP} from the elastic solution represented by point \textbf{E}. The detailed derivation is provided in Appendix \ref{application_roche}.
@@ -644,8 +680,12 @@ The solution adopted by RCC-MRx encompasses all three approaches presented above
 
 
 \newpage
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Abatement coefficient g in RCC-MRx}
 Up to this point, we have reviewed how standard piping codes address complex structural behavior through linear analysis supplemented by stress categorization (§\ref{sec:standardApproach}), examined the limitations of the secondary stress concept in the presence of elastic follow-up (§\ref{sec:EFF}), and presented the quantification of elastic follow-up through the RCC-MRx methodology (§\ref{sec:rccmrx}).
 
@@ -685,7 +725,7 @@ As shown in equation~\eqref{eq:CMS1}, displacement-controlled moments are accoun
 g \;=\; \frac{(\sigma-\sigma_P)(1+r_M)} {E\left[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)\right] + (\sigma-\sigma_P)(1+r_M)} . 
 \label{eq:gfull}
 \end{equation} 
-Here, \(\varepsilon_{M,p}\) denotes the plastic strain predicted by the Ramberg--Osgood relation. The contribution of the primary pressure stress is removed by introducing \(\sigma_P = 0.87\,\dfrac{P D_i}{2h_c}\), which is subtracted from the total stress in the above expression.
+Here, \(\varepsilon_{M,p}\) denotes the plastic strain predicted by the Ramberg--Osgood relation. The contribution of the primary pressure stress is removed by introducing \(\sigma_P = 0.87\,\dfrac{P D_i}{2h_c}\) (required to be lower than $\sigma$), which is subtracted from the total stress in the above expression.
 
 An important remark is that RCC-MRx requires the use of the maximum elastic follow-up factor \(r_M\) within the entire structure. This requirement is consistent with the first assumption of Roland L. Roche's method, which assumes a constant proportionality factor \(\varphi\) between the elastoplastic and elastic stress fields (Equation~\eqref{eq:kachanov-stress}). It is also consistent with the objective of the \(s_m+s_b\) assessment, which is intended to prevent elastic and elastoplastic instabilities, both of which are global failure modes governed by the overall structural response.
 
@@ -737,22 +777,6 @@ With this calculation procedure, only elastic analyses are required to evaluate 
 \textcolor{red}{to redo the following contents}\\
 
 
-
-
-
-When a primary membrane stress from pressure, $\sigma_P = 0.87\,\dfrac{P D_i}{2h_c}$, is also present at the section (with $\sigma_P<\sigma$), the code generalises Eq.~\eqref{eq:gsimple} to
-
-Figure~\ref{fig:rccmrx-official} reproduces the code's own graphical construction of $g$, equivalent to Eqs.~\eqref{eq:gsimple}--\eqref{eq:gfull}.
-
-
-
-The coefficient $g$ is then used to reduce (``abate'') the displacement-dependent moment $m$ (secondary, in the classical sense) into an abated value $g\,m$, which is combined with the primary loads in the assessment of primary-type (P-type) damage through the RCC-MRx CMS1 stress-limitation rule (RB~3651.1131):
-\begin{equation}
-\overline{s_m+s_b} = \left[\left(D_1\left[\frac{PD_i}{2h_c}\right]\right)^2 + \left\langle D_2/Z,\, M + g\cdot m\right\rangle^2\right]^{0.5} \le S^{*} .
-\label{eq:CMS10010000}
-\end{equation}
-
-
 \begin{table}[htbp]
 \centering
 \caption{Consolidated notation for the RCC-MRx elastic-follow-up route.}
@@ -799,6 +823,12 @@ Table~\ref{tab:key-formulas} is intended as a quick-reference summary; its notat
 
 \newpage
 % =============================================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Elasto-plastic benchmark on the abattement coefficient g}
 % =============================================================================
 \textcolor{red}{Some introduction here} \\
@@ -806,6 +836,12 @@ Table~\ref{tab:key-formulas} is intended as a quick-reference summary; its notat
 \textcolor{red}{Explain that the same model as the elastic benchmark is used here, with non-linear material lawl} \\
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Elastoplastic large-strain FEA analysis vs PEPS model}
 
 
@@ -857,6 +893,13 @@ The von Mises stress distribution over the elbow shows a clearly identifiable ``
 \label{fig:critical-vonmises-detail}
 \end{figure}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Observations and discussions}
 
 The RCC-MRx elastic route (RB~3651.1131) reduces the secondary (displacement-dependent) moment $m$ by the coefficient $g$ and combines the abated stress with the primary stress in the $\sigma_m+\sigma_b$ (P-type) damage check; equivalently, $g$ can be interpreted either as an abatement applied to the stresses (from the elastic/purely-secondary value down to the effective value) or as an abatement applied to the moments (from the elastic moment down to the effective moment). The natural benchmark question is then: \emph{how does the RCC-MRx-derived $g$ (and the associated $\sigma_m+\sigma_b$) compare with the coefficient and stress obtained from a full elasto-plastic FE reference calculation at the same critical section?}
@@ -961,8 +1004,18 @@ Both explanations are consistent with one another and are not mutually exclusive
 \newpage
 
 % =============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 % =============================================================================
+
+\textcolor{red}{to redo these contents}
+
 
 \begin{enumerate}
 \item The paper provides a consolidated route from the historical background and constitutive assumptions to the practical RCC-MRx definitions of $r_M$ and $g$, supported by the original diagrams, code excerpts and derivation material from the source presentation.
@@ -979,9 +1032,9 @@ Both explanations are consistent with one another and are not mutually exclusive
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.48\textwidth]{figures/ramberg_osgood_temperature_family.png}
+\includegraphics[width=0.4\textwidth]{figures/ramberg_osgood_temperature_family.png}
 \hfill
-\includegraphics[width=0.48\textwidth]{figures/ramberg_osgood_550c_sensitivity.png}
+\includegraphics[width=0.4\textwidth]{figures/ramberg_osgood_550c_sensitivity.png}
 \caption{Ramberg--Osgood material data extracted from the presentation. Left: family of 316L(N) stress--strain curves used to justify the temperature-dependent scaling of the law through $R_{p0.2}(T)$. Right: sensitivity check at \SI{500}{\celsius} (a different temperature from the \SI{550}{\celsius} benchmark), comparing the reference parameter set ($C_0=1.198$, $n_0=0.1125$, $C_0R_{p0.2}\approx\SI{131.8}{MPa}$) with the alternative fit ($C_0=1.233$, $n_0=0.130$, $C_0R_{p0.2}\approx\SI{135.6}{MPa}$) discussed in the text.  \textcolor{red}{-->show the importance of n0/C0 on the final results } }
 \label{fig:ro-curves}
 \end{figure}
@@ -1049,6 +1102,12 @@ The second assumption concerns material nonlinearity, represented by the Ramberg
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{First approach: Ramberg-Osgood relation under uniaxial configurations}
 \label{sec:firstApproach}
 
@@ -1117,7 +1176,7 @@ Defining the local resilience t and global resilience T as below:
 \frac{1}{t}= \frac{ \varepsilon_0^p(x)}{ \varepsilon_0(x)}
 \end{equation*} 
 \begin{equation*} 
-\frac{1}{T}= \frac{ \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0^p(x) A(x) \, dx }{  \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0(x) A(x) \, dx }=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}
+\frac{1}{T}= \frac{ \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0^p(x) A(x) \, dx }{  \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0(x) A(x) \, dx }=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}     \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous in the structure)}
 \end{equation*} 
 
 
@@ -1152,7 +1211,6 @@ Now we define the elastic-follow-up factor $rM=\frac{E(\varepsilon(x) - \varepsi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Second approach: Generalized stress-strain tensors Ramberg-Osgood under multiaxial configurations}
 \label{sec:secondApproach}
 
@@ -1236,7 +1294,7 @@ Defining the local resilience t and global resilience T as below:
 \frac{1}{t}= \frac{ \varepsilon_0^{p*}}{ \varepsilon_0^*}
 \end{equation*} 
 \begin{equation*} 
-\frac{1}{T}= \frac{ \iiint_V \sigma_0^* \varepsilon_0^{p*} \, dV }{ \iiint_V \sigma_0^* \varepsilon_0^* \, dV }=\frac{ \iiint_V \frac{1}{t} \sigma_0^{*2} \, dV }{ \iiint_V \sigma_0^{*2}  \, dV }
+\frac{1}{T}= \frac{ \iiint_V \sigma_0^* \varepsilon_0^{p*} \, dV }{ \iiint_V \sigma_0^* \varepsilon_0^* \, dV }=\frac{ \iiint_V \frac{1}{t} \sigma_0^{*2} \, dV }{ \iiint_V \sigma_0^{*2}  \, dV }    \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous in the structure)}
 \end{equation*} 
 
 
@@ -1271,7 +1329,6 @@ Now we define the elastic-follow-up factor $rM=\frac{E(\varepsilon^* - \varepsil
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \newpage
 \subsection{Third approach: Equivalent stress--strain relation Ramberg-Osgood relation under multiaxial configurations}
 \label{sec:thirdApproach}
@@ -1409,6 +1466,7 @@ or
 \section{Schematic interpretation of the elastic follow-up curve }
 \label{app:roche}
 
+\textcolor{red}{to redo these contents}
 
 This appendix reproduces, for completeness, the mathematical derivation of the elastic follow-up factor $r_M$ from the energy balance of a purely elastic finite-element analysis, following R.~Roche's original method \cite{Roche1987} as re-derived, in full native LaTeX (no scanned material), from an internal technical note accompanying the source presentation \cite{RochePipeStressNote}. This is the rigorous justification of Eqs.~\eqref{eq:rM}--\eqref{eq:Tglobal} used in Section~\ref{sec:rccmrx}. Figures~\ref{fig:roche-graphical} and \ref{fig:roche-calculation-sheet} reproduce the graphical and documentary material from which the algebraic steps below were reconstructed.
 
@@ -1422,13 +1480,186 @@ This appendix reproduces, for completeness, the mathematical derivation of the e
 
 
 
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \section{Applications of Roche's method}
 \label{application_roche}
+
+
+In this section, the parametric analysis of spring stiffness (Figure~\ref{fig:parametric-EFU}) is revisited, but this time the elastic follow-up is quantified using the factor \(r_M\). Because Beam~3 behaves primarily in axial loading, the first approach proposed by Roland L. Roche, presented in §\ref{sec:firstApproach}, is used here. \\
+
+\begin{figure}[htbp] 
+\centering
+\setlength{\fboxsep}{5pt} % spacing between image and frame 
+\setlength{\fboxrule}{0.8pt} % frame thickness 
+\fbox{\includegraphics[width=0.55\textwidth]{figures/AppendixC.png}} 
+\caption{Parametric analysis on beam 3}
+\label{fig:rm-graphical-overview}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Point SP:} \\
+For point SP, we considered:
+\begin{equation*}
+u=8.115mm \ \ \ \ \ \ \text{;} \ \ \ \ E_{spring}=\frac{E}{16}=9.688 ~\mathrm{GPa}.
+\end{equation*}
+\begin{equation*}
+k_{spring}=\frac{E_{spring}*S_{spring}}{L_{spring}}=49.277 \frac{kN}{mm} \ \ \ \ \ \ \text{;} \ \ \ \ k_{total}=\frac{1}{\frac{1}{k_{spring}}+\frac{1}{k_{section}}}=39.422 \frac{kN}{mm}.
+\end{equation*}
+
+\underline{Common section:}
+\begin{equation*}
+\sigma_{0,section} = \frac{k_{total}*u}{S} = \frac{39.422 kN/mm * 8.115mm}{2543.3 mm^2}=126~\mathrm{MPa}
+\end{equation*}
+\begin{equation*}
+1/t_{section} = \frac{\varepsilon_0(x)}{\varepsilon_0^p(x)}=\frac{\sigma_0/E}{\varepsilon_0^p(\sigma_0)}=\frac{\frac{126\mathrm{MPa}}{155\mathrm{GPa}}}{0.01\left( \frac{126\mathrm{MPa}}{1.198*106\mathrm{MPa}} \right)^{\frac{1}{0.1125}}}=0.087
+\end{equation*}
+
+
+
+\underline{Spring:} 
+\begin{equation*}
+\sigma_{0,spring} = \frac{k_{total}*u}{S_{spring}} = \frac{39.422 kN/mm * 8.115mm}{5086.66 mm^2}=63~\mathrm{MPa}
+\end{equation*}
+\begin{equation*}
+1/t = 0
+\end{equation*}
+
+
+Global resilience and the elastic follow-up factor:
+\begin{equation*}
+T=\frac{\frac{\sigma_{0,section}}{E}*S*L+\frac{\sigma_{0,spring}}{E/16}*S_{spring}*L_{spring}}{\sigma_{0,section}*\varepsilon_M^p(\sigma_{0,section})*L*S}=0.436
+\end{equation*}
+\begin{equation*}
+r_M=\frac{T}{t}-1=4 
+\end{equation*}
+
+
+Now, to estimate the elastoplastic solution, we resolve a system of two equations:
+\begin{equation*} 
+\left\{ \begin{aligned} 
+\varepsilon &= \frac{\sigma}{E} + 0.01 \left( \frac{\sigma}{C_0\,R_{p0.2,\mathrm{mean}}} \right)^{\frac{1}{n_0}} \\[1em]
+\frac{\dfrac{\sigma_0}{E}-\varepsilon} {\sigma_0-\sigma} &= -\frac{r_M}{E} 
+\end{aligned} \right.
+\end{equation*}
+The elastoplastic solution found is :  $\sigma=97.2\mathrm{MPa}$ and $\varepsilon=0.156 \%$. \\
+The elastoplastic solution found by MSC Marc: $\sigma_{Marc}=95.85\mathrm{MPa}$ and $\varepsilon_{Marc}=0.16 \%$.
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Point D:} \\
+For point D, we considered:
+\begin{equation*}
+u=27.591mm \ \ \ \ \ \ \text{;} \ \ \ \ E_{spring}=\frac{E}{64}=2421.875 ~\mathrm{GPa}.
+\end{equation*}
+\begin{equation*}
+k_{spring}=\frac{E_{spring}*S_{spring}}{L_{spring}}=12.319 \frac{kN}{mm} \ \ \ \ \ \ \text{;} \ \ \ \ k_{total}=\frac{1}{\frac{1}{k_{spring}}+\frac{1}{k_{section}}}=11.595 \frac{kN}{mm}.
+\end{equation*}
+
+\underline{Common section:} \\
+\begin{equation*}
+\sigma_{0,section} = \frac{k_{total}*u}{S} = \frac{11.595 kN/mm * 27.591mm}{2543.3 mm^2}=126~\mathrm{MPa}
+\end{equation*}
+\begin{equation*}
+1/t_{section} = \frac{\varepsilon_0(x)}{\varepsilon_0^p(x)}=\frac{\sigma_0/E}{\varepsilon_0^p(\sigma_0)}=\frac{\frac{126\mathrm{MPa}}{155\mathrm{GPa}}}{0.01\left( \frac{126\mathrm{MPa}}{1.198*106\mathrm{MPa}} \right)^{\frac{1}{0.1125}}}=0.087
+\end{equation*}
+
+
+
+\underline{Spring:} \\
+\begin{equation*}
+\sigma_{0,spring} = \frac{k_{total}*u}{S_{spring}} = \frac{11.595 kN/mm * 27.591mm}{5086.66 mm^2}=63~\mathrm{MPa}
+\end{equation*}
+\begin{equation*}
+1/t = 0
+\end{equation*}
+
+
+Global resilience and the elastic follow-up factor:
+\begin{equation*}
+T=\frac{\frac{\sigma_{0,section}}{E}*S*L+\frac{\sigma_{0,spring}}{E/16}*S_{spring}*L_{spring}}{\sigma_{0,section}*\varepsilon_M^p(\sigma_{0,section})*L*S}=1.481
+\end{equation*}
+\begin{equation*}
+r_M=\frac{T}{t}-1=16 
+\end{equation*}
+
+
+Now, to estimate the elastoplastic solution, we resolve a system of two equations:
+\begin{equation*} 
+\left\{ \begin{aligned} 
+\varepsilon &= \frac{\sigma}{E} + 0.01 \left( \frac{\sigma}{C_0\,R_{p0.2,\mathrm{mean}}} \right)^{\frac{1}{n_0}} \\[1em]
+\frac{\dfrac{\sigma_0}{E}-\varepsilon} {\sigma_0-\sigma} &= -\frac{r_M}{E} 
+\end{aligned} \right.
+\end{equation*}
+The elastoplastic solution found is :  $\sigma=106.66\mathrm{MPa}$ and $\varepsilon=0.281 \%$. \\
+The elastoplastic solution found by MSC Marc: $\sigma_{Marc}=106.7\mathrm{MPa}$ and $\varepsilon_{Marc}=0.283 \%$.
+
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Point B:} \\
+For point B, we considered:
+\begin{equation*}
+u=4.869mm \ \ \ \ \ \ \text{;} \ \ \ \ E_{spring}=\frac{E}{8}=19375 ~\mathrm{GPa}.
+\end{equation*}
+\begin{equation*}
+k_{spring}=\frac{E_{spring}*S_{spring}}{L_{spring}}=98.554 \frac{kN}{mm} \ \ \ \ \ \ \text{;} \ \ \ \ k_{total}=\frac{1}{\frac{1}{k_{spring}}+\frac{1}{k_{section}}}=65.703 \frac{kN}{mm}.
+\end{equation*}
+
+\underline{Common section:} \\
+\begin{equation*}
+\sigma_{0,section} = \frac{k_{total}*u}{S} = \frac{65.703 kN/mm * 4.869mm}{2543.3 mm^2}=126~\mathrm{MPa}
+\end{equation*}
+\begin{equation*}
+1/t_{section} = \frac{\varepsilon_0(x)}{\varepsilon_0^p(x)}=\frac{\sigma_0/E}{\varepsilon_0^p(\sigma_0)}=\frac{\frac{126\mathrm{MPa}}{155\mathrm{GPa}}}{0.01\left( \frac{126\mathrm{MPa}}{1.198*106\mathrm{MPa}} \right)^{\frac{1}{0.1125}}}=0.087
+\end{equation*}
+
+
+
+\underline{Spring:} \\
+\begin{equation*}
+\sigma_{0,spring} = \frac{k_{total}*u}{S_{spring}} = \frac{65.703 kN/mm * 4.869mm}{5086.66 mm^2}=63~\mathrm{MPa}
+\end{equation*}
+\begin{equation*}
+1/t = 0
+\end{equation*}
+
+
+Global resilience and the elastic follow-up factor:
+\begin{equation*}
+T=\frac{\frac{\sigma_{0,section}}{E}*S*L+\frac{\sigma_{0,spring}}{E/8}*S_{spring}*L_{spring}}{\sigma_{0,section}*\varepsilon_M^p(\sigma_{0,section})*L*S}=0.261
+\end{equation*}
+\begin{equation*}
+r_M=\frac{T}{t}-1=2
+\end{equation*}
+
+
+Now, to estimate the elastoplastic solution, we resolve a system of two equations:
+\begin{equation*} 
+\left\{ \begin{aligned} 
+\varepsilon &= \frac{\sigma}{E} + 0.01 \left( \frac{\sigma}{C_0\,R_{p0.2,\mathrm{mean}}} \right)^{\frac{1}{n_0}} \\[1em]
+\frac{\dfrac{\sigma_0}{E}-\varepsilon} {\sigma_0-\sigma} &= -\frac{r_M}{E} 
+\end{aligned} \right.
+\end{equation*}
+The elastoplastic solution found is :  $\sigma=93.143\mathrm{MPa}$ and $\varepsilon=0.124 \%$. \\
+The elastoplastic solution found by MSC Marc: $\sigma_{Marc}=90.3\mathrm{MPa}$ and $\varepsilon_{Marc}=0.13 \%$.
+
+
+
+
+
+\newpage
+\textcolor{red}{to redo these contents}
+
 
 The factor $r_M$ has the following limiting behaviour:
 \begin{itemize}
@@ -1439,12 +1670,11 @@ Note that a \emph{higher} $r_M$ is treated by the code as a \emph{more conservat
 
 In the Roche three-bar analogy, Bar 2 (no spring) corresponds to $r_M=0$, Bar 1 (rigid connection) corresponds to $r_M\to\infty$, and Bar 3 (elastic spring) lies at an intermediate, finite value of $r_M$ that depends on the spring stiffness $k_2$.
 
-Operationally, the presentation summarises the RCC-MRx workflow in four steps: (i) perform a purely elastic piping calculation; (ii) deduce the local plastic strain function $\varepsilon_{M,p}(\sigma_{\mathrm{ref}})$ from the adopted Ramberg--Osgood law; (iii) compute the global resilience $T$ by stress-squared weighting of the elastic reference field over the whole structure; and (iv) retain the governing local value of $r_M$ (and therefore of $g$) at the critical section. Figures~\ref{fig:rm-graphical-overview} and \ref{fig:energy-balance-scheme} summarise these complementary viewpoints: a graphical construction on the constitutive curve and an energy-balance route derived from the elastic FE solution. In other words, the code is intended to recover an elasto-plastic \emph{estimate} from an elastic base calculation rather than to replace full non-linear analysis in all circumstances.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.55\textwidth]{figures/rm_graphical_definition_slide.png}
-\caption{Graphical construction of $r_M$, reproduced directly from the presentation: $\sigma_0=\sigma_{\mathrm{el}}$ is the elastic reference stress at point $M$, $\sigma$ the actual elasto-plastic stress reached at the same strain $\varepsilon$; the local resilience is $t=OM/MN$, the global resilience $T$ is such that $OQ=(T/t)\,OM$, and the spring-effect line of slope $-1/r_M=\tan\theta$ passes through $M$ and $Q$.-->  \textcolor{red}{to be replaced by a latex code + make it similar to Figure 2}}
+\caption{Graphical construction of $r_M$}
 \label{fig:rm-graphical-overview}
 \end{figure}
 
@@ -1455,8 +1685,8 @@ Operationally, the presentation summarises the RCC-MRx workflow in four steps: (
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.92\textwidth]{figures/roche_spring_stiffness_parametric_sweep.png}
-\caption{Parametric three-bar sweep extracted from the presentation: reducing the added spring stiffness from $k_2=2k$ to $k_2=k/16$ drives Bar~3 continuously away from the purely secondary limit (Bar~2) and towards the primary-like limit (Bar~1). The slide reports the corresponding sequence of follow-up factors ($r_M=0.996$, 3.989, 7.981, 31.931), stress estimates ($\sigma_{3,\mathrm{est}}=\SIlist{89.912;97.183;101.8;111.4}{MPa}$) and end displacements ($u_3=\SIlist{2.435;4.869;8.115;27.591}{mm}$).-->  \textcolor{red}{to redesign. Don't let the rM curve occur too many times}}
+\includegraphics[width=0.5\textwidth]{figures/roche_spring_stiffness_parametric_sweep.png}
+\caption{Parametric}
 \label{fig:roche-spring-sweep}
 \end{figure}
 
@@ -1468,7 +1698,11 @@ Operationally, the presentation summarises the RCC-MRx workflow in four steps: (
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Definition of equivalent stress and strain}
 \label{sec:equivalent_sigma_epsilon_eq}
@@ -1506,12 +1740,15 @@ Using the above relation, equations~\eqref{eij} and \eqref{sij}, the equivalent 
 
 
 
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{FEA 3D model}
 \label{FEA_mesh}
 
-
+\textcolor{red}{to redo these contents}
 
 \begin{figure}[htbp]
 \centering
@@ -1522,9 +1759,14 @@ Using the above relation, equations~\eqref{eij} and \eqref{sij}, the equivalent 
 
 
 \newpage
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Additional validation: comparison across wall-thickness variants}
+
+\textcolor{red}{to redo these contents}
 
 As a further, independent check, the RCC-MRx abatement coefficient $g$ obtained from the elasto-plastic FE reference ($g_{\mathrm{FEA}}$) was compared against the RCC-MRx analytical value ($g_{\mathrm{RCC\text{-}MRx}}$) on two additional model variants of the same benchmark, differing only in wall thickness (\SI{12}{mm} and \SI{15}{mm}), including large-strain and plasticity effects. The comparison is summarised in Figure~\ref{fig:g-barchart}. In both cases, the RCC-MRx value bounds the FE-derived value, confirming the conservatism of the code-mandated coefficient across a range of section stiffnesses.
 
@@ -1584,8 +1826,16 @@ The close agreement between the closed-form analytical bound $r_{\max}=2.63$ and
 
 \newpage
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A simple example of Roche method}
+
+\textcolor{red}{Probably to remove this appendix, since we already have Appendix C}
+
+\textcolor{red}{to redo these contents}
 
 \begin{figure}[htbp]
 \centering
@@ -1614,7 +1864,11 @@ The close agreement between the closed-form analytical bound $r_{\max}=2.63$ and
 
 \newpage
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % =============================================================================
 % References
 % =============================================================================
