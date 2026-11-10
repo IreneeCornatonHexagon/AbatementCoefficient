@@ -28,6 +28,8 @@
 \definecolor{myGreen}{rgb}{0.13, 0.55, 0.13}
 
 
+
+
 \geometry{margin=2cm}
 \hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
 \setlength{\emergencystretch}{2em}
@@ -586,14 +588,100 @@ With local resilience (t) and global resilience (T) defined as below:
 \end{equation*} 
 or 
 \begin{equation*} 
-\frac{1}{T}=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}     \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous in the structure)}
+\frac{1}{T}=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}     \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous throughout the structure)}
 \end{equation*} 
 
 Local resilience and global resilience are indicators of the inverse degree of plasticity present in a structure, at the local and global scales, respectively. Of particular interest is the fact that both \(t\) and \(T\) are determined solely from the results of a linear elastic analysis (point \textbf{E}). In other words, determining \(r_M\) requires only a linear elastic analysis together with knowledge of the material's plastic constitutive law.
 
-Knowing \(r_M\), which corresponds to the inverse of the slope of the EFU segment (see Figure \ref{fig:deviation}), and using the Ramberg--Osgood relation implicitly defines a system of two equations. Solving this system makes it possible to determine the position of point \textbf{SP} from the elastic solution represented by point \textbf{E}. The detailed derivation is provided in Appendix \ref{application_roche}.
+Knowing \(r_M\), which corresponds to the inverse of the slope of the EFU segment (see Figure \ref{fig:deviation}), and using the Ramberg--Osgood relation implicitly defines a system of two equations. Solving this system makes it possible to determine the position of point \textbf{SP} from the elastic solution represented by point \textbf{E}. The detailed calculations are provided in Appendix \ref{application_roche}.
 
-Moreover, the elastic follow-up factor \(r_M\) provides a means of quantifying the degree of elastic follow-up in a generalized piping system without explicitly considering spring stiffness. The higher the value of \(r_M\), the greater the degree of elastic follow-up present in the structure. The parametric study of the spring effect presented in Figure \ref{fig:parametric-EFU} is revisited in Appendix \ref{application_roche}, this time using \(r_M\) as the governing parameter. The results demonstrate that, for the simple case of a straight pipe with a variable cross-section, the objective outlined at the end of §\ref{sec:EFF} is indeed achieved.
+Moreover, the elastic follow-up factor \(r_M\) provides a means of quantifying the degree of elastic follow-up in a generalized piping system without explicitly considering spring stiffness. The higher the value of \(r_M\), the greater the degree of elastic follow-up present in the structure. The parametric study of the spring effect presented in Figure \ref{fig:parametric-EFU} is revisited in Appendix \ref{application_roche}, this time using \(r_M\) as the observing parameter. The results demonstrate that, for the simple case of a straight pipe with a variable cross-section, the objective outlined at the end of §\ref{sec:EFF} is indeed achieved.
+
+
+
+
+
+\begin{figure}[htbp]
+\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				axis lines=middle,
+				xlabel={$\varepsilon (\%)$},
+				ylabel={$\sigma (MPa)$},
+				xmin=0, xmax=1.09,
+				ymin=0, ymax=170,
+				%xtick={ 0.01},
+				%xticklabels={ $$},         
+				xtick align=outside,
+				%ytick={0.01},
+				%yticklabels={ $$},
+				legend style={
+					at={(0.98,0.98)},
+					anchor=north east,
+					font=\scriptsize,
+						   },
+			         width=10cm, height=8cm
+				]
+				
+				% Elastic Line (slope = 2 for simplicity, representing E)
+				\addplot[thick, blue, domain=0:0.1] {1550*x};
+				\addlegendentry{Elastic (code approach)}
+				
+				% Elastoplastic Curve (nonlinear, increasing)
+				\addplot[thick, black, smooth] coordinates {(0,0) (0.013,20) (0.026,40)(0.04,60) (0.068,80)(0.105,90) (0.184,100)(0.35,110)(0.682,120)(1,126)(1.083,127) };
+				\addlegendentry{Elastoplastic ($\sim$reality)}
+
+				%EFF curves
+				\addplot[thick, red, domain=0.081:0.5] {-447.761*x+162.269};
+				\addplot[thick, red, domain=0.081:1] {-95.545*x+133.739};
+				\addplot[thick, red, domain=0.081:1] {-1231.034*x+225.714};
+
+				\addlegendentry{Elastic follow-up (spring effect)}
+
+				% Primary
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:1,126)  ;
+
+				% Secondary
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:0.0813,0)  ;
+				
+				% Points
+				\addplot[only marks, mark=*, mark size=2pt] coordinates {((0.0813,126)(1,126)(0.0813,84.5)(0.148,96)(0.11,90.3)(0.283,106.7)}; 
+								
+				% Annotations
+				\node at (axis cs:0.11,130) {\textbf{E}};
+				\node at (axis cs:0.21,130) {$ ( \varepsilon_E,\sigma_E)$};
+
+				\node at (axis cs:0.083,77) {\textbf{S}};
+				\node at (axis cs:0.083,15) {\tiny \textcolor{myGreen}{$r_M=\infty$}};
+
+				\node at (axis cs:1,118) {\textbf{P}};
+				\node at (axis cs:0.7,126){\tiny $\mathcolor{myGreen}{r_M=0}$};
+
+				\node at (axis cs:0.12,83) {\textbf{B}};
+				\node at (axis cs:0.16,30) {\tiny \textcolor{myGreen}{$r_M=2$}};
+
+
+				\node at (axis cs:0.165,90) {\textbf{SP}};
+				\node at (axis cs:0.26,47) {\tiny \textcolor{myGreen}{$r_M=4$}};
+
+
+				\node at (axis cs:0.283,100) {\textbf{D}};
+				\node at (axis cs:0.55,80) {\tiny \textcolor{myGreen}{$r_M=16$}};
+
+			\end{axis}
+		\end{tikzpicture}
+\caption{Parametric analysis on the spring stiffness' effect}
+\label{fig:parametric-EFU2}
+\end{figure}
+
+
+
+
+
+
+
+
+
 
 \vspace{1cm}
 \textbf{Second approach:} \\
@@ -623,10 +711,16 @@ r_M = 0.867\left(\frac{T}{t}-1\right)
 =
 \frac{\iiint_V \sigma_0^* \varepsilon_0^{p*}\,dV}
 {\iiint_V \sigma_0^* \varepsilon_0^*\,dV}
-=
-\frac{\iiint_V \frac{1}{t}\sigma_0^{*2}\,dV}
-{\iiint_V \sigma_0^{*2}\,dV}
 \end{equation*}
+
+or
+
+\begin{equation*}
+\frac{1}{T} = \frac{\iiint_V \frac{1}{t}\sigma_0^{*2}\,dV}{\iiint_V \sigma_0^{*2}\,dV}    \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous throughout the structure)}
+\end{equation*}
+
+
+
 
 Once again, a relationship very similar to that obtained in the first approach is found for \(r_M\), differing only by the factor 0.867. However, the formulation is now generalized to arbitrary piping systems and accounts for multiaxial stress states, displacement-controlled loading, and thermal expansion effects.
 
@@ -1176,7 +1270,11 @@ Defining the local resilience t and global resilience T as below:
 \frac{1}{t}= \frac{ \varepsilon_0^p(x)}{ \varepsilon_0(x)}
 \end{equation*} 
 \begin{equation*} 
-\frac{1}{T}= \frac{ \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0^p(x) A(x) \, dx }{  \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0(x) A(x) \, dx }=\frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}     \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous in the structure)}
+\frac{1}{T}= \frac{ \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0^p(x) A(x) \, dx }{  \int_{x=0}^{x=L} \sigma_0(x) \varepsilon_0(x) A(x) \, dx }
+\end{equation*} 
+or
+\begin{equation*} 
+\frac{1}{T}= \frac{ \int_{x=0}^{x=L} \frac{1}{t} \sigma_0^2(x) A(x) \, dx}{\int_{x=0}^{x=L} \sigma_0^2(x) A(x) \, dx}     \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous throughout the structure)}
 \end{equation*} 
 
 
@@ -1294,7 +1392,11 @@ Defining the local resilience t and global resilience T as below:
 \frac{1}{t}= \frac{ \varepsilon_0^{p*}}{ \varepsilon_0^*}
 \end{equation*} 
 \begin{equation*} 
-\frac{1}{T}= \frac{ \iiint_V \sigma_0^* \varepsilon_0^{p*} \, dV }{ \iiint_V \sigma_0^* \varepsilon_0^* \, dV }=\frac{ \iiint_V \frac{1}{t} \sigma_0^{*2} \, dV }{ \iiint_V \sigma_0^{*2}  \, dV }    \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous in the structure)}
+\frac{1}{T}= \frac{ \iiint_V \sigma_0^* \varepsilon_0^{p*} \, dV }{ \iiint_V \sigma_0^* \varepsilon_0^* \, dV }
+\end{equation*} 
+or
+\begin{equation*} 
+\frac{1}{T}=\frac{ \iiint_V \frac{1}{t} \sigma_0^{*2} \, dV }{ \iiint_V \sigma_0^{*2}  \, dV }    \ \ \ \ \ \ \ \ \ \text{(if E is homogeneous throughout the structure)}
 \end{equation*} 
 
 
@@ -1476,6 +1578,65 @@ This appendix reproduces, for completeness, the mathematical derivation of the e
 \caption{Graphical construction of the elastic follow-up factor $r$ and local resilience $t$ from the elastic ($O$--$M$--$N$) and elasto-plastic ($O$--$\varepsilon$--$Q$) response curves at a given imposed strain: $t=OM/MN$ and the elastic-follow-up (``spring effect'') line through $(\varepsilon,\sigma)$ and $Q$ has slope $-\tan\theta = -1/(T/t-1)$.}
 \label{fig:roche-graphical}
 \end{figure}
+
+
+
+\begin{figure}[htbp]
+\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				axis lines=middle,
+				xlabel={$\varepsilon (strain)$},
+				ylabel={$\sigma (stress)$},
+				xmin=0, xmax=1.09,
+				ymin=0, ymax=170,
+				xtick={ 0.01},
+				xticklabels={ $$},         
+				xtick align=outside,
+				ytick={0.01},
+				yticklabels={ $$},
+				legend style={
+					at={(0.98,0.98)},
+					anchor=north east,
+					font=\scriptsize,
+						   },
+			         width=10cm, height=8cm
+				]
+				
+				% Elastic Line 
+				\addplot[thick, blue, domain=0:0.1] {1550*x};
+				
+%				% Elastoplastic Curve (nonlinear, increasing)
+				\addplot[thick, black, smooth] coordinates {(0,0) (0.013,20) (0.026,40)(0.04,60) (0.068,80)(0.105,90) (0.184,100)(0.35,110)(0.682,120)(1,126)(1.083,127) };
+%				
+				% Primary
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:1,126)  ;
+%
+				% Secondary
+				\draw[dashed] (axis cs:0.0813,126) -- (axis cs:0.0813,84.5)  ;
+%				
+				% Points
+				\addplot[only marks, mark=*, mark size=2pt] coordinates {((0.0813,126)(1,126)(0.0813,84.5)}; 
+%								
+				% Annotations
+				\node at (axis cs:0.11,130) {$\textbf{E}$};
+
+
+				\node at (axis cs:0.11,84.5) {$\textbf{S}$};
+
+
+
+				\node at (axis cs:0.9,118) {$\textbf{P}$};
+
+
+			\end{axis}
+		\end{tikzpicture}
+\caption{Stress categorization: primary and secondary stresses}
+\label{fig:P_S}
+\end{figure}
+
+
+\newpage
 
 
 
@@ -1822,43 +1983,6 @@ For the benchmark material ($n_0=0.1125$), the same closed-form development give
 \end{figure}
 
 The close agreement between the closed-form analytical bound $r_{\max}=2.63$ and the production-code result ($r_M=2.627$) constitutes an independent, purely analytical validation of the code's implementation of the RCC-MRx elastic follow-up factor and abatement coefficient, on a case entirely decoupled from the elbow ovalisation and shell-modelling effects discussed above.
-
-
-\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A simple example of Roche method}
-
-\textcolor{red}{Probably to remove this appendix, since we already have Appendix C}
-
-\textcolor{red}{to redo these contents}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.55\textwidth]{figures/roche_example.png}
-\caption{Numerical data from Roland Roche's original worked example (straight bar of total length $L=\SI{2.54}{m}$, split into a flexible segment $L_{\mathrm{weak}}=\SI{0.813}{m}$ and a stiff segment $L_{\mathrm{stiff}}=\SI{1.727}{m}$, with $E=\SI{192000}{MPa}$, Ramberg--Osgood parameters $K=\SI{793}{MPa}$, $m=1/2.915$), illustrating the calculation of the elastic follow-up factor on a simple two-segment bar.}
-\label{fig:roche-example}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.42\textwidth]{figures/roche_example_geometry.png}
-\caption{Geometry of Roland Roche's original two-segment bar example: a stepped shaft with a flexible segment of diameter \SI{12}{mm} and length \SI{32}{in} and a stiffer segment of diameter \SI{16}{mm}, clamped at both ends, with the total length (\SI{100}{in}) measured from the flexible end.}
-\label{fig:roche-example-geometry}
-\end{figure}
-
-
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.62\textwidth]{figures/roche_original_calculation_sheet.png}
-\caption{Numerical worksheet from the source presentation reproducing Roche's two-section example (geometry in Figure~\ref{fig:roche-example-geometry}): the elastic reference stresses ($\Delta\sigma_{0,\mathrm{weak}}=\SI{440}{MPa}$, $\Delta\sigma_{0,\mathrm{strong}}=\SI{247}{MPa}$) give local resiliences $t_{\mathrm{weak}}=1.276$ and $t_{\mathrm{strong}}=3.855$, combined into a global resilience $T=2.006$ and local elastic follow-up factors $r_{\mathrm{weak}}=T/t_{\mathrm{weak}}-1=0.572$ and $r_{\mathrm{strong}}=\max(0,T/t_{\mathrm{strong}}-1)=0$; the lower numerical-calculation block solves the same problem with Mathcad solve blocks, confirming $\varphi=0.769$ and $\Delta\sigma=\SI{338.173}{MPa}$ by an independent route.}
-\label{fig:roche-calculation-sheet}
-\end{figure}
 
 
 
