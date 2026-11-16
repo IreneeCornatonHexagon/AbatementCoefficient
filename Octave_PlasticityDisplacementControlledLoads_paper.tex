@@ -64,9 +64,9 @@
 \maketitle
 
 \begin{abstract}
-In high-temperature nuclear piping, thermal expansion can induce displacement-controlled moments and local plastic deformation. The response of a plastifying region depends on the flexibility of the surrounding system, an interaction known as elastic follow-up. This paper examines how the RCC-MRx design code accounts for this behaviour in the negligible-creep regime through the monotonic elastic follow-up factor $r_M$ and the abatement coefficient $g$ applied to displacement-controlled moments in type-P damage assessment. The underlying physical concepts and the role of the monotonic material law are first discussed.
+Piping is commonly assessed using linear-elastic calculations. Because these calculations do not directly describe the local redistribution of stress and strain after yielding, their results require a posteriori interpretation, including stress classification and consideration of elastic follow-up. This effect can be important at elevated temperature: when inelastic deformation is concentrated in a limited region while most of the structure remains elastic, the surrounding structure acts as a spring and can drive substantial local deformation, even when the applied loading would otherwise be considered self-limiting. This paper examines the physical meaning of elastic follow-up and its treatment in the RCC-MRx rules, focusing on the monotonic elastic follow-up factor $r_M$ and the abatement coefficient $g$ applied to displacement-controlled moments in type-P assessment against immediate excessive deformation and plastic instability.
 
-A stainless-steel piping configuration containing an elbow is then analysed under restrained thermal expansion. A beam-based piping model with a bend flexibility factor is compared with a shell finite-element model, first in the elastic regime and then with an elasto-plastic material response. The elastic anchor moments obtained with the two models are close when the bend flexibility factor is included. For the investigated case, the reported RCC-MRx coefficient is approximately $0.323$, compared with a reaction-moment-based effective factor of $0.436$ from the elasto-plastic model. These quantities arise from different assessment procedures; their comparison requires careful interpretation and does not by itself establish the conservatism of the code rule. The study considers monotonic loading without pressure or creep.
+The code methodology is compared with elastic and elasto-plastic analyses of a stainless-steel piping configuration with an elbow subjected to restrained thermal expansion. A beam-based piping model, using a bend flexibility factor, is first compared with a shell finite-element model; the elastic anchor moments agree closely when the flexibility factor is included. For the investigated case, the RCC-MRx coefficient is approximately $0.323$, while a reaction-moment-based effective factor from the elasto-plastic model is approximately $0.436$. These values are obtained by different procedures and their comparison alone does not establish whether the code rule is conservative. The study is limited to monotonic loading without pressure or creep.
 \end{abstract}
 
 \vspace{2\baselineskip}
@@ -309,7 +309,7 @@ In order to illustrate elastic follow-up, Roland L. Roche \cite{Roche1987} propo
 
 The applied forces and imposed displacements for the three beams were selected such that, under a purely elastic analysis, all three beams exhibit the same stress and strain state \textbf{E}: $ \varepsilon_E=0.081\%$ and $\sigma_E = 126\,\mathrm{MPa}$. \\
 
-When the Ramberg--Osgood plasticity law is introduced into the common section, beam 1 (point \textbf{P}) exhibits a purely primary stress response, as expected: $ \varepsilon_P=1\% >  \varepsilon_E $ and $\sigma_P = 126\,\mathrm{MPa}=\sigma_E$. Similarly, beam 2 (pont \textbf{S}) exhibits a purely secondary stress response: $ \varepsilon_S=0.081\% =  \varepsilon_E $ and $\sigma_S = 82.3\,\mathrm{MPa} < \sigma_E$. This distinction between primary and secondary load responses was previously illustrated in figure \ref{fig:P_S} and is reproduced here in figure \ref{fig:deviation}. However, beam 3 (point \textbf{SP}), \emph{although subjected to a secondary load}, exhibits an intermediate stress state between the purely secondary and purely primary configurations. Point SP lies between points S and P on the elastoplastic stress-strain curve: $ \varepsilon_S<  \left( \varepsilon_{PS}=0.16\% \right) < \varepsilon_P $ and  $\sigma_S < \left( \sigma_{SP}= 95.85\,\mathrm{MPa} \right) < \sigma_P $. \\
+When the Ramberg--Osgood plasticity law described in Section~\ref{sec:RO} is introduced into the common section, beam 1 (point \textbf{P}) exhibits a purely primary stress response, as expected: $ \varepsilon_P=1\% >  \varepsilon_E $ and $\sigma_P = 126\,\mathrm{MPa}=\sigma_E$. Similarly, beam 2 (pont \textbf{S}) exhibits a purely secondary stress response: $ \varepsilon_S=0.081\% =  \varepsilon_E $ and $\sigma_S = 82.3\,\mathrm{MPa} < \sigma_E$. This distinction between primary and secondary load responses was previously illustrated in Figure~\ref{fig:P_S} and is reproduced here in Figure~\ref{fig:deviation}. However, beam 3 (point \textbf{SP}), \emph{although subjected to a secondary load}, exhibits an intermediate stress state between the purely secondary and purely primary configurations. Point SP lies between points S and P on the elasto-plastic stress--strain curve: $ \varepsilon_S<  \left( \varepsilon_{PS}=0.16\% \right) < \varepsilon_P $ and  $\sigma_S < \left( \sigma_{SP}= 95.85\,\mathrm{MPa} \right) < \sigma_P $. \\
 
 \begin{figure}[htbp]
 \centering
@@ -468,6 +468,7 @@ The three-beam example (Figures~\ref{fig:deviation} and \ref{fig:parametric-EFU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Monotonic material behaviour}
+\label{sec:RO}
 
 To model the elasto-plastic material response, the Ramberg--Osgood law is used in its general textbook form, decomposing the total strain into an elastic and a power-law plastic part,
 \begin{equation}
@@ -485,6 +486,8 @@ where $R_{p0.2,\mathrm{mean}}$ is the mean 0.2\% proof stress. With strains expr
 \label{eq:RO}
 \end{equation}
 The factor $0.01$ converts the plastic-strain term from percent to fractional strain. Accordingly, $K_R$ in Eq.~\eqref{eq:KofT} is not identical to $K$ in Eq.~\eqref{eq:RO-generic}; the two forms coincide for $n=n_0$ when $K=K_R/0.01^{n_0}$. The curve is uniaxial; its application to the reference stress in the code method is described below.
+
+\clearpage
 \subsection{Elastic follow-up factor $r_M$ in RCC-MRx}
 \label{sec:rccmrx}
 % =============================================================================
@@ -544,7 +547,7 @@ Figure~\ref{fig:roche-graphical} illustrates this construction for a uniaxial re
 \node[anchor=west] at (7.0,0.15) {$\displaystyle r_M=-\frac{1}{\tan\theta}=-\frac{E}{d\sigma/d\varepsilon}=\frac{T}{t}-1$};
 \end{tikzpicture}%
 }
-\caption{Schematic elastic-follow-up construction, adapted from the technical note accompanying the presentation \cite{RochePipeStressNote}. The red line connects the elastic and elasto-plastic states and extends to $Q$; its physical stress--strain slope is $-E/r_M$. The angle $\theta$ is measured clockwise, with axis scales chosen so that $\sigma_0$ and $\varepsilon_0$ have equal displayed lengths.}
+\caption{Schematic elastic-follow-up construction, adapted from the technical note \cite{RochePipeStressNote}. The red line connects the elastic and elasto-plastic states and extends to $Q$; its physical stress--strain slope is $-E/r_M$. The angle $\theta$ is measured clockwise, with axis scales chosen so that $\sigma_0$ and $\varepsilon_0$ have equal displayed lengths.}
 \label{fig:roche-graphical}
 \end{figure}
 
@@ -567,7 +570,7 @@ Up to this point, we have reviewed how standard piping codes address complex str
 This observation raises an important question, particularly in light of the results presented in Figure \ref{fig:deviation}. Due to the presence of elastic follow-up, loads traditionally classified as secondary exhibit a deviation from the expected secondary-stress behavior and partially resemble the behavior of primary loads. This observation highlights the need to account for the contribution of secondary loads when assessing the acceptability of primary stresses.
 
 
-In the RCC-MRx RB~3651.1131 type-P \(s_m+s_b\) assessment, the abatement coefficient \(g\) is applied to the displacement-controlled moment \(m\). Its graphical interpretation is shown in Figure~\ref{fig:rccmrx-official}. RB~3651.1132 defines the coefficient as
+The RCC-MRx RB~3651.1131 type-P \(s_m+s_b\) assessment is intended to prevent excessive deformation and plastic instability. It checks the combined stress against the relatively low allowable \(S^*\), rather than using a shakedown limit that may permit stresses approaching twice the yield strength. The Code nevertheless credits the reduction in displacement-controlled moment that plasticity can produce: the elastic-analysis moment \(m\) is multiplied by \(g\), which accounts for plasticity and elastic follow-up, while the load-controlled moment \(M\) remains unattenuated. Thus, the bending term is \(M+g\,m\) before the combined stress is checked against \(S^*\). The graphical interpretation of \(g\) is shown in Figure~\ref{fig:rccmrx-official}. RB~3651.1132 defines the coefficient as
 \begin{equation} 
 g \;=\; \frac{(\sigma-\sigma_P)(1+r_M)} {E\left[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)\right] + (\sigma-\sigma_P)(1+r_M)} . 
 \label{eq:gfull}
@@ -582,7 +585,25 @@ The coefficient \(0.87\) is consistent with the von Mises equivalent stress for 
 \end{equation}
 This idealised stress state explains the numerical factor but does not establish its historical derivation in the code; other boundary conditions or significant radial stresses can alter the equivalent stress.
 
-For this calculation, RB~3651.1132 specifies the maximum monotonic elastic follow-up factor of the piping line. An earlier interpretation of $g$ is retained for review in Appendix~\ref{app:g-interpretation-draft}.
+For this calculation, RB~3651.1132 specifies the maximum monotonic elastic follow-up factor of the piping line.
+
+\paragraph{Conditional mechanical interpretation.}
+The following manipulation helps interpret Eq.~\eqref{eq:gfull}; it is not an independent derivation of the Code prescription. Consider a uniaxial response on the same monotonic material curve, and denote by $\sigma_{\mathrm{el}}$ the elastic stress corresponding to the elasto-plastic state $(\sigma,\varepsilon)$. With $\varepsilon=\sigma/E+\varepsilon_{M,p}(\sigma)$ and $\varepsilon_{\mathrm{el}}=\sigma_{\mathrm{el}}/E$, the definition of the local elastic follow-up factor in Eq.~\eqref{eq:rM} gives
+\begin{equation*}
+E\,\varepsilon_{M,p}(\sigma)=(1+r_M)(\sigma_{\mathrm{el}}-\sigma).
+\end{equation*}
+Substitution into Eq.~\eqref{eq:gfull} then yields
+\begin{equation*}
+g=
+\frac{\sigma-\sigma_P}
+{\sigma_{\mathrm{el}}-\sigma_P-
+\dfrac{E\,\varepsilon_{M,p}(\sigma_P)}{1+r_M}}.
+\end{equation*}
+If $\sigma>\sigma_P$, $\varepsilon_{M,p}(\sigma_P)\geq0$, and the denominator is positive, this implies
+\begin{equation*}
+g\geq\frac{\sigma-\sigma_P}{\sigma_{\mathrm{el}}-\sigma_P}.
+\end{equation*}
+In the pressure-free case, where $\sigma_P=0$ and $\varepsilon_{M,p}(0)=0$, the relation reduces to $g=\sigma/\sigma_{\mathrm{el}}$. This scalar result gives a mechanical interpretation of the abatement factor under the stated assumptions; it does not by itself prove that the same ratio maps directly onto a general multiaxial piping moment distribution. RCC-MRx prescribes the maximum line value of $r_M$ for calculating $g$.
 
 The code evaluates \(g\) at a prescribed stress level rather than requiring an elastoplastic analysis. RB~3651.1132 specifies:
 \begin{equation*} 
@@ -663,15 +684,12 @@ The nomenclature provides a quick-reference summary of the notation used through
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Case study: elastic and elasto-plastic piping analysis}
 % =============================================================================
-\textcolor{red}{Some introduction here} \\
-\textcolor{red}{says we review the Roland Roche approach by a FEA elastoplastic large strain model} \\
-\textcolor{red}{Explain that the same model as the elastic benchmark is used here, with non-linear material lawl} \\
+This case study considers a simple piping configuration consisting of two straight pipe legs, anchored at both ends and connected by an elbow, under restrained thermal expansion only. The analysis is deliberately staged to separate structural-model calibration from material plasticity. First, a linear-elastic benchmark compares a one-dimensional beam model with a three-dimensional shell finite-element model discretised using four-node bilinear thick-shell elements (MSC Marc Element 75); the elbow flexibility is calibrated so that the two models provide a consistent elastic reference. In the stress--strain schematic of Figure~\ref{fig:P_S}, this elastic calculation corresponds to state E. Plasticity is then introduced in the shell model while retaining the benchmark geometry, boundary conditions and thermal loading, and replacing the linear-elastic constitutive law with a nonlinear material law. This elasto-plastic calculation is used to assess the response of the same piping configuration, not to reproduce Roland Roche's method.
 
 \subsection{Elastic analysis}
+\label{sec:elastic-analysis}
 
-\textcolor{red}{Maybe say that we are referring to the anlaysis of point E in Figure 2} \\
-
-The objective of the benchmark presented below is to demonstrate the consistency between a Timoshenko beam model (Figure \ref{fig:PEPS}) and a 3D shell FEA model (Figure \ref{fig:Marc}), for the analysis of a simple stainless-steel piping structure.
+The objective of the benchmark presented below is to demonstrate the consistency between a Timoshenko beam model (Figure \ref{fig:PEPS}) and an MSC Marc shell model (Figure \ref{fig:Marc}) for the analysis of a simple stainless-steel piping structure.
 
  \begin{figure}[htbp] 
 \centering 
@@ -692,13 +710,20 @@ The objective of the benchmark presented below is to demonstrate the consistency
 \label{fig:geometry_fea} 
 \end{figure}
 
-The configuration consists of two straight pipe segments (10-20 and 30-40) connected by an elbow (20-30). The structure is made of A3.3S material (RCC-MRx Ed. 2022), with an outer diameter of 219.07 mm, a wall thickness of 3.76 mm, a straight-pipe length of 2000 mm for each segment, and an elbow radius of 500 mm. The straight-pipe ends at nodes 10 and 40 are fully anchored. The piping is uniformly heated from an ambient temperature of 20°C to an in-service temperature of 550°C. Only thermal expansion is considered in this analysis, and the material behavior is assumed to be linear elastic. \\
+The configuration consists of two straight pipe segments (10-20 and 30-40) connected by an elbow (20-30). The structure is classified in RCC-MRx as material group A3.3S (2022 Edition), the group for solution-annealed austenitic stainless steels in the 316L family, including X2CrNiMo17-12-2, X2CrNiMo17-12-3 and X2CrNiMo18-14-3 (Section III, Tome 1, Subsection Z, Appendix A3.3S). The nonlinear constitutive curve used below is specifically parameterized from 316L(N) tensile data at \SI{550}{\celsius}; thus A3.3S is the code property-group designation, while 316L(N) identifies the material dataset used in the analysis. The pipe has an outer diameter of 219.07 mm, a wall thickness of 3.76 mm, a straight-pipe length of 2000 mm for each segment, and an elbow radius of 500 mm. The straight-pipe ends at nodes 10 and 40 are fully anchored. The piping is uniformly heated from an ambient temperature of 20°C to an in-service temperature of 550°C. Only thermal expansion is considered in this analysis, and the material behavior is assumed to be linear elastic. At \SI{550}{\celsius}, the elastic material properties are $E=\SI{155}{GPa}$ and $\nu=0.3$; the thermal expansion coefficient used is $\alpha=\SI{18.5e-6}{\per\celsius}$. \\
 
 Two independent numerical models are used and cross-checked:
 \begin{itemize}
     \item \textbf{Aspect Nuclear Pipe Stress} (``NS'' solver, PEPS~8.0), a Timoshenko-beam FEA piping model in which the elbow flexibility is represented through the analytical flexibility factor $k$ of Eq.~\eqref{eq:flexfactor};
-    \item \textbf{MSC~Marc}, a shell finite-element model using bilinear thick-shell elements (four-node, Marc Element~75), in which elbow ovalisation is captured directly by the shell discretisation rather than through an analytical flexibility factor. This element uses bilinear interpolation of coordinates, displacements and rotations, with membrane strains from the displacement field and curvatures from the rotation field; transverse shear strains are evaluated at the mid-edges and interpolated to the Gauss integration points, giving an efficient element that remains accurate in the thin-shell limit while avoiding tying constraints at plate intersections. The two ends of the model are connected to the FE mesh through RBE2 rigid-body elements, as shown in Figure~\ref{fig:rbe2-detail}. RBE2 links can locally generate spurious over-stiffening and stress concentrations; this is considered acceptable here because stresses are not examined at the anchor points themselves (only the elbow region is of interest for stress results), so that the simpler RBE2 connection is preferred over an RBE3 connection.
+    \item \textbf{MSC~Marc}, a shell finite-element model using bilinear thick-shell elements (four-node, Marc Element~75), in which elbow ovalisation is captured directly by the shell discretisation rather than through an analytical flexibility factor. This element uses bilinear interpolation of coordinates, displacements and rotations, with membrane strains from the displacement field and curvatures from the rotation field; transverse shear strains are evaluated at the mid-edges and interpolated to the Gauss integration points, giving an efficient element that remains accurate in the thin-shell limit while avoiding tying constraints at plate intersections. The two ends of the model are connected to the FE mesh through RBE2 rigid-body elements, as shown in Figure~\ref{fig:shell-mesh-views}. RBE2 links can locally generate spurious over-stiffening and stress concentrations; this is considered acceptable here because stresses are not examined at the anchor points themselves (only the elbow region is of interest for stress results), so that the simpler RBE2 connection is preferred over an RBE3 connection.
 \end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figures/shell_mesh_verification_views.png}
+\caption{Additional shell-model views for the 80-elements-per-circumference discretisation: overall and zoomed renderings of the mesh around the elbow, together with the boundary-condition and constraint markers.}
+\label{fig:shell-mesh-views}
+\end{figure}
 
 % =============================================================================
 
@@ -708,27 +733,46 @@ Table~\ref{tab:elastic-calib} reports the anchor reaction moment obtained with t
 
 \begin{table}[htbp]
 \centering
-\caption{Anchor reaction moment: beam model (with/without flexibility factor) versus shell FE model at increasing mesh density.}
+\caption{Anchor reaction moment for the beam and shell models.}
 \label{tab:elastic-calib}
-\begin{tabular}{@{}lS@{}lS@{}lS@{}}
+\begin{tabular}{@{}lS[table-format=5.0]@{}}
 \toprule
-\textbf{Model} & \textbf{Mz [\si{\newton\metre}]}  & \textbf{FX [\si{\newton}]}   & \textbf{FY [\si{\newton}]}       \\
+\textbf{Model} & {\textbf{$M_z$ [\si{\newton\metre}]}} \\
 \midrule
-PEPS beam model, without $k$-factor & 56702 & xxx & yyy \\
-PEPS beam model, with $k$-factor & 39632  & xxx & yyy\\
-%MSC~Marc shell, 10 elements/circumference & 38260 \\
-%MSC~Marc shell, 20 elements/circumference & 39650 \\
-%MSC~Marc shell, 40 elements/circumference & 40180 \\
-Marc shell, 80 elements/circumference & 40290 & xxx & yyy \\
+PEPS beam model, without $k$-factor & 56702 \\
+PEPS beam model, with $k$-factor & 39632 \\
+MSC~Marc shell, 10 elements/circumference & 38260 \\
+MSC~Marc shell, 20 elements/circumference & 39650 \\
+MSC~Marc shell, 40 elements/circumference & 40180 \\
+MSC~Marc shell, 80 elements/circumference & 40290 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The presentation also documents the same run carried through to its final increment on the finer shell mesh, reproduced in Figure~\ref{fig:elastic-model-final}: the maximum displacement stabilises at \SI{35.25}{mm} (node 8121), essentially unchanged from the coarser/earlier-increment view of Figure~\ref{fig:elastic-model}, confirming that the elastic solution is converged with respect to load increment.
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}{0.46\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/elastic_model_displacement.png}
+\caption{Earlier shell result: maximum displacement \SI{35.17}{mm} at node 2142.}
+\label{fig:elastic-model}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.46\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/80elementsPerCircumference.png}
+\caption{80 elements per circumference: maximum displacement \SI{35.25}{mm} at node 8121.}
+\label{fig:elastic-model-final}
+\end{subfigure}
+\caption{Maximum-displacement contours from the elastic shell benchmark.}
+\label{fig:elastic-displacement-comparison}
+\end{figure}
 
-The beam model without the elbow $k$-factor overestimates the system stiffness by about \SI{40}{\percent} relative to the converged shell solution, confirming the essential role of elbow ovalisation in the overall flexibility of the system. Once the analytical flexibility factor of Eq.~\eqref{eq:flexfactor} is introduced ($k=10.1717$), the beam-model reaction moment (\SI{39632}{\newton\metre}) matches the shell result at a moderate mesh density (20 elements per circumference, \SI{39650}{\newton\metre}) extremely well, confirming both the validity of the analytical flexibility factor and the adequacy of the beam-element representation for this geometry. Figure~\ref{fig:elastic-model} shows the corresponding shell-model stress field and displacement pattern. As the shell mesh is further refined to 40 and 80 elements per circumference, the reaction moment increases moderately further (to \SI{40180}{\newton\metre} and \SI{40290}{\newton\metre}, respectively), indicating a degree of mesh sensitivity in the shell model that is revisited in Section~\ref{sec:discussion}. Large-deformation effects (ovalisation) are included in the shell analysis.
+The final-increment result on the finer shell mesh is shown in Figure~\ref{fig:elastic-model-final}: the maximum displacement stabilises at \SI{35.25}{mm} (node 8121), essentially unchanged from the coarser/earlier-increment view of Figure~\ref{fig:elastic-model}, confirming that the elastic solution is converged with respect to load increment.
 
-The presentation also compares the global deformed shapes produced by the two models. The beam-based NS model predicts a maximum thermal-expansion displacement of \SI{33.649}{mm} at point Z010, reported in Figure~\ref{fig:ns-deformed}, which is consistent with the shell-model maximum displacement reported in Figure~\ref{fig:elastic-model}; this provides a second, kinematic confirmation that the calibrated beam model reproduces the shell-model flexibility with acceptable accuracy for this benchmark.
+The beam model without the elbow $k$-factor overestimates the system stiffness by about \SI{40}{\percent} relative to the converged shell solution, confirming the essential role of elbow ovalisation in the overall flexibility of the system. Once the analytical flexibility factor of Eq.~\eqref{eq:flexfactor} is introduced ($k=10.1717$), the beam-model reaction moment (\SI{39632}{\newton\metre}) matches the shell result at a moderate mesh density (20 elements per circumference, \SI{39650}{\newton\metre}) extremely well, confirming both the validity of the analytical flexibility factor and the adequacy of the beam-element representation for this geometry. Figure~\ref{fig:elastic-model} shows the corresponding shell-model displacement pattern. As the shell mesh is refined from 20 to 40 and 80 elements per circumference, the reaction moment increases from \SI{39650}{\newton\metre} to \SI{40180}{\newton\metre} and \SI{40290}{\newton\metre}; the diminishing increments indicate convergence of the shell-model reaction moment with mesh refinement. Large-deformation effects (ovalisation) are included in the shell analysis.
+
+The global deformed shapes provide a second, kinematic comparison of the two models. The beam-based NS model predicts a maximum thermal-expansion displacement of \SI{33.649}{mm} at point Z010 (Figure~\ref{fig:ns-deformed}), consistent with the shell-model displacement in Figure~\ref{fig:elastic-model}; this confirms that the calibrated beam model reproduces the shell-model flexibility with acceptable accuracy for this benchmark.
 
 \begin{figure}[htbp]
 \centering
@@ -736,11 +780,6 @@ The presentation also compares the global deformed shapes produced by the two mo
 \caption{Deformed shape from the Aspect Nuclear Pipe Stress elastic benchmark (load case 102, thermal expansion): the beam-model maximum displacement is \SI{33.649}{mm} at point Z010, close to the shell-model prediction after calibration of the elbow flexibility.}
 \label{fig:ns-deformed}
 \end{figure}
-
-\textcolor{red}{Show more results here} \\
-\textcolor{red}{Conclusion of the elastic benchmark here} \\
-\textcolor{red}{Show that we are looking for point E solution, with a much less time-consuming approach (PEPS 8.0)} \\
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -750,11 +789,8 @@ The presentation also compares the global deformed shapes produced by the two mo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Elasto-plastic analysis}
 
-For 316L(N) stainless steel, $n_0 = 0.1125$ ($1/n_0 = 8.89$) and $C_0 = 1.198$; at the benchmark temperature of \SI{550}{\celsius}, $R_{p0.2} \approx \SI{106}{MPa}$, so that the stress scale $C_0R_{p0.2}$ used in the actual benchmark computations of Eq.~\eqref{eq:RO} is about \SI{127}{MPa}. The temperature dependence therefore enters through $R_{p0.2}(T)$ in Eq.~\eqref{eq:KofT}, whereas $C_0$ and $n_0$ retain the same normalised curve shape at all temperatures --- i.e., no change of hardening \emph{shape} with temperature is assumed. A separate sensitivity study reported in the presentation, evaluated at \SI{500}{\celsius} (where $R_{p0.2}\approx\SI{110}{MPa}$, so that the reference parameter set gives $C_0R_{p0.2}\approx\SI{131.8}{MPa}$), compares this reference curve with an alternative fit ($C_0=1.233$, $n_0=0.130$, i.e. $1/n_0=7.69$, $C_0R_{p0.2}\approx\SI{135.6}{MPa}$) calibrated on the same \SI{500}{\celsius} tensile data; the resulting stress--strain curve is only marginally softer than the reference one over the whole strain range plotted, confirming that the choice of hardening parameters is not the dominant source of discrepancy discussed in Section~\ref{sec:discussion}.
+Section~\ref{sec:RO} introduces the Ramberg--Osgood law used here: $n_0$ controls the power-law exponent $1/n_0$ and hence the normalised curve shape, while $C_0$ scales the stress through $K_R=C_0R_{p0.2,\mathrm{mean}}$. For 316L(N), the reference values are $n_0=0.1125$ ($1/n_0=8.89$) and $C_0=1.198$. At the benchmark temperature of \SI{550}{\celsius}, $R_{p0.2}\approx\SI{106}{MPa}$, giving a stress scale $C_0R_{p0.2}\approx\SI{127}{MPa}$ in Eq.~\eqref{eq:RO}. The temperature dependence enters through $R_{p0.2}(T)$ in Eq.~\eqref{eq:KofT}; $n_0$ and $C_0$ are held fixed, so no change in normalised hardening-curve shape with temperature is assumed. A separate sensitivity study at \SI{500}{\celsius} (where $R_{p0.2}\approx\SI{110}{MPa}$, so that the reference parameter set gives $C_0R_{p0.2}\approx\SI{131.8}{MPa}$) compares this reference curve with an alternative fit ($C_0=1.233$, $n_0=0.130$, i.e. $1/n_0=7.69$, $C_0R_{p0.2}\approx\SI{135.6}{MPa}$) calibrated on tensile data at the same temperature; the resulting stress--strain curve is only marginally softer than the reference one over the whole strain range plotted, confirming that the choice of hardening parameters is not the dominant source of discrepancy discussed in Section~\ref{sec:discussion}.
 
-
-
-\textcolor{red}{Use the same model as the elastic benchmark + plasticity}
 
 
 The elasto-plastic shell analysis uses the von Mises yield criterion with isotropic hardening, and the Ramberg--Osgood law of Eq.~\eqref{eq:RO} calibrated to 316L(N) at \SI{550}{\celsius} (RCC-MRx RB~A3.3S.451), with yielding onset defined at zero offset stress consistent with the code's convention. The material is defined in MSC~Marc by $E=\SI{155000}{MPa}$, $\nu=0.3$, and the von Mises yield condition $\sigma_{\mathrm{VM}} < \sigma_Y$ with
@@ -766,7 +802,7 @@ $s_{ij}$ the deviatoric stress. Hardening is tracked through the equivalent plas
 \varepsilon_{p,\mathrm{eq}} \;:=\; \sqrt{\tfrac{2}{3}\,\varepsilon^{p}_{ij}\varepsilon^{p}_{ij}} \, ,
 \label{eq:eps-p-eq}
 \end{equation}
-with $\varepsilon^{p}_{ij}$ the plastic strain tensor, consistent with the standard von Mises formulation. Isotropic hardening is imposed as a tabulated function $\sigma_Y(\varepsilon_{p,\mathrm{eq}}) := F(V1)$, with $V1$ the independent (equivalent plastic strain) variable digitised from the Ramberg--Osgood law of Eq.~\eqref{eq:RO} at zero offset stress: the presentation's \emph{plas\_new} table samples this curve over 34 points, $V1\in[0,1.002]$, $F\in[0.6,213.2]\,\mathrm{MPa}$ (dimensionless scale factor $\times 100$), reproduced in Figure~\ref{fig:hardening-plas-new}.
+with $\varepsilon^{p}_{ij}$ the plastic strain tensor, consistent with the standard von Mises formulation. Isotropic hardening is imposed as a tabulated function $\sigma_Y(\varepsilon_{p,\mathrm{eq}}) := F(V1)$, with $V1$ the independent (equivalent plastic strain) variable digitised from the Ramberg--Osgood law of Eq.~\eqref{eq:RO} at zero offset stress. The \emph{plas\_new} table samples this curve over 34 points, $V1\in[0,1.002]$, $F\in[0.6,213.2]\,\mathrm{MPa}$ (dimensionless scale factor $\times 100$), as shown in Figure~\ref{fig:hardening-plas-new}.
 
 \begin{figure}[htbp]
 \centering
@@ -775,16 +811,9 @@ with $\varepsilon^{p}_{ij}$ the plastic strain tensor, consistent with the stand
 \label{fig:hardening-plas-new}
 \end{figure}
 
-The shell mesh used for the elasto-plastic run (80 elements around the circumference) was checked beforehand for consistency with the elastic reference solution of Section~\ref{sec:elastic-analysis}. Figure~\ref{fig:shell-mesh-views} shows the mesh and constraint markers used for the non-linear calculation.
+For the elasto-plastic analysis, the 80-elements-per-circumference shell mesh shown in Figure~\ref{fig:shell-mesh-views} was retained and checked against the elastic reference solution of Section~\ref{sec:elastic-analysis} before the nonlinear calculation.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.82\textwidth]{figures/shell_mesh_verification_views.png}
-\caption{Additional shell-model views extracted from the presentation for the 80-elements-per-circumference discretisation used in the elasto-plastic benchmark: overall and zoomed renderings of the mesh density retained around the elbow, together with the boundary-condition/constraint markers checked before running the non-linear calculation.}
-\label{fig:shell-mesh-views}
-\end{figure}
-
-The source presentation makes this consistency check explicit by reading the retained critical-point values back onto the FE hardening law: the final shell result combines $\sigma_{\mathrm{VM}}=\SI{86.5}{MPa}$ with an equivalent plastic strain of about $\varepsilon_{p,\mathrm{eq}}=\SI{0.05}{\percent}$ (Eq.~\eqref{eq:eps-p-eq}), and the corresponding point lies on the imposed work-hardening curve $\sigma_Y(\varepsilon_{p,\mathrm{eq}})$ used in the Marc material definition. Figure~\ref{fig:work-hardening-zoom} zooms into the small-strain region of this same curve (equivalent plastic strain up to \SI{0.12}{\percent}) and marks this exact point, directly confirming graphically that the FE critical-section result is consistent with the imposed hardening law.
+As a consistency check, the final shell result, $\sigma_{\mathrm{VM}}=\SI{86.5}{MPa}$ and $\varepsilon_{p,\mathrm{eq}}\approx\SI{0.05}{\percent}$ (Eq.~\eqref{eq:eps-p-eq}), is compared with the imposed work-hardening curve $\sigma_Y(\varepsilon_{p,\mathrm{eq}})$ used in the Marc material definition. Figure~\ref{fig:work-hardening-zoom} shows this point in the small-strain region (up to \SI{0.12}{\percent} equivalent plastic strain), confirming its consistency with the specified hardening law.
 
 \begin{figure}[htbp]
 \centering
@@ -818,7 +847,9 @@ The von Mises stress distribution over the elbow shows a clearly identifiable ``
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 \subsection{Observations and discussions}
+\label{sec:discussion}
 
 The RCC-MRx elastic route (RB~3651.1131) reduces the secondary (displacement-dependent) moment $m$ by the coefficient $g$ and combines the abated stress with the primary stress in the $\sigma_m+\sigma_b$ (P-type) damage check; equivalently, $g$ can be interpreted either as an abatement applied to the stresses (from the elastic/purely-secondary value down to the effective value) or as an abatement applied to the moments (from the elastic moment down to the effective moment). The natural benchmark question is then: \emph{how does the RCC-MRx-derived $g$ (and the associated $\sigma_m+\sigma_b$) compare with the coefficient and stress obtained from a full elasto-plastic FE reference calculation at the same critical section?}
 
@@ -838,12 +869,12 @@ MSC~Marc elasto-plastic shell, reaction-based effective abatement & 0.436 & 86.5
 \end{tabular}
 \end{table}
 
-%\begin{figure}[htbp]
-%\centering
-%\includegraphics[width=0.85\textwidth]{figures/hexagon_benchmark_rM_g_table.png}
-%\caption{Actual production-code output (Aspect Nuclear Pipe Stress / HEXAGON NEW SOLVER, PC-ISL-64b) for the benchmark elbow under thermal load case LC~202: the element-by-element elastic follow-up calculation gives $r_M=2.638$ and $g=0.3237$ at the critical section, confirming the value reported in Table~\ref{tab:g-comparison}.}
-%\label{fig:hexagon-benchmark-table}
-%\end{figure}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/hexagon_benchmark_rM_g_table.png}
+\caption{Actual production-code output (Aspect Nuclear Pipe Stress / HEXAGON NEW SOLVER, PC-ISL-64b) for the benchmark elbow under thermal load case LC~202: the element-by-element elastic follow-up calculation gives $r_M=2.638$ and $g=0.3237$ at the critical section, confirming the value reported in Table~\ref{tab:g-comparison}.}
+\label{fig:hexagon-benchmark-table}
+\end{figure}
 
 \begin{figure}[htbp]
 \centering
@@ -852,14 +883,40 @@ MSC~Marc elasto-plastic shell, reaction-based effective abatement & 0.436 & 86.5
 \label{fig:ns-table}
 \end{figure}
 
-Taken together, Figures~\ref{fig:hexagon-benchmark-table} and \ref{fig:ns-table} provide the production-code evidence behind the benchmark values reported in Table~\ref{tab:g-comparison}: the first figure documents the local $r_M/g$ calculation, while the second gives the corresponding stress result at the critical point. The source presentation additionally distinguishes two FE-side ways of defining an ``effective'' abatement coefficient from the shell model: a local stress ratio, $g_{\mathrm{VM}} = 86.5/213.7 = 0.405$, and a reaction-moment ratio, $g_{\mathrm{reaction}} = 17.58/40.3 = 0.436$, reconstructed independently in Figure~\ref{fig:fe-g-reconstruction}. The presentation retains the second value in the comparison table because RCC-MRx applies $g$ to the displacement-dependent moment rather than directly to the local von Mises stress.
+Taken together, Figures~\ref{fig:hexagon-benchmark-table} and \ref{fig:ns-table} provide the production-code evidence behind the benchmark values reported in Table~\ref{tab:g-comparison}: the first figure documents the local $r_M/g$ calculation, while the second gives the corresponding stress result at the critical point. The shell results provide two definitions of an ``effective'' abatement coefficient: a local stress ratio, $g_{\mathrm{VM}} = 86.5/213.7 = 0.405$, and a reaction-moment ratio, $g_{\mathrm{reaction}} = 17.58/40.3 = 0.436$. The reaction-based value is retained in the comparison table because RCC-MRx applies $g$ to the displacement-dependent moment rather than directly to the local von Mises stress. The following calculation independently checks this reaction-based value using the shell-model response.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.9\textwidth]{figures/fe_g_reconstruction_from_critical_moment.png}
-\caption{Second FE-side consistency check reproduced from the presentation: starting from the shell-model reaction moment $M_f=\SI{10.0927}{\kilo\newton\metre}$ and the piping-code coefficient $B_2=4.371$, the equivalent elastic reference stress is reconstructed as $\sigma_{0,\mathrm{ref}}=0.79\,B_2\,M_f/Z=\SI{258.938}{MPa}$. Solving the coupled elastic-follow-up and Ramberg--Osgood relations shown on the slide then gives $\sigma_{3,\mathrm{est}}=\SI{112.6}{MPa}$ and $g=0.435$, i.e.\ the reaction-based FE abatement coefficient $g_{\mathrm{reaction}}=0.436$ to within rounding. -->  \textcolor{red}{to redesign}}
-\label{fig:fe-g-reconstruction}
-\end{figure}
+The shell-model reaction moment at the critical section is $M_f=\SI{10.0927}{\kilo\newton\metre}$. Using the piping-code bending coefficient $B_2=4.371$ and section modulus $Z=\SI{134592}{\milli\metre^3}$ gives the equivalent elastic reference stress
+\begin{equation}
+\sigma_{0,\mathrm{ref}} = 0.79\,B_2\,\frac{M_f}{Z}
+= \SI{258.938}{MPa}.
+\label{eq:fe-reference-stress}
+\end{equation}
+The corresponding elasto-plastic stress is obtained by solving the elastic-follow-up compatibility relation together with the Ramberg--Osgood law of Eq.~\eqref{eq:RO}:
+\begin{equation}
+\frac{\sigma_{0,\mathrm{ref}}/E-\varepsilon(\sigma)}
+{\sigma_{0,\mathrm{ref}}-\sigma}
+= -\frac{r_M}{E},
+\qquad
+\varepsilon(\sigma)=\frac{\sigma}{E}
++0.01\left(\frac{\sigma}{C_0R_{p0.2,\mathrm{mean}}}\right)^{1/n_0}.
+\end{equation}
+With $E=\SI{155}{GPa}$, $r_M=2.638$, $C_0=1.198$, $n_0=0.1125$, and $R_{p0.2,\mathrm{mean}}=\SI{106}{MPa}$, this gives $\sigma_{3,\mathrm{est}}=\SI{112.6}{MPa}$. For the benchmark, $\sigma_P=0$; hence Eq.~\eqref{eq:gfull} reduces to
+\begin{equation}
+\begin{aligned}
+\varepsilon_{M,p}(\sigma_{3,\mathrm{est}})
+&=0.01\left(
+\frac{\sigma_{3,\mathrm{est}}}{C_0R_{p0.2,\mathrm{mean}}}
+\right)^{1/n_0}
+= 3.434\times10^{-3},\\
+g
+&=\frac{\sigma_{3,\mathrm{est}}(1+r_M)}
+{E\,\varepsilon_{M,p}(\sigma_{3,\mathrm{est}})
++\sigma_{3,\mathrm{est}}(1+r_M)}
+=0.435.
+\end{aligned}
+\label{eq:fe-reconstructed-g}
+\end{equation}
+This reconstruction agrees, to within rounding, with the direct reaction-moment ratio $g_{\mathrm{reaction}}=0.436$.
 
 Two observations follow directly from Table~\ref{tab:g-comparison}:
 
@@ -868,13 +925,13 @@ Two observations follow directly from Table~\ref{tab:g-comparison}:
 \item \textbf{Observation 2:} the RCC-MRx primary-equivalent stress ($\sigma_m+\sigma_b = \SI{66.5}{MPa}$) is less conservative than the von Mises stress of the reference elasto-plastic FE analysis (\SI{86.5}{MPa}).
 \end{enumerate}
 
-\vspace{20mm}
+\vspace{2\baselineskip}
 
 % =============================================================================
 \underline{\textbf{Discussion: why is the RCC-MRx route less conservative?}}
 
 
-Slide~44 of the source presentation first recalls clause RB~3651.111, titled (in the original French code) \emph{Limitations des contraintes dues \`a la pression} (``Limitation of stresses due to pressure''), which gathers the classical primary-pressure limits
+RCC-MRx clause RB~3651.111 sets the level-A limits for primary stresses due to pressure:
 \[
 P_m \le S_m(\theta_m), \qquad
 P_L \le 1.5\,S_m(\theta_m), \qquad
@@ -908,16 +965,6 @@ g\cdot\frac{1.3\,S_m}{S^{*}}
 
 Once this conversion is applied, the RCC-MRx-based primary-equivalent stress ($g^{\mathrm{rabat}}=0.671$, $(\sigma_m+\sigma_b)^{\mathrm{rabat}}=\SI{138.23}{MPa}$) becomes markedly \emph{more} conservative than the elasto-plastic FE reference ($g=0.436$, $\sigma_{\mathrm{VM}}=\SI{86.5}{MPa}$), reversing the apparent non-conservatism identified in Table~\ref{tab:g-comparison}. This confirms that the raw comparison of Table~\ref{tab:g-comparison} is not made on a consistent allowable-stress basis: $g$ and $\sigma_m+\sigma_b$ as computed under the CMS1 rule (RB~3651.1131, allowable $S^{*}$) are not directly comparable to a von Mises stress checked against $1.3\,S_m$, and the code-mandated re-scaling of Eq.~\eqref{eq:pmpb} restores the expected conservative character of the analytical RCC-MRx route. \\
 
-\vspace{20mm}
-
-
-
-A complementary explanation emerges from the mesh sensitivity already noted in Table~\ref{tab:elastic-calib}. Two distinct pieces of evidence are available in the source presentation. First, slide~38 contains a native Office chart titled \emph{Mesh convergence analysis}, whose exact data are reproduced in Appendix~\ref{app:mesh-sensitivity} (Table~\ref{tab:mesh-vm-data}). Those four points are the maximum von Mises stresses extracted from the shell calculations, not the $g$ values themselves: the raw stress sequence is \SIlist{105.02;83.86;84.57;86.5}{MPa} for 10, 20, 40 and 80 circumferential elements, respectively, so it is not strictly monotonic. The key observation is that the coarse 10-element mesh is an outlier, whereas the 20-, 40- and 80-element meshes cluster within a much narrower band and approach the retained elasto-plastic reference value of \SI{86.5}{MPa}. Second, the separate NS/NewSolver sensitivity plot reproduced in Figure~\ref{fig:g-mesh-convergence} tracks the derived RCC-MRx abatement coefficient as the discretisation is refined; it shows an overall upward stabilisation trend with small oscillations, rather than a perfectly monotonic increase. Taken together, these two slides indicate that once mesh convergence is properly achieved, the discrepancy between the RCC-MRx analytical route and the elasto-plastic reference is substantially reduced, even before the primary-equivalent stress conversion of Section~\ref{sec:discussion} is applied. This suggests that part of the discrepancy originally observed in Table~\ref{tab:g-comparison} originates from an insufficiently refined shell mesh in the reference elasto-plastic model, rather than from an intrinsic shortcoming of the RCC-MRx $r_M/g$ formulation itself.
-
-
-
-
-Both explanations are consistent with one another and are not mutually exclusive: the primary-equivalent stress conversion is a code-mandated, conservatism-restoring step that must always be applied; the mesh-sensitivity finding is a numerical-modelling caveat that must be controlled independently, regardless of which analytical route (RCC-MRx or direct elasto-plastic FE) is used.
 
 \newpage
 
@@ -936,7 +983,7 @@ Both explanations are consistent with one another and are not mutually exclusive
 
 
 \begin{enumerate}
-\item The paper provides a consolidated route from the historical background and constitutive assumptions to the practical RCC-MRx definitions of $r_M$ and $g$, supported by the original diagrams, code excerpts and derivation material from the source presentation.
+\item The paper provides a consolidated route from the historical background and constitutive assumptions to the practical RCC-MRx definitions of $r_M$ and $g$, supported by the code provisions, figures and derivations presented here.
 \item The elastic benchmark shows that the beam-element piping model and the MSC~Marc shell model agree well in terms of global flexibility once the elbow flexibility factor is introduced consistently and the boundary conditions are treated carefully.
 \item For the benchmark elbow, the direct RCC-MRx output gives $r_M=2.638$ and $g=0.3237$, whereas the non-linear shell reference yields a higher effective abatement level when the comparison is made on a raw section-stress basis.
 \item This apparent discrepancy is resolved by two complementary observations: the code requires the abated secondary effect to be expressed in terms of primary stress, and the shell reference solution is also sensitive to mesh density in the elbow ovalisation zone (see also Appendix~\ref{app:mesh-sensitivity}).
@@ -946,14 +993,14 @@ Both explanations are consistent with one another and are not mutually exclusive
 
 
 
-\item Several open questions regarding the domain of validity of this simplified, temperature-invariant hardening shape are noted in the presentation (and are only partially addressed here): the sensitivity to strain rate, to monotonic versus cyclic hardening, to the number of cycles, and to environment (air, PWR primary water, sodium, etc.). Figure~\ref{fig:ro-curves} documents both the temperature family and the parameter sensitivity used to motivate this discussion. For reference, an example comparison at $\SI{0.01}{}$ true strain shows a stress discrepancy of about \SI{4.0}{MPa} ($\sim$\SI{5}{\percent}) between candidate hardening curves \cite{NASAn1930}.
+\item Several open questions regarding the domain of validity of this simplified, temperature-invariant hardening shape remain and are only partially addressed here: sensitivity to strain rate, monotonic versus cyclic hardening, number of cycles, and environment (air, PWR primary water, sodium, etc.). Figure~\ref{fig:ro-curves} shows the temperature family and parameter sensitivity. At $\SI{0.01}{}$ true strain, the candidate hardening curves differ by about \SI{4.0}{MPa} ($\sim$\SI{5}{\percent}) \cite{NASAn1930}.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.4\textwidth]{figures/ramberg_osgood_temperature_family.png}
 \hfill
 \includegraphics[width=0.4\textwidth]{figures/ramberg_osgood_550c_sensitivity.png}
-\caption{Ramberg--Osgood material data extracted from the presentation. Left: family of 316L(N) stress--strain curves used to justify the temperature-dependent scaling of the law through $R_{p0.2}(T)$. Right: sensitivity check at \SI{500}{\celsius} (a different temperature from the \SI{550}{\celsius} benchmark), comparing the reference parameter set ($C_0=1.198$, $n_0=0.1125$, $C_0R_{p0.2}\approx\SI{131.8}{MPa}$) with the alternative fit ($C_0=1.233$, $n_0=0.130$, $C_0R_{p0.2}\approx\SI{135.6}{MPa}$) discussed in the text.  \textcolor{red}{-->show the importance of n0/C0 on the final results } }
+\caption{Ramberg--Osgood material curves and parameter sensitivity. Left: family of 316L(N) stress--strain curves illustrating temperature-dependent scaling through $R_{p0.2}(T)$. Right: comparison at \SI{500}{\celsius} (distinct from the \SI{550}{\celsius} benchmark) between the reference parameters ($C_0=1.198$, $n_0=0.1125$, $C_0R_{p0.2}\approx\SI{131.8}{MPa}$) and the alternative fit ($C_0=1.233$, $n_0=0.130$, $C_0R_{p0.2}\approx\SI{135.6}{MPa}$).}
 \label{fig:ro-curves}
 \end{figure}
 
@@ -965,7 +1012,7 @@ Both explanations are consistent with one another and are not mutually exclusive
 \section*{Acknowledgements}
 % =============================================================================
 The authors thank the organisers of Pipe Stress Day 2026 (Lyon, France) for the opportunity to present the initial version of this work. \\
-\textcolor{red}{Octave teams} + \textcolor{red}{Cadence}
+The authors thank Cadence for providing the MSC Marc software (\href{http://www.cadence.com}{www.cadence.com}). They also thank their employer, Octave (\href{https://www.octave.com}{www.octave.com}), for the trust it has placed in them.
 
 
 
@@ -1193,7 +1240,7 @@ Equation ~\eqref{eq:Ramberg-Osgood-modif-2nd} might also be expressed for the eq
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{figures/energy_balance_equivalent_stress_scheme.png}
-\caption{Energy-balance scheme extracted from the presentation, summarising Roche's route from the virtual-work statement of the elastic calculation to the equivalent stress/strain formulation used to define $T$, $t$ and ultimately $r_M$.}
+\caption{Energy-balance scheme illustrating how the virtual-work statement of the elastic calculation leads to the equivalent stress--strain formulation used to define $T$, $t$ and ultimately $r_M$.}
 \label{fig:energy-balance-scheme}
 \end{figure}
 
@@ -1616,33 +1663,6 @@ Compared with the method of Roland L. Roche, the resulting expression is no long
 \vspace{1cm}
 
 
-\section{\texorpdfstring{}{Appendix \thesection: }Interpretation of the abatement coefficient (draft)}
-\label{app:g-interpretation-draft}
-
-\textbf{Review required.} The following earlier interpretation is retained for traceability. Its assumptions and its proposed bound require verification before use.
-
-An important remark is that RCC-MRx requires the use of the maximum elastic follow-up factor \(r_M\) within the entire structure. This requirement is consistent with the first assumption of Roland L. Roche's method, which assumes a constant proportionality factor \(\varphi\) between the elastoplastic and elastic stress fields (Equation~\eqref{eq:kachanov-stress}). It is also consistent with the objective of the \(s_m+s_b\) assessment, which is intended to prevent elastic and elastoplastic instabilities, both of which are global failure modes governed by the overall structural response.
-
-
-
-\vspace{1cm}
-\textbf{How to interprete the formula of abatement coefficient g  ?} \\
-In a first step, the right-hand side of Equation~\eqref{eq:gfull} is analyzed without considering the specific procedure given in RCC-MRx RB 3651.1132 (let's say the g coefficient is not yet introduced at this stage). Instead, we simply consider an elastoplastic stress \(\sigma\) and its associated elastic solution \(\sigma_{el}\). The elastic follow-up factor is recalled as \[ r_M = -\frac{E\left(\varepsilon-\varepsilon_{el}\right)} {\sigma-\sigma_{el}}. \]
-The right-hand side of Equation~\eqref{eq:gfull} can then be rewritten as
-\begin{equation*}
-\frac{(\sigma-\sigma_P)(1+r_M)} {E\left[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)\right] +(\sigma-\sigma_P)(1+r_M)} \geq \frac{(\sigma-\sigma_P)(1+r_M)} {E\,\varepsilon_{M,p}(\sigma) +(\sigma-\sigma_P)(1+r_M)} = \frac{\sigma-\sigma_P} {E\,\dfrac{\varepsilon_{M,p}(\sigma)}{1+r_M} +\sigma-\sigma_P} = \frac{\sigma-\sigma_P} {\sigma_{el}-\sigma_P}
-\end{equation*}
-($"="$ is obtained only in condition that $\sigma_P=0$) \\
-So, in essence, the formula in the right-hand-side of equation \eqref{eq:gfull} is used to derive the ratio between the elastoplastic stress and the elastic stress, without considering the primary pressure stress, in a conservative approach.
-
-Now, to satisfy the Kachanov hypothesis, a unique elastic follow-up factor must be considered throughout the structure. To obtain a conservative result, the maximum elastic follow-up factor of the entire structure is used, i.e., \(r_M=r_{M,\max}\). The above inequality can then be developed as follows:
-\begin{equation*}
-\frac{\sigma-\sigma_P} {\sigma_{el}-\sigma_P}  \leq     \frac{(\sigma-\sigma_P)(1+r_{M,max})} {E\left[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)\right] +(\sigma-\sigma_P)(1+r_{M,max})}
-\end{equation*}
-Finally, the displacement-controlled moments \(m\) must be multiplied by the factor $\frac{\sigma-\sigma_P}{\sigma_{el}-\sigma_P}$ in order to obtain the displacement-controlled moment corresponding to the elastoplastic analysis (see the term $g.m$ in equation \eqref{eq:gfull})\\
-
-
-
 \section{\texorpdfstring{}{Appendix \thesection: }Applications of Roche's method}
 \label{application_roche}
 
@@ -1876,7 +1896,7 @@ As a further, independent check, the RCC-MRx abatement coefficient $g$ obtained 
 
 \subsection{Analytical validation on a cantilever with imposed end displacement}
 
-To validate the production-code implementation of $r_M$ and $g$ independently of the elbow benchmark, a simple, closed-form case is considered: a straight cantilever beam of length $l$, clamped at one end, subjected to an imposed transverse displacement $\Delta u$ at the free end (Figure~\ref{fig:cantilever-sketch}). In the benchmark slide deck, the imposed displacement is specified explicitly as $\Delta u=\SI{12}{mm}$. In the closed-form derivation below, the curvilinear abscissa $x$ is measured from the free end ($x=0$) towards the clamp ($x=l$), so that the elastic bending moment and the elastic reference stress vary linearly with $x$.
+To validate the production-code implementation of $r_M$ and $g$ independently of the elbow benchmark, a simple, closed-form case is considered: a straight cantilever beam of length $l$, clamped at one end, subjected to an imposed transverse displacement $\Delta u=\SI{12}{mm}$ at the free end (Figure~\ref{fig:cantilever-sketch}). In the closed-form derivation below, the curvilinear abscissa $x$ is measured from the free end ($x=0$) towards the clamp ($x=l$), so that the elastic bending moment and the elastic reference stress vary linearly with $x$.
 
 \begin{figure}[htbp]
 \centering
@@ -1979,36 +1999,6 @@ Sections RB~3643, RB~3651 and RB~A3.3S.451.
 
 
 \bibitem{ASMEIII5} American Society of Mechanical Engineers (ASME), \textit{ASME Boiler and Pressure Vessel Code, Section III, Division 5: High Temperature Reactors}, 2021 Edition, ASME, New York, NY, USA, 2021.
-
-
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
-
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
-
-\bibitem{...}
-... \emph{\textcolor{red}{more references expected here}},
 
 
 
