@@ -184,6 +184,8 @@ Flexibility factors address the overall deformation of bends, whereas stress int
 
 The one-dimensional model describes the geometry and structural degrees of freedom; a material law is also required to calculate its response. Standard piping calculations generally assume linear elastic material behaviour, using Hooke's law to obtain displacements and sectional forces and moments under the specified loads. Stresses are then evaluated from the calculated loads and the relevant piping-code expressions.
 
+Hooke's law is retained for the elastic strain component throughout this work: in uniaxial notation, $\sigma=E\varepsilon_e$. When plasticity is included, the total strain is $\varepsilon_t=\varepsilon_e+\varepsilon_p$, so $\sigma=E\varepsilon_t$ no longer applies; the plastic component is modelled separately by the Ramberg--Osgood law introduced in Section~\ref{sec:RO}.
+
 The resulting elastic stresses cannot, by themselves, establish the actual response or the risk of damage once local yielding occurs. They must be interpreted in relation to the nature of the loading and the failure modes addressed by the applicable code. This motivates the stress classification discussed below.
 
 \subsection{Interpretation: primary and secondary stresses}
@@ -271,6 +273,85 @@ As discussed in Section~\ref{sec:Intro}, piping design rules use elastic calcula
 
 The present paper considers monotonic plasticity in the negligible-creep regime. Roche's report on elevated-temperature piping \cite{Roche1985} provides important background on the interaction between local and global behaviour, but addresses creep relaxation; its results are therefore distinguished here from the monotonic RCC-MRx rules. In RB~3643.31 and RB~3651.113, RCC-MRx provides a practical route to account for elastic follow-up and the effect of plasticity on displacement-controlled moments.
 
+The monotonic plastic response is represented here by a Ramberg--Osgood law, specified first below before its use in the physical illustration and in the subsequent code assessment.
+
+\subsection{Monotonic material behaviour}
+\label{sec:RO}
+
+To model the elasto-plastic material response, the Ramberg--Osgood law is used in its general textbook form, decomposing the total strain into an elastic and a power-law plastic part,
+\begin{equation}
+\varepsilon_t = \varepsilon_e + \varepsilon_p = \frac{\sigma}{E} + \left(\frac{\sigma}{K}\right)^{1/n},
+\label{eq:RO-generic}
+\end{equation}
+with $K$ a strength coefficient and $n$ a hardening exponent. In the benchmark, the mean monotonic tensile curve is expressed using the temperature-dependent stress scale
+\begin{equation}
+K_R(T) = C_0\,R_{p0.2,\mathrm{mean}}(T),
+\label{eq:KofT}
+\end{equation}
+where $R_{p0.2,\mathrm{mean}}$ is the mean 0.2\% proof stress. With strains expressed as dimensionless fractions rather than percentages, the form used in the benchmark is
+\begin{equation}
+\varepsilon(\sigma) = \frac{\sigma}{E} + 0.01\left(\frac{\sigma}{C_0\,R_{p0.2,\mathrm{mean}}}\right)^{1/n_0},
+\label{eq:RO}
+\end{equation}
+The factor $0.01$ converts the plastic-strain term from percent to fractional strain. Accordingly, $K_R$ in Eq.~\eqref{eq:KofT} is not identical to $K$ in Eq.~\eqref{eq:RO-generic}; the two forms coincide for $n=n_0$ when $K=K_R/0.01^{n_0}$. The curve is uniaxial; its application to the reference stress in the code method is described below.
+
+Figure~\ref{fig:RO-n0-parametric} compares the benchmark curve with lower values of $n_0$. For each value, $C_0=0.2^{-n_0}$ is recalibrated so that the mean 0.2\% proof stress remains fixed at \SI{106}{MPa}. With this recalibration, decreasing $n_0$ reduces strain hardening (work hardening): the post-yield stress increase for a given increase in plastic strain progressively diminishes and tends to zero as $n_0\to0^+$. The dashed line shows the resulting ideal elastic--perfectly plastic limit; setting $n_0=0$ directly in Eq.~\eqref{eq:RO} is not defined.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.96\textwidth,
+  height=8.2cm,
+  xmin=0, xmax=5,
+  ymin=0, ymax=165,
+  xlabel={Total strain $\varepsilon$ (\%)},
+  ylabel={Stress $\sigma$ (MPa)},
+  grid=both,
+  minor tick num=1,
+  tick label style={font=\small},
+  label style={font=\small},
+  legend style={
+    at={(0.5,-0.24)},
+    anchor=north,
+    legend columns=4,
+    draw=none,
+    font=\small,
+    /tikz/every even column/.append style={column sep=0.35cm}
+  },
+  clip=true
+]
+\addplot[thick, violet, domain=0:151.917, samples=2000]
+  ({100*(x/155000+0.01*pow(x/(1.198489202*106),1/0.1125))},{x});
+\addlegendentry{$n_0=0.1125$ (benchmark)}
+\addplot[thick, RoyalBlue, domain=0:124.409, samples=2000]
+  ({100*(x/155000+0.01*pow(x/(1.083798387*106),1/0.05))},{x});
+\addlegendentry{$n_0=0.05$}
+\addplot[thick, TealBlue, domain=0:113.015, samples=2000]
+  ({100*(x/155000+0.01*pow(x/(1.032712420*106),1/0.02))},{x});
+\addlegendentry{$n_0=0.02$}
+\addplot[thick, myGreen, domain=0:109.452, samples=2000]
+  ({100*(x/155000+0.01*pow(x/(1.016224591*106),1/0.01))},{x});
+\addlegendentry{$n_0=0.01$}
+\addplot[thick, ForestGreen, domain=0:107.712, samples=2000]
+  ({100*(x/155000+0.01*pow(x/(1.008079655*106),1/0.005))},{x});
+\addlegendentry{$n_0=0.005$}
+\addplot[thick, OliveGreen, domain=0:106.853, samples=2000]
+  ({100*(x/155000+0.01*pow(x/(1.004031700*106),1/0.0025))},{x});
+\addlegendentry{$n_0=0.0025$}
+\addplot[black, thick, dashed]
+  coordinates {(0,0) (0.068387,106) (5,106)};
+\addlegendentry{Ideal elastic--perfectly plastic}
+\addplot[only marks, mark=*, mark size=1.7pt, black]
+  coordinates {(0.268387,106)};
+\draw[dotted, gray] (axis cs:0.068387,0) -- (axis cs:0.068387,106);
+\node[anchor=west, font=\scriptsize] at (axis cs:0.34,116) {$R_{p0.2}=106$ MPa};
+\end{axis}
+\end{tikzpicture}
+\caption{Parametric influence of $n_0$ on the benchmark Ramberg--Osgood curve at \SI{550}{\celsius}, with $E=\SI{155}{GPa}$ and $R_{p0.2,\mathrm{mean}}=\SI{106}{MPa}$. The coefficient $C_0$ is recalibrated for each curve to preserve the same 0.2\% proof stress.}
+\label{fig:RO-n0-parametric}
+\end{figure}
+\FloatBarrier
 
 \subsection{Elastic follow-up: physical interpretation}
 \label{sec:EFF}
@@ -434,19 +515,19 @@ The above remarks are illustrated by points B and D in Figure~\ref{fig:parametri
 				\node at (axis cs:0.21,130) {$ ( \varepsilon_E,\sigma_E)$};
 
 				\node at (axis cs:0.083,77) {\textbf{S}};
-				\node at (axis cs:0.083,35) {\textcolor{myGreen}{0}};
+				\node at (axis cs:0.083,25) {\textcolor{myGreen}{$r_M=0$}};
 
 				\node at (axis cs:1,118) {\textbf{P}};
-				\node at (axis cs:0.7,126){$\mathcolor{myGreen}{\mathbf{\infty}}$};
+				\node at (axis cs:0.7,126){\textcolor{myGreen}{$r_M\to\infty$}};
 
 				\node at (axis cs:0.12,83) {\textbf{B}};
-				\node at (axis cs:0.16,40) {\textcolor{myGreen}{k/2}};
+				\node at (axis cs:0.16,40) {\textcolor{red}{$k/2$}};
 
 				\node at (axis cs:0.165,90) {\textbf{SP}};
-				\node at (axis cs:0.26,47) {\textcolor{myGreen}{k/4}};
+				\node at (axis cs:0.26,47) {\textcolor{red}{$k/4$}};
 
 				\node at (axis cs:0.283,100) {\textbf{D}};
-				\node at (axis cs:0.55,80) {\textcolor{myGreen}{k/16}};
+				\node at (axis cs:0.55,80) {\textcolor{red}{$k/16$}};
 
 			\end{axis}
 		\end{tikzpicture}
@@ -466,26 +547,6 @@ The three-beam example (Figures~\ref{fig:deviation} and \ref{fig:parametric-EFU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Monotonic material behaviour}
-\label{sec:RO}
-
-To model the elasto-plastic material response, the Ramberg--Osgood law is used in its general textbook form, decomposing the total strain into an elastic and a power-law plastic part,
-\begin{equation}
-\varepsilon_t = \varepsilon_e + \varepsilon_p = \frac{\sigma}{E} + \left(\frac{\sigma}{K}\right)^{1/n},
-\label{eq:RO-generic}
-\end{equation}
-with $K$ a strength coefficient and $n$ a hardening exponent. In the benchmark, the mean monotonic tensile curve is expressed using the temperature-dependent stress scale
-\begin{equation}
-K_R(T) = C_0\,R_{p0.2,\mathrm{mean}}(T),
-\label{eq:KofT}
-\end{equation}
-where $R_{p0.2,\mathrm{mean}}$ is the mean 0.2\% proof stress. With strains expressed as dimensionless fractions rather than percentages, the form used in the benchmark is
-\begin{equation}
-\varepsilon(\sigma) = \frac{\sigma}{E} + 0.01\left(\frac{\sigma}{C_0\,R_{p0.2,\mathrm{mean}}}\right)^{1/n_0},
-\label{eq:RO}
-\end{equation}
-The factor $0.01$ converts the plastic-strain term from percent to fractional strain. Accordingly, $K_R$ in Eq.~\eqref{eq:KofT} is not identical to $K$ in Eq.~\eqref{eq:RO-generic}; the two forms coincide for $n=n_0$ when $K=K_R/0.01^{n_0}$. The curve is uniaxial; its application to the reference stress in the code method is described below.
 
 \clearpage
 \subsection{Elastic follow-up factor $r_M$ in RCC-MRx}
@@ -551,7 +612,18 @@ Figure~\ref{fig:roche-graphical} illustrates this construction for a uniaxial re
 \label{fig:roche-graphical}
 \end{figure}
 
-The reference stress is a scalar used with the uniaxial material curve, not necessarily a local peak von Mises stress. Roche connects $\pi B_2/4$ to reference-stress and limit-moment considerations and discusses the combination of bending and torsion \cite{Roche1985}. For a circular tube, $0.87\approx\sqrt{3}/2$ is consistent with the von Mises conversion of the torsional shear stress. These observations illuminate the code coefficients; they do not establish the full historical derivation of the current rule. The separate factor $2(1+\nu)/3$, which appears in some equivalent-strain definitions, has a different origin (Section~\ref{sec:equivalent_sigma_epsilon_eq}).
+The reference stress is a scalar used with the uniaxial material curve, not necessarily a local peak von Mises stress. Roche connects $\pi B_2/4$ to reference-stress and limit-moment considerations and discusses the combination of bending and torsion \cite{Roche1985}.
+
+For a very thin annulus, Roark's \emph{Formulas for Stress and Strain} \cite[Table~A.1, case~17, p.~807]{YoungBudynas2002} gives the bending shape factor $Z_{\mathrm{pl}}/Z_{\mathrm{el}}=4/\pi$. Its reciprocal therefore gives the coefficient in the limit-load reference stress:
+\begin{equation*}
+\sigma_{\mathrm{ref}}
+=\frac{M_b}{Z_{\mathrm{pl}}}
+=\frac{Z_{\mathrm{el}}}{Z_{\mathrm{pl}}}\frac{M_b}{Z_{\mathrm{el}}}
+\simeq\frac{\pi}{4}\frac{M_b}{Z_{\mathrm{el}}}.
+\end{equation*}
+Thus $\pi/4\simeq0.785$ explains the coefficient $0.79$ in Eq.~\eqref{eq:Tglobal} for thin-tube bending. Here $Z_{\mathrm{el}}$ is the elastic section modulus denoted by $Z$ in that equation; Roark's table instead uses $Z$ for the plastic section modulus. This section-property argument does not by itself establish the component factor $B_2$ or the full rule for elbows.
+
+For a circular tube, $0.87\approx\sqrt{3}/2$ is consistent with the von Mises conversion of the torsional shear stress. These observations illuminate the code coefficients; they do not establish the full historical derivation of the current rule. The separate factor $2(1+\nu)/3$, which appears in some equivalent-strain definitions, has a different origin (Section~\ref{sec:equivalent_sigma_epsilon_eq}).
 
 \FloatBarrier
 
@@ -587,23 +659,45 @@ This idealised stress state explains the numerical factor but does not establish
 
 For this calculation, RB~3651.1132 specifies the maximum monotonic elastic follow-up factor of the piping line.
 
-\paragraph{Conditional mechanical interpretation.}
-The following manipulation helps interpret Eq.~\eqref{eq:gfull}; it is not an independent derivation of the Code prescription. Consider a uniaxial response on the same monotonic material curve, and denote by $\sigma_{\mathrm{el}}$ the elastic stress corresponding to the elasto-plastic state $(\sigma,\varepsilon)$. With $\varepsilon=\sigma/E+\varepsilon_{M,p}(\sigma)$ and $\varepsilon_{\mathrm{el}}=\sigma_{\mathrm{el}}/E$, the definition of the local elastic follow-up factor in Eq.~\eqref{eq:rM} gives
+\paragraph{Derivation from the graphical construction.}
+Equation~\eqref{eq:gfull} follows directly from the two prescribed slopes in Figure~\ref{fig:rccmrx-official}. Let $A=(\varepsilon_A,\sigma_P)$ and $B=(\varepsilon_B,\sigma)$ be the two points on the mean monotonic tensile curve. Let $C=(\varepsilon_C,\sigma_C)$ be the intersection of the line through $A$ of slope $E$ with the line through $B$ of slope $-E/r_M$. The upper stress level shown in the figure is
 \begin{equation*}
-E\,\varepsilon_{M,p}(\sigma)=(1+r_M)(\sigma_{\mathrm{el}}-\sigma).
+\sigma_C=\sigma_P+\frac{\sigma-\sigma_P}{g},
+\qquad\text{hence}\qquad
+g=\frac{\sigma-\sigma_P}{\sigma_C-\sigma_P}.
 \end{equation*}
-Substitution into Eq.~\eqref{eq:gfull} then yields
+For finite $r_M>0$, the slopes of $AC$ and $CB$ give
 \begin{equation*}
-g=
-\frac{\sigma-\sigma_P}
-{\sigma_{\mathrm{el}}-\sigma_P-
-\dfrac{E\,\varepsilon_{M,p}(\sigma_P)}{1+r_M}}.
+\varepsilon_C-\varepsilon_A=\frac{\sigma_C-\sigma_P}{E},
+\qquad
+\varepsilon_B-\varepsilon_C=\frac{r_M(\sigma_C-\sigma)}{E}.
 \end{equation*}
-If $\sigma>\sigma_P$, $\varepsilon_{M,p}(\sigma_P)\geq0$, and the denominator is positive, this implies
+Adding these relations and writing $\sigma_C-\sigma_P=(\sigma-\sigma_P)+(\sigma_C-\sigma)$ yields
 \begin{equation*}
-g\geq\frac{\sigma-\sigma_P}{\sigma_{\mathrm{el}}-\sigma_P}.
+E(\varepsilon_B-\varepsilon_A)
+=(\sigma-\sigma_P)+(1+r_M)(\sigma_C-\sigma).
 \end{equation*}
-In the pressure-free case, where $\sigma_P=0$ and $\varepsilon_{M,p}(0)=0$, the relation reduces to $g=\sigma/\sigma_{\mathrm{el}}$. This scalar result gives a mechanical interpretation of the abatement factor under the stated assumptions; it does not by itself prove that the same ratio maps directly onto a general multiaxial piping moment distribution. RCC-MRx prescribes the maximum line value of $r_M$ for calculating $g$.
+Independently, the material curve gives
+\begin{equation*}
+E(\varepsilon_B-\varepsilon_A)
+=(\sigma-\sigma_P)
++E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)].
+\end{equation*}
+Equating the two expressions therefore gives
+\begin{equation*}
+(1+r_M)(\sigma_C-\sigma)
+=E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)].
+\end{equation*}
+Finally, multiplying numerator and denominator of the stress-increment ratio by $1+r_M$ gives
+\begin{align*}
+g
+&=\frac{(\sigma-\sigma_P)(1+r_M)}
+{(\sigma_C-\sigma)(1+r_M)+(\sigma-\sigma_P)(1+r_M)}\\
+&=\frac{(\sigma-\sigma_P)(1+r_M)}
+{E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)]
++(\sigma-\sigma_P)(1+r_M)},
+\end{align*}
+which is Eq.~\eqref{eq:gfull}; the $r_M=0$ case follows by continuity, with $CB$ vertical. The term $\varepsilon_{M,p}(\sigma_P)$ appears because $AC$ starts at $A$ on the material curve, not at the undeformed origin. Thus $\sigma_C$ is an auxiliary stress of the graphical construction, not automatically the original elastic-analysis stress. This derivation establishes the equivalence of the Code's scalar graphical and algebraic constructions; it does not independently derive the prescribed maximum line factor or the multiaxial piping assessment. Without pressure, $\sigma_P=0$ and $\varepsilon_{M,p}(0)=0$, point $A$ is the origin and $g=\sigma/\sigma_C$.
 
 The code evaluates \(g\) at a prescribed stress level rather than requiring an elastoplastic analysis. RB~3651.1132 specifies:
 \begin{equation*} 
@@ -642,6 +736,9 @@ The complete abatement procedure defined in RCC-MRx, for monotonic loads, is sum
   .. controls (10.35,6.12) and (11.45,6.50) .. (11.9,6.50);
 \draw[thin] (7.57,4.96) -- (8.46,6.80);
 \draw[thin] (8.46,6.80) -- (12.03,3.85);
+\fill (7.57,4.96) circle (1.3pt) node[below right] {$A$};
+\fill (9.56,5.88) circle (1.3pt) node[above right] {$B$};
+\fill (8.46,6.80) circle (1.3pt) node[above right] {$C$};
 \draw[thin] (5.83,0.7) -- (5.83,2.48);
 \draw[thin] (10.35,5.23) -- (10.35,4.50) -- (11.22,4.50);
 
@@ -662,7 +759,7 @@ The complete abatement procedure defined in RCC-MRx, for monotonic loads, is sum
   +(\sigma-\sigma_p)(1+r_M)}$}};
 \end{tikzpicture}%
 }
-\caption{Graphical presentation of the abatement coefficient, redrawn from RCC-MRx Figure RB~3651.1132.}
+\caption{Graphical presentation of the abatement coefficient, redrawn from RCC-MRx Figure RB~3651.1132, with points $A$, $B$ and $C$ added for the derivation.}
 \label{fig:rccmrx-official}
 \end{figure}
 
@@ -824,19 +921,19 @@ As a consistency check, the final shell result, $\sigma_{\mathrm{VM}}=\SI{86.5}{
 
 %\subsection{Stress distribution and identification of the critical section}
 
-The von Mises stress distribution over the elbow shows a clearly identifiable ``weak link'' region (the section of maximum bending combined with ovalisation-amplified local stress), consistently located at the same position across all models, which is used as the reference cross-section for the abatement-coefficient comparison below. Figure~\ref{fig:vonmises} gives the full-field response, while Figure~\ref{fig:critical-vonmises-detail} zooms in on the section from which the FE-based value of $g$ is back-calculated.
+The von Mises stress distribution over the elbow shows a clearly identifiable ``weak link'' region (the section of maximum bending combined with ovalisation-amplified local stress), consistently located at the same position across all models, which is used as the reference cross-section for the abatement-coefficient comparison below. Figures~\ref{fig:vonmises} and \ref{fig:critical-vonmises-detail} show the same elasto-plastic solution at the final increment: the former is a close-up of the elbow and the latter a view of the complete piping model. Both report the same maximum von Mises stress of \SI{86.5}{MPa} at node 6974; they are two views of one result, not independent calculations.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/elastoplastic_vonmises_contour.png}
-\caption{MSC~Marc elasto-plastic shell model (80 elements/circumference): equivalent von Mises stress distribution at the end of the thermal transient, showing the critical section at the elbow crown (maximum \SI{86.5}{MPa}, node 6974; minimum \SI{1.5}{MPa}, node 7426).}
+\caption{Close-up of the elbow in the MSC~Marc elasto-plastic shell solution (80 elements/circumference), at the final increment: maximum von Mises stress \SI{86.5}{MPa} at node 6974. The complete model is shown in Figure~\ref{fig:critical-vonmises-detail}.}
 \label{fig:vonmises}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{figures/critical_section_vonmises_detail.png}
-\caption{Close-up of the critical elbow section used for the FE/RCC-MRx comparison: the local maximum equivalent von Mises stress of \SI{86.5}{MPa} is the reference value from which the FE-based abatement coefficient is back-calculated.}
+\caption{Complete piping model for the same final-increment elasto-plastic solution as Figure~\ref{fig:vonmises}: maximum von Mises stress \SI{86.5}{MPa} at node 6974; minimum \SI{1.5}{MPa} at node 7426.}
 \label{fig:critical-vonmises-detail}
 \end{figure}
 
@@ -851,13 +948,31 @@ The von Mises stress distribution over the elbow shows a clearly identifiable ``
 \subsection{Observations and discussions}
 \label{sec:discussion}
 
-The RCC-MRx elastic route (RB~3651.1131) reduces the secondary (displacement-dependent) moment $m$ by the coefficient $g$ and combines the abated stress with the primary stress in the $\sigma_m+\sigma_b$ (P-type) damage check; equivalently, $g$ can be interpreted either as an abatement applied to the stresses (from the elastic/purely-secondary value down to the effective value) or as an abatement applied to the moments (from the elastic moment down to the effective moment). The natural benchmark question is then: \emph{how does the RCC-MRx-derived $g$ (and the associated $\sigma_m+\sigma_b$) compare with the coefficient and stress obtained from a full elasto-plastic FE reference calculation at the same critical section?}
+The RCC-MRx elastic route (RB~3651.1131) reduces the secondary (displacement-dependent) moment $m$ by the coefficient $g$ and combines the abated stress with the primary stress in the $\sigma_m+\sigma_b$ (P-type) damage check. For a fixed linear moment-to-stress conversion, multiplying the moment by $g$ also multiplies its associated stress contribution by $g$; this does not imply the same reduction of the local von Mises stress after plastic redistribution. The natural benchmark question is then: \emph{how does the RCC-MRx-derived $g$ (and the associated $\sigma_m+\sigma_b$) compare with the moment reduction and stress obtained from the elasto-plastic FE reference calculation?}
 
-Table~\ref{tab:g-comparison} reports this comparison.
+To define the FE comparison quantity before introducing its numerical value, the benchmark presentation reports the shell-model reaction-moment magnitudes as $M_{\mathrm{reaction,el}}=\SI{40.3}{\kilo\newton\metre}$ for the elastic calculation (the rounded \SI{40.29}{\kilo\newton\metre} result of Section~\ref{sec:elastic-analysis}) and $M_{\mathrm{reaction,ep}}=\SI{17.58}{\kilo\newton\metre}$ for the elasto-plastic calculation under the same thermal loading. Their ratio defines a reaction-based effective abatement coefficient:
+\begin{equation}
+g_{\mathrm{reaction}}
+:=\frac{M_{\mathrm{reaction,ep}}}{M_{\mathrm{reaction,el}}}
+=\frac{17.58}{40.3}
+\simeq 0.436.
+\label{eq:g-reaction-fe}
+\end{equation}
+Thus, $0.436$ is obtained directly from the two FE reaction moments, not from the RCC-MRx formula for $g$. It measures the reduction of the reported global reaction moment, rather than a local stress reduction. It is retained as a moment-based comparator because the code coefficient acts on displacement-dependent moments; identifying it with the local code coefficient remains a modelling approximation.
+
+The stress-based comparison shown alongside it in the presentation gives a different ratio:
+\begin{equation}
+g_{\mathrm{VM}}
+:=\frac{\sigma_{\mathrm{VM,ep}}}{\sigma_{\mathrm{VM,el}}}
+=\frac{86.5}{213.7}
+\simeq 0.405.
+\label{eq:g-vm-fe}
+\end{equation}
+The two ratios need not coincide because plastic redistribution changes the local stress field as well as the global reaction. Table~\ref{tab:g-comparison} reports both $g_{\mathrm{reaction}}$ and $g_{\mathrm{VM}}$, alongside the same elasto-plastic von Mises stress: \SI{86.5}{MPa} is a direct FE result, not the product $0.436\times\SI{213.7}{MPa}$.
 
 \begin{table}[htbp]
 \centering
-\caption{Abatement coefficient $g$ and equivalent stress: RCC-MRx analytical route versus elasto-plastic FE reference.}
+\caption{RCC-MRx coefficient $g$ and primary-equivalent stress versus the FE reaction-based and stress-based effective coefficients (Eqs.~\eqref{eq:g-reaction-fe} and \eqref{eq:g-vm-fe}). Both FE rows report the same local von Mises stress; only the definition of the effective abatement coefficient differs.}
 \label{tab:g-comparison}
 \begin{tabular}{@{}lSS@{}}
 \toprule
@@ -865,6 +980,7 @@ Table~\ref{tab:g-comparison} reports this comparison.
 \midrule
 Aspect Nuclear Pipe Stress, RCC-MRx (SMC1), $\sigma_m+\sigma_b$ & 0.323 & 66.5 \\
 MSC~Marc elasto-plastic shell, reaction-based effective abatement & 0.436 & 86.5 \\
+MSC~Marc elasto-plastic shell, stress-based effective abatement & 0.405 & 86.5 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -883,7 +999,7 @@ MSC~Marc elasto-plastic shell, reaction-based effective abatement & 0.436 & 86.5
 \label{fig:ns-table}
 \end{figure}
 
-Taken together, Figures~\ref{fig:hexagon-benchmark-table} and \ref{fig:ns-table} provide the production-code evidence behind the benchmark values reported in Table~\ref{tab:g-comparison}: the first figure documents the local $r_M/g$ calculation, while the second gives the corresponding stress result at the critical point. The shell results provide two definitions of an ``effective'' abatement coefficient: a local stress ratio, $g_{\mathrm{VM}} = 86.5/213.7 = 0.405$, and a reaction-moment ratio, $g_{\mathrm{reaction}} = 17.58/40.3 = 0.436$. The reaction-based value is retained in the comparison table because RCC-MRx applies $g$ to the displacement-dependent moment rather than directly to the local von Mises stress. The following calculation independently checks this reaction-based value using the shell-model response.
+Taken together, Figures~\ref{fig:hexagon-benchmark-table} and \ref{fig:ns-table} provide the production-code evidence behind the benchmark values reported in Table~\ref{tab:g-comparison}: the first figure documents the local $r_M/g$ calculation, while the second gives the corresponding stress result at the critical point. The following scalar reconstruction is compared with the directly extracted reaction ratio of Eq.~\eqref{eq:g-reaction-fe}; substituting its compatible stress back into the code expression is an algebraic consistency check, not an independent FE determination of $g$.
 
 The shell-model reaction moment at the critical section is $M_f=\SI{10.0927}{\kilo\newton\metre}$. Using the piping-code bending coefficient $B_2=4.371$ and section modulus $Z=\SI{134592}{\milli\metre^3}$ gives the equivalent elastic reference stress
 \begin{equation}
@@ -916,7 +1032,7 @@ g
 \end{aligned}
 \label{eq:fe-reconstructed-g}
 \end{equation}
-This reconstruction agrees, to within rounding, with the direct reaction-moment ratio $g_{\mathrm{reaction}}=0.436$.
+This scalar reconstruction is numerically close to the direct reaction-moment ratio $g_{\mathrm{reaction}}=0.436$, but the two quantities are obtained by different procedures.
 
 Two observations follow directly from Table~\ref{tab:g-comparison}:
 
@@ -1952,7 +2068,7 @@ The close agreement between the closed-form analytical bound $r_{\max}=2.63$ and
 % =============================================================================
 % References
 % =============================================================================
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 
 \bibitem{VonKarman1911}
 Th.~von K\'arm\'an,
@@ -1963,6 +2079,11 @@ Journal of the Association of German Engineers, Vol.~55, pp.~1889--1895, 1911.
 A.R.C.~Markl,
 \emph{Piping Flexibility Analysis},
 Transactions of the ASME, Vol.~77, February 1955.
+
+\bibitem{YoungBudynas2002}
+W.C.~Young, R.G.~Budynas,
+\emph{Roark's Formulas for Stress and Strain},
+7th edition, McGraw-Hill, New York, 2002.
 
 \bibitem{MillardRoche1981}
 A.~Millard, R.~Roche,

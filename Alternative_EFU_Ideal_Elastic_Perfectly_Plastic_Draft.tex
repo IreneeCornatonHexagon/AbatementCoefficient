@@ -1,0 +1,93 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\geometry{margin=25mm}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+
+\title{Alternative Elastic Follow-Up Measure\\
+\large Ideal Elastic--Perfectly Plastic Response}
+\author{Proposed standalone addition for review}
+\date{17 November 2026}
+
+\begin{document}
+\maketitle
+
+\textbf{Note to the authors (not part of the proposed manuscript text).}
+This short note proposes an alternative, finite-element-based measure for an ideal elastic--perfectly plastic material. It is intended as a possible supplementary comparison, not as a replacement for the RCC-MRx procedure. The draft is deliberately explicit about the different definitions and their limits.
+
+\hrule
+\vspace{0.8em}
+
+\section*{Proposed text for the paper}
+\subsection*{An alternative elastic follow-up measure for ideal plasticity}
+
+The RCC-MRx estimate of the monotonic elastic follow-up factor, $r_M=T/t-1$, is based on an elastic analysis and a prescribed monotonic tensile curve. An independent way to examine the structural redistribution associated with yielding is to obtain a follow-up measure directly from an elastic--plastic analysis. Wang, Smith and Truman define such a factor for plastic deformation from the strain increment at a material point and its elastic counterpart \cite{Wang2013}. In uniaxial notation, their incremental definition is
+\begin{equation}
+Z_P =
+\frac{\Delta\varepsilon_{P,\mathrm{inc}}+
+      \Delta\varepsilon_{P,\mathrm{el}}}
+     {\Delta\varepsilon_{P,\mathrm{el}}},
+\qquad
+\Delta\varepsilon_{P,\mathrm{el}}=
+\frac{\Delta\sigma_P}{E},
+\label{eq:zp-increment}
+\end{equation}
+where $\Delta\varepsilon_{P,\mathrm{inc}}$ is the inelastic strain increment during the selected loading step and $\Delta\varepsilon_{P,\mathrm{el}}$ is the elastic strain increment corresponding to the stress increment. The value therefore depends on the selected load interval and on the precise definition of the local strain and stress measures. It is not the same quantity as the RCC-MRx factor $r_M$.
+
+A useful limiting case is a two-bar system in series under imposed displacement. Let bar 1 be the part that undergoes inelastic deformation and bar 2 remain elastic. With axial stiffnesses $K_i=E_iA_i/L_i$ and stiffness ratio $\alpha=K_2/K_1$, the solution reported by Wang et al.\ reduces to
+\begin{equation}
+Z_P=1+\frac{1}{\alpha}
+=1+\frac{K_1}{K_2}.
+\label{eq:zp-two-bars}
+\end{equation}
+For an ideal elastic--perfectly plastic response in bar 1, with bar 2 remaining elastic, this result is governed by the relative structural stiffnesses; the post-yield tangent modulus is zero. It provides a transparent mechanical illustration of how compliance in the surrounding structure increases the deformation associated with local yielding. It is a result for this idealized one-dimensional arrangement, not a general closed-form solution for a piping system.
+
+The literature also reports calculations of elastic follow-up using elastic--perfectly plastic models in more complex components. For example, Takakura et al.\ compare elastic--perfectly plastic and bilinear material models in a tubesheet analysis \cite{Takakura1995}. The reported factors depend on the component, loading cycle and constitutive idealization; they should not be transferred directly to a different geometry or loading case.
+
+\subsection*{Possible application to the elbow benchmark}
+
+For the present elbow, the idealized case could be investigated by retaining the geometry, boundary conditions, thermal loading and shell mesh of the benchmark, but replacing the Ramberg--Osgood hardening curve with an elastic--perfectly plastic law. A local FE measure such as $Z_P$ could then be evaluated over a stated monotonic loading interval at the critical elbow section. The reference strain measure, the selected increment, the yield stress and the mesh sensitivity would need to be reported. A comparison with a bilinear model and with the existing Ramberg--Osgood model would help distinguish the effects of zero post-yield hardening from those of the structural configuration.
+
+This comparison would be complementary to, rather than a recalculation of, the RCC-MRx coefficient. In particular, the RCC-MRx expression for $g$ uses the plastic strain from a specified monotonic tensile curve. An ideal elastic--perfectly plastic law does not provide a unique plastic strain as a function of stress beyond yield; consequently, its FE-derived $Z_P$ cannot be substituted directly for $r_M$ in the RCC-MRx equation for $g$. The two factors should be reported with their definitions and compared as different assessment quantities.
+
+An alternative work-rate definition has also been proposed for finite-element analyses of time-dependent high-temperature response, including constitutive models with plasticity and creep \cite{Messner2019}. That approach is relevant to creep and creep-fatigue applications, but its time-dependent work-based factor is outside the scope of the present monotonic benchmark.
+
+\subsection*{Scope and limitations}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Equation~\eqref{eq:zp-two-bars} is limited to the idealized two-bar case in which one member deforms inelastically and the other remains elastic. It is not a general formula for a multiaxial piping FE model.
+\item A perfectly plastic material is a limiting idealization. After yield, the predicted response can become sensitive to load control, localization, mesh and the existence of a plastic mechanism. These aspects must be checked before interpreting the result as a material-independent EFU factor.
+\item The proposed factor $Z_P$ is defined from a nonlinear response and a chosen strain/stress increment. The RCC-MRx $r_M$ is obtained by a different, elastic-analysis-based procedure. Numerical agreement or disagreement between them is informative only when the definitions, locations and loading intervals are stated explicitly.
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{Wang2013}
+Y.~Wang, D.~J.~Smith, and C.~E.~Truman,
+\emph{Inelastic Deformation and Elastic Follow-Up},
+Proceedings of the ASME 2013 Pressure Vessels and Piping Conference,
+PVP2013-97744, 2013.
+\href{https://doi.org/10.1115/PVP2013-97744}{doi:10.1115/PVP2013-97744}.
+
+\bibitem{Takakura1995}
+K.~Takakura, M.~Ueta, M.~Ichimiya, H.~Hirayama, T.~Ueno, H.~Wada,
+H.~Ozaki, and T.~Ohsaki,
+\emph{Development of elevated temperature structural design guide for
+Japanese demonstration breeder reactor},
+Nuclear Engineering and Design, 155, 559--570, 1995.
+\href{https://doi.org/10.1016/0029-5493(94)00926-0}
+{doi:10.1016/0029-5493(94)00926-0}.
+
+\bibitem{Messner2019}
+M.~C.~Messner, R.~I.~Jetter, and T.-L.~Sham,
+\emph{A Method for Directly Assessing Elastic Follow Up in 3D Finite
+Element Calculations}, draft conference paper, PVP2019-93644, 2019.
+\end{thebibliography}
+
+\end{document}

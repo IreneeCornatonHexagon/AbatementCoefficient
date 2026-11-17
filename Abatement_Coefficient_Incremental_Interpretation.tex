@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=23mm]{geometry}
+\usepackage{microtype}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\title{Abatement coefficient: minimal correction\\to the handwritten calculation}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\vspace{-2em}
+
+\textbf{The only change is the elastic reference strain.}
+Retain the same algebra and notation, but anchor the elastic reference
+line at the point on the monotonic curve corresponding to $\sigma_P$:
+\[
+\varepsilon_P=\frac{\sigma_P}{E}+\varepsilon_{M,p}(\sigma_P),
+\qquad
+\boxed{\varepsilon_{\mathrm{el}}
+=\varepsilon_P+\frac{\sigma_{\mathrm{el}}-\sigma_P}{E}
+=\frac{\sigma_{\mathrm{el}}}{E}+\varepsilon_{M,p}(\sigma_P).}
+\]
+Thus $\varepsilon_{\mathrm{el}}$ is no longer the strain on the
+origin-based Hooke line. Here $\sigma_{\mathrm{el}}$ denotes the elastic
+reference stress associated with this shifted construction; it must not
+be identified automatically with the original elastic-analysis stress.
+
+\textbf{1. Start with the same follow-up relation:}
+\begin{align*}
+r_M&=-\frac{E(\varepsilon-\varepsilon_{\mathrm{el}})}
+                  {\sigma-\sigma_{\mathrm{el}}},\\
+\varepsilon&=\frac{\sigma}{E}+\varepsilon_{M,p}(\sigma),
+\qquad
+\varepsilon_{\mathrm{el}}=\frac{\sigma_{\mathrm{el}}}{E}
+                         +\varepsilon_{M,p}(\sigma_P).
+\end{align*}
+Substitution gives
+\begin{align*}
+r_M
+&=-\frac{\sigma-\sigma_{\mathrm{el}}
+ +E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)]}
+ {\sigma-\sigma_{\mathrm{el}}},\\
+r_M+1
+&=-\frac{E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)]}
+ {\sigma-\sigma_{\mathrm{el}}}
+=\frac{E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)]}
+ {\sigma_{\mathrm{el}}-\sigma}.
+\end{align*}
+
+\textbf{2. Keep the same definition of the reduction ratio:}
+\[
+g=\frac{\sigma-\sigma_P}{\sigma_{\mathrm{el}}-\sigma_P}
+\qquad(\sigma>\sigma_P).
+\]
+Multiply numerator and denominator by $1+r_M$ and split the denominator,
+exactly as in the handwritten calculation:
+\begin{align*}
+g
+&=\frac{(\sigma-\sigma_P)(1+r_M)}
+        {(\sigma_{\mathrm{el}}-\sigma_P)(1+r_M)}\\[0.4em]
+&=\frac{(\sigma-\sigma_P)(1+r_M)}
+ {(\sigma_{\mathrm{el}}-\sigma)(1+r_M)
+  +(\sigma-\sigma_P)(1+r_M)}\\[0.4em]
+&=\boxed{\frac{(\sigma-\sigma_P)(1+r_M)}
+ {E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)]
+  +(\sigma-\sigma_P)(1+r_M)}}.
+\end{align*}
+
+\textbf{Scope.}
+This reproduces the RCC-MRx expression by a pressure-referenced scalar
+construction. Using the prescribed code factor $r_M$ in this construction
+is an assumption, not a result of the algebra. It is not a general
+derivation from the original, origin-based follow-up definition.
+If $\sigma_P=0$ and $\varepsilon_{M,p}(0)=0$, the reference shift vanishes
+and the calculation reduces to the original one.
+
+\end{document}

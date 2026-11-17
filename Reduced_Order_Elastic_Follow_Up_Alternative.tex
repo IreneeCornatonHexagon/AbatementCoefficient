@@ -1,0 +1,146 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\geometry{margin=25mm}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+
+\title{A Reduced-Order Elastic Follow-Up and Moment-Abatement Model\\
+\large An Elastic--Perfectly Plastic Hinge Coupled to an Elastic Structure}
+\author{Short theoretical note}
+\date{17 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note derives a simple alternative measure of displacement-controlled moment reduction for a localized yielding region coupled to an elastic surrounding structure. The critical region is idealized as an elastic--perfectly plastic rotational hinge in series with an elastic rotational spring. Compatibility and equilibrium give a closed-form, piecewise expression for the ratio of the actual moment to the moment predicted by a fully elastic analysis. The same model yields a secant plastic follow-up index that depends only on the ratio of the hinge and surrounding stiffnesses, consistent with the idealized two-bar result reported in the literature. These quantities are not the RCC-MRx factors $r_M$ and $g$; the model is a transparent reduced-order comparator for a purely displacement-controlled, monotonic loading case.
+\end{abstract}
+
+\section{Motivation and scope}
+
+The RCC-MRx methodology estimates elastic follow-up from an elastic solution and a prescribed monotonic tensile curve, then uses the resulting $r_M$ in its expression for the abatement coefficient $g$. Here we consider a different route: idealize the locally yielding region and the elastic remainder of the structure as two rotational components in series, and derive their response directly from equilibrium and compatibility.
+
+The purpose is not to reproduce the Code rule or to propose a general piping design formula. It is to obtain a simple reference model that makes the role of surrounding structural compliance explicit and can later be compared with a nonlinear piping analysis. The model assumes a single dominant yielding region, monotonic imposed rotation, no pressure or other load-controlled moment, small rotations, and an elastic surrounding structure.
+
+\section{Reduced-order model}
+
+Let a localized critical region be represented by a rotational hinge with initial elastic stiffness $K_h$ and yield moment $M_y$. The rest of the structure is represented by an elastic rotational spring of stiffness $K_s$. Both components carry the same moment $M$ and their rotations add:
+\begin{equation}
+\theta=\theta_h+\theta_s.
+\label{eq:compatibility}
+\end{equation}
+The hinge is elastic--perfectly plastic:
+\begin{equation}
+\theta_h=\frac{M}{K_h}+\theta_p,\qquad
+|M|\leq M_y,\qquad
+\dot{\theta}_p\neq0\ \Longrightarrow\ M=M_y
+\end{equation}
+for positive monotonic loading. The surrounding spring remains elastic, $\theta_s=M/K_s$.
+
+Before yield, $\theta_p=0$. The fully elastic system therefore has equivalent stiffness
+\begin{equation}
+K_{\mathrm{eq}}=
+\left(\frac{1}{K_h}+\frac{1}{K_s}\right)^{-1}
+=\frac{K_hK_s}{K_h+K_s},
+\qquad M_{\mathrm{el}}=K_{\mathrm{eq}}\,\theta.
+\label{eq:elastic}
+\end{equation}
+Yield begins at
+\begin{equation}
+\theta_y=M_y\left(\frac{1}{K_h}+\frac{1}{K_s}\right)
+=\frac{M_y}{K_{\mathrm{eq}}}.
+\label{eq:yield-rotation}
+\end{equation}
+
+For $\theta>\theta_y$, the hinge moment remains at $M_y$. Compatibility then gives
+\begin{equation}
+M=M_y,\qquad
+\theta_s=\frac{M_y}{K_s},\qquad
+\theta_p=\theta-\theta_y.
+\label{eq:plastic-response}
+\end{equation}
+Thus the local plastic rotation grows with imposed rotation, while the transmitted moment stays on the yield plateau.
+
+\section{Alternative moment-abatement factor}
+
+For a purely imposed-rotation load case, define the effective abatement as the ratio of the actual moment to the moment from a fully elastic analysis under the same total rotation:
+\begin{equation}
+g_{\mathrm{alt}}(\theta):=\frac{M(\theta)}{M_{\mathrm{el}}(\theta)}.
+\label{eq:g-alt-def}
+\end{equation}
+Combining Eqs.~\eqref{eq:elastic}--\eqref{eq:plastic-response} gives
+\begin{equation}
+g_{\mathrm{alt}}(\theta)=
+\begin{cases}
+1, & 0\leq\theta\leq\theta_y,\\[2mm]
+\dfrac{M_y}{K_{\mathrm{eq}}\theta}
+=\dfrac{\theta_y}{\theta}, & \theta>\theta_y.
+\end{cases}
+\label{eq:g-alt}
+\end{equation}
+This result has a direct interpretation: no moment reduction is predicted before yield, and after yield the actual moment is capped at $M_y$ while the elastic reference moment continues to increase. Accordingly, $g_{\mathrm{alt}}$ depends on the imposed rotation relative to the yield rotation, not solely on material parameters.
+
+\section{A secant plastic follow-up index}
+
+The same model gives a stiffness-based measure of local plastic deformation amplification. Let $\theta_{h,\mathrm{el}}(\theta)$ denote the hinge rotation predicted by the fully elastic system at the same total rotation, and let $\theta_{h,\mathrm{e}}(M)=M/K_h$ denote the elastic part of the hinge rotation at the actual moment. For $\theta>\theta_y$, define
+\begin{equation}
+Z_P:=
+\frac{\theta_h-\theta_{h,\mathrm{e}}(M)}
+{\theta_{h,\mathrm{el}}(\theta)-\theta_{h,\mathrm{e}}(M)}
+=\frac{\theta_p}
+{\theta_{h,\mathrm{el}}(\theta)-\theta_y}.
+\label{eq:zp-def}
+\end{equation}
+In the fully elastic system, the hinge rotation is
+\begin{equation}
+\theta_{h,\mathrm{el}}(\theta)
+=\frac{K_s}{K_h+K_s}\,\theta.
+\end{equation}
+Using $\theta_y=M_y(1/K_h+1/K_s)$ and $\theta_p=\theta-\theta_y$ in Eq.~\eqref{eq:zp-def} yields
+\begin{equation}
+Z_P=\frac{K_h+K_s}{K_s}
+=1+\frac{K_h}{K_s}
+=1+\frac{1}{\alpha},
+\qquad \alpha:=\frac{K_s}{K_h}.
+\label{eq:zp}
+\end{equation}
+This is the idealized one-inelastic-member/one-elastic-member result reported for a two-bar system by Wang, Smith and Truman \cite{Wang2013}. It is independent of the amount of post-yield rotation for this idealized model. As $K_s\to\infty$, the surrounding structure becomes rigid and $Z_P\to1$; as $K_s\to0$, its compliance permits increasingly large local plastic rotation and $Z_P$ grows without bound.
+
+\section{Illustrative normalized case}
+
+If $K_h=K_s$, then $K_{\mathrm{eq}}=K_h/2$, $\theta_y=2M_y/K_h$, and $Z_P=2$. At $\theta=2\theta_y$, the actual moment remains $M_y$, whereas the elastic reference moment is $2M_y$; hence $g_{\mathrm{alt}}=1/2$. This example separates the two roles: $Z_P$ is set by the stiffness ratio, while $g_{\mathrm{alt}}$ also depends on the imposed rotation.
+
+\section{Relation to RCC-MRx and possible use}
+
+The proposed factors answer different questions from RCC-MRx:
+\begin{itemize}
+\item $Z_P$ describes the amplification of local plastic rotation relative to a specified elastic reference in this reduced model.
+\item $g_{\mathrm{alt}}$ is the actual-to-elastic moment ratio for a prescribed total rotation in this same model.
+\item RCC-MRx $r_M$ is evaluated by the Code procedure from elastic-analysis quantities and material resilience; RCC-MRx $g$ is then calculated from $r_M$ and the specified monotonic tensile curve.
+\end{itemize}
+Neither $Z_P$ nor $g_{\mathrm{alt}}$ can therefore be substituted directly for $r_M$ or $g$. In particular, adding pressure or another primary moment requires a separate load decomposition and equilibrium model; Eq.~\eqref{eq:g-alt} applies only to the pure imposed-rotation case considered here.
+
+For a piping application, $K_h$ could be estimated for a selected critical region and $K_s$ for the surrounding elastic structure from an elastic model or a calibrated submodel. The resulting reduced-order predictions could be compared against nonlinear FE analyses for several imposed rotations. Such a study should state how the critical region is selected, how the two stiffnesses are obtained, and how the idealized hinge rotation maps to the FE strain or section rotation. The model would be useful only if those choices produce stable predictions across mesh refinements and plausible variations in the region boundaries.
+
+\section{Limitations}
+
+The model neglects distributed yielding, hardening, unloading, cyclic effects, pressure, multiaxial interaction, geometric nonlinearity and creep. An elastic--perfectly plastic hinge can also form a mechanism; the surrounding elastic stiffness is essential to retain a stable load path after yield. The formulas are exact only for the stated series model and monotonic loading assumptions. They are a candidate comparison framework, not a validated alternative design rule for piping.
+
+\begin{thebibliography}{9}
+\bibitem{Wang2013}
+Y.~Wang, D.~J.~Smith, and C.~E.~Truman,
+\emph{Inelastic Deformation and Elastic Follow-Up},
+Proceedings of the ASME 2013 Pressure Vessels and Piping Conference,
+PVP2013-97744, 2013.
+\href{https://doi.org/10.1115/PVP2013-97744}
+{doi:10.1115/PVP2013-97744}.
+\end{thebibliography}
+
+\end{document}

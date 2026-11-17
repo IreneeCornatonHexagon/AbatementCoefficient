@@ -1,0 +1,212 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\geometry{margin=25mm}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+
+\title{Pistes bibliographiques pour estimer l'effet de ressort}
+\author{Note de travail -- méthodes alternatives et complémentaires}
+\date{17 novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note rassemble des approches repérées dans la littérature locale pour
+estimer ou caractériser l'elastic follow-up (EFU), sans modifier le manuscrit
+principal. Trois voies sont examinées : un modèle analytique à deux barres
+élastoplastiques, une mesure sécante extraite d'un calcul éléments finis (EF),
+et une définition multiaxiale fondée sur les taux de travail. Ces facteurs ne
+sont pas interchangeables avec \(r_M\) ou \(g\) du RCC-MRx. La note précise les
+hypothèses, le domaine d'emploi et une démarche de comparaison possible pour le
+coude étudié.
+\end{abstract}
+
+\section{Modèle à deux barres avec plasticité dans les deux barres}
+
+Wang, Smith et Truman étudient deux barres en série, de longueurs \(L_i\) et
+sections \(A_i\), soumises à une compatibilité de déplacement et à l'équilibre.
+Pour chacune, la déformation totale est représentée par
+\[
+  \varepsilon_i=\frac{\sigma_i}{E_i}+f_i(\sigma_i,T_i).
+\]
+Le facteur de suivi plastique \(Z_P\) est défini dans leur modèle à partir des
+états initial et final. Lorsque les deux barres plastifient et que la loi
+plastique est une loi puissance de type Ramberg--Osgood,
+\[
+  \varepsilon_i=\frac{\sigma_i}{E_i}+D_i\sigma_i^{m_i},
+\]
+leur équation (24) donne
+\[
+  Z_P=
+  \frac{1+1/\alpha}
+       {1+\dfrac{L_2}{L_1}\dfrac{D_2}{D_1}
+       \left(\dfrac{A_1}{A_2}\right)^{m_2}
+       \sigma_1^{\,m_2-m_1}},
+  \qquad
+  \alpha=\frac{K_2}{K_1}
+  =\frac{A_2E_2L_1}{A_1E_1L_2}.
+\]
+Les paramètres \(D_i,m_i\) peuvent différer entre matériaux ou températures.
+Si les deux barres sont de même matériau et à la même température, l'équation
+(25) se réduit à
+\[
+  Z_P=
+  \frac{1+(L_2/L_1)(A_1/A_2)}
+       {1+(L_2/L_1)(A_1/A_2)^m}.
+\]
+Cette relation montre explicitement que le facteur dépend de la géométrie et
+de la réponse constitutive; quand les deux barres sont plastifiées, il peut
+aussi dépendre du niveau de chargement. Le cas différent où seule la barre 1
+plastifie et la barre 2 reste élastique donne, dans le même article,
+\(Z_P=1+1/\alpha\), indépendant de la loi plastique.
+
+\textbf{Intérêt pour l'étude en cours.} Cette formulation permettrait de
+construire un modèle réduit combinant une zone locale et la compliance du reste
+de la tuyauterie, puis d'étudier l'influence de l'exposant de la loi
+constitutive. Elle constitue une piste analytique distincte de la formule
+RCC-MRx.
+
+\textbf{Limites.} Le modèle est uniaxial et sériel : il ne représente ni la
+flexion multiaxiale d'un coude, ni la redistribution spatiale des contraintes.
+L'exposant \(m\) de la forme \(\varepsilon_p=D\sigma^m\) doit être relié avec
+précaution à celui de la loi utilisée dans le calcul actuel. Faire varier
+l'exposant tout en maintenant la limite conventionnelle \(R_{p0.2}\) impose
+également de recalibrer \(D\); sinon on change simultanément la courbe
+matériau et le facteur étudié. Une limite parfaitement plastique n'est donc
+pas obtenue par simple substitution dans cette formule.
+
+\section{Facteur sécant mesuré directement par éléments finis}
+
+Le même article définit un facteur plastique à partir de la déformation
+finale, de la contrainte finale et de la réponse élastique de référence pour le
+même chargement ou déplacement. Dans sa notation uniaxiale,
+\[
+  Z_P =
+  \frac{\varepsilon_{P,\mathrm{fl}}-\varepsilon_{P,\mathrm{eq,el}}}
+       {\varepsilon_{P,\mathrm{in}}-\varepsilon_{P,\mathrm{eq,el}}},
+  \qquad
+  \varepsilon_{P,\mathrm{eq,el}}=\frac{\sigma_{P,\mathrm{fl}}}{E}.
+\]
+Cette définition fournit une mesure sécante a posteriori : elle caractérise
+l'effet de ressort dans un état donné, mais ne prédit pas cet état sans calcul
+inélastique.
+
+Pour le coude, une adaptation pourrait être évaluée à chaque point d'intégration
+sur la section critique, en comparant le calcul non linéaire et un calcul
+élastique de référence soumis au même déplacement imposé. Il faudra définir
+explicitement la grandeur scalaire comparée (composante axiale, courbure ou
+mesure équivalente), l'instant de référence, et le traitement des changements
+de signe. La formule publiée est établie pour le modèle uniaxial à deux barres;
+son application multiaxiale ne doit pas être présentée comme une définition
+universelle sans validation.
+
+\textbf{Usage recommandé.} En faire une mesure locale de diagnostic dans le
+modèle coque, et non une substitution directe à \(r_M\) ou au coefficient
+d'abattement \(g\). Elle pourrait vérifier si le modèle réduit capture les
+tendances observées dans le coude.
+
+\section{Extension multiaxiale fondée sur les taux de travail}
+
+Messner, Jetter et Sham proposent une définition locale calculable à partir
+d'une simulation EF évolutive. Leur article définit, dans le cas uniaxial,
+\[
+  q=-\frac{\dot W_{\mathrm{inel}}}{\dot W_{\mathrm{el}}},
+\]
+et l'étend aux états multiaxiaux en utilisant les puissances de travail
+\(\dot W_{\mathrm{inel}}=\boldsymbol{\sigma}:\dot{\boldsymbol{\varepsilon}}_{\mathrm{inel}}\)
+et
+\(\dot U=\boldsymbol{\sigma}:\dot{\boldsymbol{\varepsilon}}\). Lorsque la
+dissipation du modèle provient uniquement de l'inélasticité, leur équation
+(13) s'écrit
+\[
+  q=-\frac{\dot W_{\mathrm{inel}}}{\dot U-\dot W_{\mathrm{inel}}}.
+\]
+Cette mesure tangentielle dépend du temps et du trajet de relaxation. Elle
+permet de traiter des géométries complexes et des lois constitutives réalistes,
+mais nécessite un calcul EF fournissant les champs de taux de déformation et de
+travail.
+
+Les auteurs indiquent que la plasticité doit être incluse dans l'inélasticité
+pour leurs applications, notamment lorsque creep et plasticité sont couplés à
+haute température. Toutefois, l'article est marqué \emph{DRAFT}. La définition
+est discutée principalement pour des situations de relaxation/fluage; pour un
+chargement monotone quasi statique sans maintien, un facteur tangent dépend
+fortement de l'incrément et ne se compare pas directement au facteur sécant
+précédent. Il faudrait donc préciser le trajet, l'intervalle temporel ou
+l'incrément retenu et vérifier la stabilité numérique avant toute utilisation
+quantitative.
+
+\section{Autres résultats, à ne pas confondre avec une formule générale}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Takakura et al. rapportent des facteurs \(q\) obtenus par analyses EF
+  pour des composants représentatifs du guide japonais à haute température.
+  Les résultats dépendent de la géométrie, du chargement, du modèle
+  élastoplastique et du cycle; ils peuvent servir de points de comparaison ou
+  de bornes pour les cas étudiés, pas de facteur transférable sans justification
+  au coude présent.
+\item Messner et al. rappellent que des valeurs de conception de l'ordre de
+  \(2\)--\(3\) sont utilisées dans certains cadres, mais que des concentrations
+  locales peuvent conduire à des valeurs plus élevées. Il s'agit d'une
+  indication de conception, non d'une prédiction pour notre géométrie.
+\item Les actes UK de 1982 présentent des facteurs d'amplification de
+  déformation issus de courbes fonction de la limite d'élasticité, du rapport
+  des modules plastique et élastique et de la biaxialité. Ces courbes visent
+  l'estimation des déformations inélastiques sous choc thermique à partir d'un
+  calcul élastique; elles constituent une approche voisine, mais pas une
+  définition générale de l'EFU.
+\end{itemize}
+
+\section{Proposition d'application au coude}
+
+La voie la plus informative serait de comparer deux mesures ayant des rôles
+distincts :
+\begin{enumerate}[leftmargin=1.7em]
+\item construire un modèle réduit zone critique--reste élastique, puis calculer
+  \(Z_P\) avec la formule à deux barres pour une loi puissance, en calibrant
+  chaque loi afin de conserver le même \(R_{p0.2}\);
+\item extraire du modèle coque un facteur sécant local fondé sur la définition
+  de Wang et al., avec la même convention de déformation et le même déplacement
+  de référence;
+\item si une phase de maintien/relaxation est étudiée, calculer séparément
+  \(q(t)\) par le bilan de travail multiaxial de Messner et al., en vérifiant
+  sa sensibilité au maillage et à l'incrément.
+\end{enumerate}
+
+Les résultats devront rester identifiés par leurs symboles et définitions :
+\(Z_P\), \(q\), \(r_M\) et \(g\) ne sont pas synonymes. Une comparaison
+numérique entre eux n'a de sens qu'après avoir aligné chargement, quantité
+mesurée, état de référence et hypothèses constitutives.
+
+\section*{Références}
+\begin{enumerate}[leftmargin=1.7em]
+\item Y. Wang, D. J. Smith et C. E. Truman, ``Inelastic Deformation and
+  Elastic Follow-Up,'' \emph{Proceedings of the ASME 2013 Pressure Vessels and
+  Piping Conference}, PVP2013-97744, Paris, 2013.
+  \href{https://doi.org/10.1115/PVP2013-97744}{doi:10.1115/PVP2013-97744}.
+\item M. C. Messner, R. I. Jetter et T.-L. Sham, ``A Method for Directly
+  Assessing Elastic Follow Up in 3D Finite Element Calculations,''
+  \emph{Proceedings of the ASME 2019 Pressure Vessels and Piping Conference},
+  PVP2019-93644, 2019. Copie locale marquée \emph{DRAFT}.\par
+  \href{https://doi.org/10.1115/PVP2019-93644}{doi:10.1115/PVP2019-93644}.
+\item K. Takakura et al., ``Development of elevated temperature structural
+  design guide for Japanese demonstration breeder reactor,''
+  \emph{Nuclear Engineering and Design}, vol. 155, 1995, pp. 559--570.
+  \href{https://doi.org/10.1016/0029-5493(94)00926-0}
+  {doi:10.1016/0029-5493(94)00926-0}.
+\item I. W. Goodall, D. A. Jobson et R. T. Rose, ``UK Contribution to the
+  IWGFR Specialists Meeting on Advances in Structural Analysis for LMFBR
+  Applications,'' Paris, 11--15 octobre 1982, document local XA0201718.
+\end{enumerate}
+
+\end{document}
