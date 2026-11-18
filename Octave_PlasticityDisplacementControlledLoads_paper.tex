@@ -863,27 +863,34 @@ MSC~Marc shell, 80 elements/circumference & 40290 \\
 \end{subfigure}
 \caption{Maximum-displacement contours from the elastic shell benchmark.}
 \label{fig:elastic-displacement-comparison}
-\end{figure}
-
-The final-increment result on the finer shell mesh is shown in Figure~\ref{fig:elastic-model-final}: the maximum displacement stabilises at \SI{35.25}{mm} (node 8121), essentially unchanged from the coarser/earlier-increment view of Figure~\ref{fig:elastic-model}, confirming that the elastic solution is converged with respect to load increment.
-
-The beam model without the elbow $k$-factor overestimates the system stiffness by about \SI{40}{\percent} relative to the converged shell solution, confirming the essential role of elbow ovalisation in the overall flexibility of the system. Once the analytical flexibility factor of Eq.~\eqref{eq:flexfactor} is introduced ($k=10.1717$), the beam-model reaction moment (\SI{39632}{\newton\metre}) matches the shell result at a moderate mesh density (20 elements per circumference, \SI{39650}{\newton\metre}) extremely well, confirming both the validity of the analytical flexibility factor and the adequacy of the beam-element representation for this geometry. Figure~\ref{fig:elastic-model} shows the corresponding shell-model displacement pattern. As the shell mesh is refined from 20 to 40 and 80 elements per circumference, the reaction moment increases from \SI{39650}{\newton\metre} to \SI{40180}{\newton\metre} and \SI{40290}{\newton\metre}; the diminishing increments indicate convergence of the shell-model reaction moment with mesh refinement. Large-deformation effects (ovalisation) are included in the shell analysis.
-
-The global deformed shapes provide a second, kinematic comparison of the two models. The beam-based NS model predicts a maximum thermal-expansion displacement of \SI{33.649}{mm} at point Z010 (Figure~\ref{fig:ns-deformed}), consistent with the shell-model displacement in Figure~\ref{fig:elastic-model}; this confirms that the calibrated beam model reproduces the shell-model flexibility with acceptable accuracy for this benchmark.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.34\textwidth]{figures/ns_thermal_deformed_shape.png}
+\par\medskip
+\includegraphics[width=0.30\textwidth]{figures/ns_thermal_deformed_shape.png}
 \caption{Deformed shape from the Aspect Nuclear Pipe Stress elastic benchmark (load case 102, thermal expansion): the beam-model maximum displacement is \SI{33.649}{mm} at point Z010, close to the shell-model prediction after calibration of the elbow flexibility.}
 \label{fig:ns-deformed}
 \end{figure}
 
+The final-increment result on the finer shell mesh is shown in Figure~\ref{fig:elastic-model-final}: the maximum displacement stabilises at \SI{35.25}{mm} (node 8121), essentially unchanged from the coarser/earlier-increment view of Figure~\ref{fig:elastic-model}, confirming that the elastic solution is converged with respect to load increment.
+
+The global deformed shapes provide a second, kinematic comparison of the two models. The beam-based NS model predicts a maximum thermal-expansion displacement of \SI{33.649}{mm} at point Z010 (Figure~\ref{fig:ns-deformed}), consistent with the shell-model displacement in Figure~\ref{fig:elastic-model-final}; this confirms that the calibrated beam model reproduces the shell-model flexibility with acceptable accuracy for this benchmark.
+
+The beam model without the elbow $k$-factor overestimates the system stiffness by about \SI{40}{\percent} relative to the converged shell solution, confirming the essential role of elbow ovalisation in the overall flexibility of the system. Once the analytical flexibility factor of Eq.~\eqref{eq:flexfactor} is introduced ($k=10.1717$), the beam-model reaction moment (\SI{39632}{\newton\metre}) matches the shell result at a moderate mesh density (20 elements per circumference, \SI{39650}{\newton\metre}) extremely well, confirming both the validity of the analytical flexibility factor and the adequacy of the beam-element representation for this geometry. Figure~\ref{fig:elastic-model} shows the corresponding shell-model displacement pattern. As the shell mesh is refined from 20 to 40 and 80 elements per circumference, the reaction moment increases from \SI{39650}{\newton\metre} to \SI{40180}{\newton\metre} and \SI{40290}{\newton\metre}; the diminishing increments indicate convergence of the shell-model reaction moment with mesh refinement. Large-deformation effects (ovalisation) are included in the shell analysis.
+
+Figure~\ref{fig:elastic-vonmises} documents the corresponding elastic von Mises stress field for the 80-elements-per-circumference shell mesh at the final increment. The maximum is $\sigma_{\mathrm{VM,el}}=\SI{213.7}{MPa}$ at node 7946. This is the elastic reference value used in the stress-based effective abatement ratio of Eq.~\eqref{eq:g-vm-fe}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.55\textwidth]{figures/80elementsVonMises.png}
+\caption{MSC~Marc elastic shell solution with 80 elements per circumference, at the final increment of the thermal loading: equivalent von Mises stress distribution, with a maximum of \SI{213.7}{MPa} at node 7946.}
+\label{fig:elastic-vonmises}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 \subsection{Elasto-plastic analysis}
 
 Section~\ref{sec:RO} introduces the Ramberg--Osgood law used here: $n_0$ controls the power-law exponent $1/n_0$ and hence the normalised curve shape, while $C_0$ scales the stress through $K_R=C_0R_{p0.2,\mathrm{mean}}$. For 316L(N), the reference values are $n_0=0.1125$ ($1/n_0=8.89$) and $C_0=1.198$. At the benchmark temperature of \SI{550}{\celsius}, $R_{p0.2}\approx\SI{106}{MPa}$, giving a stress scale $C_0R_{p0.2}\approx\SI{127}{MPa}$ in Eq.~\eqref{eq:RO}. The temperature dependence enters through $R_{p0.2}(T)$ in Eq.~\eqref{eq:KofT}; $n_0$ and $C_0$ are held fixed, so no change in normalised hardening-curve shape with temperature is assumed. A separate sensitivity study at \SI{500}{\celsius} (where $R_{p0.2}\approx\SI{110}{MPa}$, so that the reference parameter set gives $C_0R_{p0.2}\approx\SI{131.8}{MPa}$) compares this reference curve with an alternative fit ($C_0=1.233$, $n_0=0.130$, i.e. $1/n_0=7.69$, $C_0R_{p0.2}\approx\SI{135.6}{MPa}$) calibrated on tensile data at the same temperature; the resulting stress--strain curve is only marginally softer than the reference one over the whole strain range plotted, confirming that the choice of hardening parameters is not the dominant source of discrepancy discussed in Section~\ref{sec:discussion}.
@@ -960,7 +967,7 @@ g_{\mathrm{reaction}}
 \end{equation}
 Thus, $0.436$ is obtained directly from the two FE reaction moments, not from the RCC-MRx formula for $g$. It measures the reduction of the reported global reaction moment, rather than a local stress reduction. It is retained as a moment-based comparator because the code coefficient acts on displacement-dependent moments; identifying it with the local code coefficient remains a modelling approximation.
 
-The stress-based comparison shown alongside it in the presentation gives a different ratio:
+The stress-based comparison uses the elastic maximum $\sigma_{\mathrm{VM,el}}=\SI{213.7}{MPa}$ documented in Figure~\ref{fig:elastic-vonmises} and the elasto-plastic maximum $\sigma_{\mathrm{VM,ep}}=\SI{86.5}{MPa}$ shown in Figure~\ref{fig:vonmises}, giving a different ratio:
 \begin{equation}
 g_{\mathrm{VM}}
 :=\frac{\sigma_{\mathrm{VM,ep}}}{\sigma_{\mathrm{VM,el}}}
