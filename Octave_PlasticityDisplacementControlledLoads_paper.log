@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.6.16)  18 NOV 2026 16:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.6.16)  19 NOV 2026 14:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1017,16 +1017,16 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 <figures/FEA_model.png, id=266, 425.1885pt x 369.17924pt>
 File: figures/FEA_model.png Graphic file (type png)
 <use figures/FEA_model.png>
-Package pdftex.def Info: figures/FEA_model.png  used on input line 795.
+Package pdftex.def Info: figures/FEA_model.png  used on input line 796.
 (pdftex.def)             Requested size: 227.3381pt x 197.39346pt.
 <figures/Beam piping model.png, id=267, 606.01407pt x 505.13719pt>
 File: figures/Beam piping model.png Graphic file (type png)
 <use figures/Beam piping model.png>
-Package pdftex.def Info: figures/Beam piping model.png  used on input line 802.
+Package pdftex.def Info: figures/Beam piping model.png  used on input line 803.
 
 (pdftex.def)             Requested size: 251.52443pt x 209.65886pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 810--811
+Underfull \hbox (badness 10000) in paragraph at lines 811--812
 
  []
 
@@ -1037,25 +1037,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 810--811
 File: figures/shell_mesh_verification_views.png Graphic file (type png)
 <use figures/shell_mesh_verification_views.png>
 Package pdftex.def Info: figures/shell_mesh_verification_views.png  used on inp
-ut line 820.
+ut line 821.
 (pdftex.def)             Requested size: 396.63496pt x 340.10684pt.
 <figures/elastic_model_displacement.png, id=280, 550.30594pt x 556.32843pt>
 File: figures/elastic_model_displacement.png Graphic file (type png)
 <use figures/elastic_model_displacement.png>
 Package pdftex.def Info: figures/elastic_model_displacement.png  used on input 
-line 853.
+line 854.
 (pdftex.def)             Requested size: 222.5038pt x 224.93826pt.
 <figures/80elementsPerCircumference.png, id=281, 347.79938pt x 439.6425pt>
 File: figures/80elementsPerCircumference.png Graphic file (type png)
 <use figures/80elementsPerCircumference.png>
 Package pdftex.def Info: figures/80elementsPerCircumference.png  used on input 
-line 860.
+line 861.
 (pdftex.def)             Requested size: 222.5038pt x 281.2562pt.
 <figures/ns_thermal_deformed_shape.png, id=282, 411.5375pt x 468.75125pt>
 File: figures/ns_thermal_deformed_shape.png Graphic file (type png)
 <use figures/ns_thermal_deformed_shape.png>
 Package pdftex.def Info: figures/ns_thermal_deformed_shape.png  used on input l
-ine 867.
+ine 868.
 (pdftex.def)             Requested size: 145.11053pt x 165.28133pt.
 [14 <./figures/shell_mesh_verification_views.png (PNG copy)>] [15 <./figures/el
 astic_model_displacement.png> <./figures/80elementsPerCircumference.png> <./fig
@@ -1063,7 +1063,7 @@ ures/ns_thermal_deformed_shape.png (PNG copy)>]
 <figures/80elementsVonMises.png, id=304, 527.72156pt x 542.025pt>
 File: figures/80elementsVonMises.png Graphic file (type png)
 <use figures/80elementsVonMises.png>
-Package pdftex.def Info: figures/80elementsVonMises.png  used on input line 882
+Package pdftex.def Info: figures/80elementsVonMises.png  used on input line 883
 .
 (pdftex.def)             Requested size: 266.03474pt x 273.24489pt.
 [16 <./figures/80elementsVonMises.png>]
@@ -1071,27 +1071,27 @@ Package pdftex.def Info: figures/80elementsVonMises.png  used on input line 882
 File: figures/hardening_curve_plas_new.png Graphic file (type png)
 <use figures/hardening_curve_plas_new.png>
 Package pdftex.def Info: figures/hardening_curve_plas_new.png  used on input li
-ne 913.
+ne 914.
 (pdftex.def)             Requested size: 203.1518pt x 181.24797pt.
 <figures/work_hardening_law_zoom.png, id=326, 363.3575pt x 285.065pt>
 File: figures/work_hardening_law_zoom.png Graphic file (type png)
 <use figures/work_hardening_law_zoom.png>
 Package pdftex.def Info: figures/work_hardening_law_zoom.png  used on input lin
-e 924.
+e 925.
 (pdftex.def)             Requested size: 203.1518pt x 159.38303pt.
 <figures/elastoplastic_vonmises_contour.png, id=329, 557.08125pt x 528.47438pt>
 
 File: figures/elastoplastic_vonmises_contour.png Graphic file (type png)
 <use figures/elastoplastic_vonmises_contour.png>
 Package pdftex.def Info: figures/elastoplastic_vonmises_contour.png  used on in
-put line 935.
+put line 936.
 (pdftex.def)             Requested size: 290.22107pt x 275.32434pt.
 <figures/critical_section_vonmises_detail.png, id=332, 784.9325pt x 704.6325pt>
 
 File: figures/critical_section_vonmises_detail.png Graphic file (type png)
 <use figures/critical_section_vonmises_detail.png>
 Package pdftex.def Info: figures/critical_section_vonmises_detail.png  used on 
-input line 942.
+input line 943.
 (pdftex.def)             Requested size: 241.84843pt x 217.1006pt.
 [17
 
@@ -1102,24 +1102,24 @@ ning_law_zoom.png (PNG copy)> <./figures/elastoplastic_vonmises_contour.png>] [
 File: figures/hexagon_benchmark_rM_g_table.png Graphic file (type png)
 <use figures/hexagon_benchmark_rM_g_table.png>
 Package pdftex.def Info: figures/hexagon_benchmark_rM_g_table.png  used on inpu
-t line 997.
+t line 998.
 (pdftex.def)             Requested size: 411.14528pt x 352.97258pt.
 <figures/ns_solver_stress_table.png, id=367, 1385.92781pt x 662.475pt>
 File: figures/ns_solver_stress_table.png Graphic file (type png)
 <use figures/ns_solver_stress_table.png>
 Package pdftex.def Info: figures/ns_solver_stress_table.png  used on input line
- 1004.
+ 1005.
 (pdftex.def)             Requested size: 362.77264pt x 173.40192pt.
 [20
 
 ] [21 <./figures/hexagon_benchmark_rM_g_table.png> <./figures/ns_solver_stress_
 table.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1085--1086
+Underfull \hbox (badness 10000) in paragraph at lines 1086--1087
 
  []
 
 
-Underfull \hbox (badness 1028) in paragraph at lines 1089--1090
+Underfull \hbox (badness 1028) in paragraph at lines 1090--1091
 \OT1/cmr/m/n/10 (+20) 138\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 (+20) 23 []$\T1/cmr/
 m/n/10 (+20) ) be-comes markedly \T1/cmr/m/it/10 (+20) more \T1/cmr/m/n/10 (+20
 ) con-ser-va-tive than the elasto-plastic FE ref-er-ence ($\OML/cmm/m/it/10 g \
@@ -1128,28 +1128,28 @@ OT1/cmr/m/n/10 (+20) = 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 (+20) 436$\T1/cmr/m/n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1089--1090
+Underfull \hbox (badness 10000) in paragraph at lines 1090--1091
 
  []
 
 [22]
 
 LaTeX Warning: Reference `app:mesh-sensitivity' on page 23 undefined on input l
-ine 1112.
+ine 1113.
 
 <figures/ramberg_osgood_temperature_family.png, id=409, 1454.43375pt x 1013.787
 5pt>
 File: figures/ramberg_osgood_temperature_family.png Graphic file (type png)
 <use figures/ramberg_osgood_temperature_family.png>
 Package pdftex.def Info: figures/ramberg_osgood_temperature_family.png  used on
- input line 1123.
+ input line 1124.
 (pdftex.def)             Requested size: 193.47578pt x 134.84442pt.
 <figures/ramberg_osgood_550c_sensitivity.png, id=410, 1719.42375pt x 1141.26375
 pt>
 File: figures/ramberg_osgood_550c_sensitivity.png Graphic file (type png)
 <use figures/ramberg_osgood_550c_sensitivity.png>
 Package pdftex.def Info: figures/ramberg_osgood_550c_sensitivity.png  used on i
-nput line 1125.
+nput line 1126.
 (pdftex.def)             Requested size: 193.47578pt x 128.41275pt.
 [23
 
@@ -1160,10 +1160,10 @@ g_osgood_550c_sensitivity.png (PNG copy)>] [24
 <figures/FirstApproach.png, id=436, 509.65407pt x 175.40532pt>
 File: figures/FirstApproach.png Graphic file (type png)
 <use figures/FirstApproach.png>
-Package pdftex.def Info: figures/FirstApproach.png  used on input line 1207.
+Package pdftex.def Info: figures/FirstApproach.png  used on input line 1208.
 (pdftex.def)             Requested size: 241.84843pt x 83.23541pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1224--1225
+Underfull \hbox (badness 10000) in paragraph at lines 1225--1226
 
  []
 
@@ -1176,50 +1176,50 @@ File: figures/energy_balance_equivalent_stress_scheme.png Graphic file (type pn
 g)
 <use figures/energy_balance_equivalent_stress_scheme.png>
 Package pdftex.def Info: figures/energy_balance_equivalent_stress_scheme.png  u
-sed on input line 1365.
+sed on input line 1366.
 (pdftex.def)             Requested size: 241.84843pt x 109.40508pt.
 [27] [28 <./figures/energy_balance_equivalent_stress_scheme.png (PNG copy)>] [2
 9]
-Underfull \hbox (badness 10000) in paragraph at lines 1482--1483
+Underfull \hbox (badness 10000) in paragraph at lines 1483--1484
 
  []
 
 [30] [31]
-Underfull \hbox (badness 10000) in paragraph at lines 1599--1602
+Underfull \hbox (badness 10000) in paragraph at lines 1600--1603
 
  []
 
 [32
 
 ] [33] [34]
-Underfull \hbox (badness 10000) in paragraph at lines 1794--1795
+Underfull \hbox (badness 10000) in paragraph at lines 1795--1796
 
  []
 
 <figures/AppendixC.png, id=607, 754.31813pt x 410.2828pt>
 File: figures/AppendixC.png Graphic file (type png)
 <use figures/AppendixC.png>
-Package pdftex.def Info: figures/AppendixC.png  used on input line 1800.
+Package pdftex.def Info: figures/AppendixC.png  used on input line 1801.
 (pdftex.def)             Requested size: 266.03474pt x 144.6967pt.
 [35
 
  <./figures/AppendixC.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 1867--1868
+Underfull \hbox (badness 10000) in paragraph at lines 1868--1869
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1877--1878
+Underfull \hbox (badness 10000) in paragraph at lines 1878--1879
 
  []
 
 [36]
-Underfull \hbox (badness 10000) in paragraph at lines 1918--1919
+Underfull \hbox (badness 10000) in paragraph at lines 1919--1920
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1928--1929
+Underfull \hbox (badness 10000) in paragraph at lines 1929--1930
 
  []
 
@@ -1228,7 +1228,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1928--1929
 File: figures/rm_graphical_definition_slide.png Graphic file (type png)
 <use figures/rm_graphical_definition_slide.png>
 Package pdftex.def Info: figures/rm_graphical_definition_slide.png  used on inp
-ut line 1976.
+ut line 1977.
 (pdftex.def)             Requested size: 266.03474pt x 155.80246pt.
 <figures/roche_spring_stiffness_parametric_sweep.png, id=623, 1284.8pt x 722.7p
 t>
@@ -1236,7 +1236,7 @@ File: figures/roche_spring_stiffness_parametric_sweep.png Graphic file (type pn
 g)
 <use figures/roche_spring_stiffness_parametric_sweep.png>
 Package pdftex.def Info: figures/roche_spring_stiffness_parametric_sweep.png  u
-sed on input line 1988.
+sed on input line 1989.
 (pdftex.def)             Requested size: 241.84843pt x 136.03523pt.
 [38 <./figures/rm_graphical_definition_slide.png (PNG copy)> <./figures/roche_s
 pring_stiffness_parametric_sweep.png (PNG copy)>]
@@ -1244,12 +1244,12 @@ pring_stiffness_parametric_sweep.png (PNG copy)>]
 File: figures/g_fea_vs_rccmrx_barchart.png Graphic file (type png)
 <use figures/g_fea_vs_rccmrx_barchart.png>
 Package pdftex.def Info: figures/g_fea_vs_rccmrx_barchart.png  used on input li
-ne 2015.
+ne 2016.
 (pdftex.def)             Requested size: 314.40001pt x 155.50752pt.
 <figures/cantilever_sketch.png, id=633, 392.21532pt x 177.66376pt>
 File: figures/cantilever_sketch.png Graphic file (type png)
 <use figures/cantilever_sketch.png>
-Package pdftex.def Info: figures/cantilever_sketch.png  used on input line 2026
+Package pdftex.def Info: figures/cantilever_sketch.png  used on input line 2027
 .
 (pdftex.def)             Requested size: 241.84843pt x 109.55397pt.
 [39
@@ -1259,19 +1259,19 @@ Package pdftex.def Info: figures/cantilever_sketch.png  used on input line 2026
 File: figures/cantilever_3d_model.png Graphic file (type png)
 <use figures/cantilever_3d_model.png>
 Package pdftex.def Info: figures/cantilever_3d_model.png  used on input line 20
-45.
+46.
 (pdftex.def)             Requested size: 241.84843pt x 182.18347pt.
 <figures/cantilever_vonmises_validation.png, id=651, 1217.54875pt x 525.965pt>
 File: figures/cantilever_vonmises_validation.png Graphic file (type png)
 <use figures/cantilever_vonmises_validation.png>
 Package pdftex.def Info: figures/cantilever_vonmises_validation.png  used on in
-put line 2052.
+put line 2053.
 (pdftex.def)             Requested size: 241.84843pt x 104.46883pt.
 <figures/hexagon_cantilever_rM_g_table.png, id=652, 712.91344pt x 178.41656pt>
 File: figures/hexagon_cantilever_rM_g_table.png Graphic file (type png)
 <use figures/hexagon_cantilever_rM_g_table.png>
 Package pdftex.def Info: figures/hexagon_cantilever_rM_g_table.png  used on inp
-ut line 2059.
+ut line 2060.
 (pdftex.def)             Requested size: 411.14528pt x 102.89362pt.
 [40 <./figures/cantilever_3d_model.png> <./figures/cantilever_vonmises_validati
 on.png (PNG copy)> <./figures/hexagon_cantilever_rM_g_table.png>]
@@ -1297,11 +1297,11 @@ _paper.out' has not changed.
 (rerunfilecheck)             Checksum: 98FEF4D67D831E2A5349C45F74448672;6636.
  ) 
 Here is how much of TeX's memory you used:
- 40398 strings out of 467167
- 955604 string characters out of 5413691
+ 40400 strings out of 467167
+ 955618 string characters out of 5413691
  3012540 words of memory out of 5000000
  68652 multiletter control sequences out of 15000+600000
- 657389 words of font info for 230 fonts, out of 8000000 for 9000
+ 657440 words of font info for 231 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,19n,118p,1365b,2237s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/tex
@@ -1330,7 +1330,7 @@ c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive
 f-dist/fonts/type1/public/cm-super/sfti1000.pfb><c:/texlive/2026/texmf-dist/fon
 ts/type1/public/cm-super/sftt1000.pfb>
 Output written on Octave_PlasticityDisplacementControlledLoads_paper.pdf (41 pa
-ges, 2958356 bytes).
+ges, 2958815 bytes).
 PDF statistics:
  835 PDF objects out of 1000 (max. 8388607)
  636 compressed objects within 7 object streams

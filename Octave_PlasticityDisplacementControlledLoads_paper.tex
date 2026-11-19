@@ -666,38 +666,39 @@ Equation~\eqref{eq:gfull} follows directly from the two prescribed slopes in Fig
 \qquad\text{hence}\qquad
 g=\frac{\sigma-\sigma_P}{\sigma_C-\sigma_P}.
 \end{equation*}
-For finite $r_M>0$, the slopes of $AC$ and $CB$ give
+The line $AC$ has slope $E$, while the slope of $CB$ gives, for distinct points $B$ and $C$,
 \begin{equation*}
-\varepsilon_C-\varepsilon_A=\frac{\sigma_C-\sigma_P}{E},
+r_M=-\frac{E(\varepsilon_B-\varepsilon_C)}{\sigma-\sigma_C},
 \qquad
-\varepsilon_B-\varepsilon_C=\frac{r_M(\sigma_C-\sigma)}{E}.
+1+r_M=
+\frac{-E(\varepsilon_B-\varepsilon_C)+\sigma-\sigma_C}
+{\sigma-\sigma_C}.
 \end{equation*}
-Adding these relations and writing $\sigma_C-\sigma_P=(\sigma-\sigma_P)+(\sigma_C-\sigma)$ yields
+The strain at $B$ follows the mean tensile curve. Because $AC$ starts at $A$, the strain at $C$ includes the plastic strain already present at $\sigma_P$:
 \begin{equation*}
-E(\varepsilon_B-\varepsilon_A)
-=(\sigma-\sigma_P)+(1+r_M)(\sigma_C-\sigma).
+\varepsilon_B=\frac{\sigma}{E}+\varepsilon_{M,p}(\sigma),
+\qquad
+\varepsilon_C=\frac{\sigma_C}{E}+\varepsilon_{M,p}(\sigma_P).
 \end{equation*}
-Independently, the material curve gives
-\begin{equation*}
-E(\varepsilon_B-\varepsilon_A)
-=(\sigma-\sigma_P)
-+E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)].
-\end{equation*}
-Equating the two expressions therefore gives
-\begin{equation*}
-(1+r_M)(\sigma_C-\sigma)
-=E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)].
-\end{equation*}
-Finally, multiplying numerator and denominator of the stress-increment ratio by $1+r_M$ gives
+Substituting these strains and cancelling the elastic terms yields
+\begin{align*}
+1+r_M
+&=\frac{-\sigma-E\varepsilon_{M,p}(\sigma)+\sigma_C
++E\varepsilon_{M,p}(\sigma_P)+\sigma-\sigma_C}{\sigma-\sigma_C}\\
+&=\frac{E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)]}
+{\sigma_C-\sigma}.
+\end{align*}
+Multiplying the numerator and denominator of the stress-increment ratio by $1+r_M$, and separating $\sigma_C-\sigma_P$ into $(\sigma_C-\sigma)+(\sigma-\sigma_P)$, gives
 \begin{align*}
 g
-&=\frac{(\sigma-\sigma_P)(1+r_M)}
+&=\frac{\sigma-\sigma_P}{\sigma_C-\sigma_P}
+=\frac{(\sigma-\sigma_P)(1+r_M)}
 {(\sigma_C-\sigma)(1+r_M)+(\sigma-\sigma_P)(1+r_M)}\\
 &=\frac{(\sigma-\sigma_P)(1+r_M)}
 {E[\varepsilon_{M,p}(\sigma)-\varepsilon_{M,p}(\sigma_P)]
 +(\sigma-\sigma_P)(1+r_M)},
 \end{align*}
-which is Eq.~\eqref{eq:gfull}; the $r_M=0$ case follows by continuity, with $CB$ vertical. The term $\varepsilon_{M,p}(\sigma_P)$ appears because $AC$ starts at $A$ on the material curve, not at the undeformed origin. Thus $\sigma_C$ is an auxiliary stress of the graphical construction, not automatically the original elastic-analysis stress. This derivation establishes the equivalence of the Code's scalar graphical and algebraic constructions; it does not independently derive the prescribed maximum line factor or the multiaxial piping assessment. Without pressure, $\sigma_P=0$ and $\varepsilon_{M,p}(0)=0$, point $A$ is the origin and $g=\sigma/\sigma_C$.
+which is Eq.~\eqref{eq:gfull}. The limiting cases where $B$ and $C$ coincide, including the $r_M=0$ case with $CB$ vertical, are recovered by continuity. The term $\varepsilon_{M,p}(\sigma_P)$ appears because $AC$ starts at $A$ on the material curve, not at the undeformed origin. Thus $\sigma_C$ is an auxiliary stress of the graphical construction, not automatically the original elastic-analysis stress. This derivation establishes the equivalence of the Code's scalar graphical and algebraic constructions; it does not independently derive the prescribed maximum line factor or the multiaxial piping assessment. Without pressure, $\sigma_P=0$ and $\varepsilon_{M,p}(0)=0$, point $A$ is the origin and $g=\sigma/\sigma_C$.
 
 The code evaluates \(g\) at a prescribed stress level rather than requiring an elastoplastic analysis. RB~3651.1132 specifies:
 \begin{equation*} 
